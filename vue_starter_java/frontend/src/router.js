@@ -4,6 +4,7 @@ import auth from './auth'
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Register from './views/Register.vue'
+import CreateEvent from './views/CreateEvent.vue'
 
 Vue.use(Router)
 
@@ -44,6 +45,14 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    {
+      path: "/createEvent",
+      name: "createEvent",
+      component: CreateEvent,
+      meta: {
+        requiresAuth: false
+      }
+    }
   ]
 })
 
