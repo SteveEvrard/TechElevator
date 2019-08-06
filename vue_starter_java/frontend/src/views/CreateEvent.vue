@@ -1,9 +1,14 @@
 <template>
-  <div class="form">
+  <form-format>
     <form class="event">
+      <h1>Create a New Event</h1>
       <div>
         <label for="titleOfEvent">Title:</label>
         <input type="text" id="titleOfEvent" v-model="userData.eventTitle">
+      </div>
+      <div>
+        <label for="urlOfEventImage">URL for the event image:</label>
+        <input id="rlOfEventImage" type="text" v-model="userData.eventImageURL">
       </div>
       <div>
         <label for="privateEventBoolean">Is this a private event?</label>
@@ -15,6 +20,7 @@
           <span slot="afterDateInput" class="animated-placeholder">Choose a Date</span>
         </datepicker>
       </div>
+      <div></div>
       <div>
         <label for="locationOfEvent">Location:</label>
         <input type="text" id="locationOfEvent" v-model="userData.eventLocation">
@@ -24,21 +30,23 @@
         <textarea id="descriptionOfEvent" v-model="userData.eventDescription"></textarea>
       </div>
       <div>
-        <label for="blindEventBoolean">Is this a private event?</label>
+        <label for="blindEventBoolean">Is this a blind tasting?</label>
         <input id="blindEventBoolean" type="checkbox" v-model="userData.isBlindEvent">
         {{userData.isBlindEvent ? "yes" : "no"}}
       </div>
     </form>
-  </div>
+  </form-format>
 </template>
 
 <script>
 import Datepicker from "vuejs-datepicker";
 import { en } from "vuejs-datepicker/dist/locale";
+import FormFormat from "../components/FormFormat.vue";
 
 export default {
   components: {
-    Datepicker
+    Datepicker,
+    FormFormat
   },
 
   data() {
@@ -46,6 +54,7 @@ export default {
       en: en,
       userData: {
         eventTitle: "",
+        eventImageURL: "",
         isPrivateEvent: true,
         state: {
           date: new Date(2019, 7, 6),
@@ -59,3 +68,5 @@ export default {
   }
 };
 </script>
+
+
