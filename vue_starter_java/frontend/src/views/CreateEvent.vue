@@ -10,6 +10,11 @@
     </datepicker>
     <label for="locationOfEvent">Location:</label>
     <input type="text" id="locationOfEvent" v-model="userData.eventLocation">
+    <label for="descriptionOfEvent">Additional Information:</label>
+    <textarea id="descriptionOfEvent" v-model="userData.eventDescription"></textarea>
+    <label for="blindEventBoolean">Is this a private event?</label>
+    <input id="blindEventBoolean" type="checkbox" v-model="userData.isBlindEvent">
+    {{userData.isBlindEvent ? "yes" : "no"}}
   </form>
 </template>
 
@@ -29,10 +34,12 @@ export default {
         eventTitle: "",
         isPrivateEvent: true,
         state: {
-          date: new Date(2019, 9, 16),
+          date: new Date(2019, 7, 6),
           placeholder: "Select a date."
         },
-        eventLocation: ""
+        eventLocation: "",
+        eventDescription: "",
+        isBlindEvent: true
       }
     };
   }
