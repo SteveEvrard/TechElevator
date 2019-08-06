@@ -23,4 +23,13 @@ has_occured boolean,
 is_private boolean
 );
 
+DROP TABLE IF EXISTS joinTable;
+
+CREATE TABLE joinTable
+(
+event_id serial REFERENCES     event(event_id),
+id SERIAL REFERENCES users(id)
+)
+;
+
 COMMIT TRANSACTION;
