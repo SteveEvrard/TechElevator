@@ -20,6 +20,6 @@ title varchar(255),
 is_blind boolean,
 has_occurred boolean,
 is_private boolean
-)
+);
 
 COMMIT;
