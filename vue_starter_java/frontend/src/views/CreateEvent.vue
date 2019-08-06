@@ -2,40 +2,39 @@
   <form-format>
     <form class="event">
       <h1>Create a New Event</h1>
-      <div>
-        <label for="titleOfEvent">Title:</label>
-        <input type="text" id="titleOfEvent" v-model="userData.eventTitle">
-      </div>
-      <div>
-        <label for="urlOfEventImage">URL for the event image:</label>
-        <input id="rlOfEventImage" type="text" v-model="userData.eventImageURL">
-      </div>
-      <div>
-        <label for="privateEventBoolean">Is this a private event?</label>
-        <input id="privateEventBoolean" type="checkbox" v-model="userData.isPrivateEvent">
+      <form-line>
+        <h4>Title:</h4>
+        <input type="text" v-model="userData.eventTitle">
+      </form-line>
+      <form-line>
+        <h4>URL for the event image:</h4>
+        <input type="text" v-model="userData.eventImageURL">
+      </form-line>
+      <form-line class="checkbox">
+        <h4>Is this a private event?</h4>
+        <input type="checkbox" v-model="userData.isPrivateEvent">
         {{userData.isPrivateEvent ? "yes" : "no"}}
-      </div>
-      <div>
-        <datepicker v-model="userData.state.date" name="uniquename">
-          <span slot="afterDateInput" class="animated-placeholder">Choose a Date</span>
-        </datepicker>
-      </div>
-      <div>
+      </form-line>
+      <form-line>
+        <h4>Date of Event:</h4>
+        <datepicker v-model="userData.state.date" name="uniquename"></datepicker>
+      </form-line>
+      <form-line>
         <vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>
-      </div>
-      <div>
-        <label for="locationOfEvent">Location:</label>
-        <input type="text" id="locationOfEvent" v-model="userData.eventLocation">
-      </div>
-      <div>
-        <label for="descriptionOfEvent">Additional Information:</label>
-        <textarea id="descriptionOfEvent" v-model="userData.eventDescription"></textarea>
-      </div>
-      <div>
-        <label for="blindEventBoolean">Is this a blind tasting?</label>
-        <input id="blindEventBoolean" type="checkbox" v-model="userData.isBlindEvent">
+      </form-line>
+      <form-line>
+        <h4>Location:</h4>
+        <input type="text" v-model="userData.eventLocation">
+      </form-line>
+      <form-line>
+        <h4>Additional Information:</h4>
+        <textarea v-model="userData.eventDescription"></textarea>
+      </form-line>
+      <form-line class="checkbox">
+        <h4>Is this a blind tasting?</h4>
+        <input type="checkbox" v-model="userData.isBlindEvent">
         {{userData.isBlindEvent ? "yes" : "no"}}
-      </div>
+      </form-line>
     </form>
   </form-format>
 </template>
@@ -44,13 +43,15 @@
 import Datepicker from "vuejs-datepicker";
 import { en } from "vuejs-datepicker/dist/locale";
 import FormFormat from "../components/FormFormat.vue";
+import FormLine from "../components/FormLine.vue";
 import VueTimepicker from "vue2-timepicker";
 
 export default {
   components: {
     Datepicker,
     FormFormat,
-    VueTimepicker
+    VueTimepicker,
+    FormLine
   },
 
   data() {

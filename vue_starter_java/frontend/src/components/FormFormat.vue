@@ -18,7 +18,4 @@ export default {
 </script>
 
 <style>
-.form {
-  display: block;
-}
 </style>

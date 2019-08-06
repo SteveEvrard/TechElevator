@@ -1,8 +1,14 @@
 <template>
   <div class="event">
     <h2>{{event.title}}</h2>
-    <img src="{{event.imgUrl}}" >
-    <h4>Date:{{event.date}} Time:{{event.time}}</h4>
+    <img src="{{event.imgUrl}}">
+    <h4>Date:</h4>
+    <p>{{event.date}}</p>
+    <h4>Time:</h4>
+    <p>{{event.time}}</p>
+    <h4>Location:</h4>
+    <p>{{event.location}}</p>
+    <p>{{event.info}}</p>
   </div>
 </template>
 
@@ -12,7 +18,7 @@ export default {
     event: {
       title: String,
       imgUrl: String
-      date: Date,
+      date: DateConstructor,
       time: String,
       location: String,
       info: String
@@ -21,3 +27,10 @@ export default {
   name: "SingleEvent"
 };
 </script>
+
+<style>
+.event {
+  padding: 2%;
+  margin: 2%;
+}
+</style>

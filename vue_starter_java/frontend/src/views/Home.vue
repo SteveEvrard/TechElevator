@@ -4,22 +4,22 @@
       <h1>Home</h1>
       <p>You must be authenticated to see this</p>
     </div>
-    <event-list
+    <!-- <event-list
       v-if="!showAddProductForm"
       :apiURL="API_URL"
       v-on:addReview="addReview"
       v-on:editReview="editReview($event)"
-    />
+    />-->
   </div>
 </template>
 
 <script>
-import EventList from "../components/EventList.vue";
+// import EventList from "../components/EventList.vue";
 
 export default {
-  components: {
-    EventList
-  },
+  // components: {
+  //   EventList
+  // },
   name: "home",
   data() {
     return {
