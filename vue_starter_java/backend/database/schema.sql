@@ -22,14 +22,7 @@ has_occurred boolean,
 is_private boolean
 );
 
-DROP TABLE IF EXISTS jointable;
 
-CREATE TABLE jointable
-(
-id SERIAL REFERENCES users(id),
-event_id SERIAL REFERENCES event(event_id),
-whiskey_id SERIAL REFERENCES whiskey(whiskey_id)
-);
 
 DROP TABLE IF EXISTS whiskey;
 
@@ -46,4 +39,13 @@ finish_rating INT,
 price__rating INT,
 overall_rating INT
 );
+DROP TABLE IF EXISTS jointable;
+
+CREATE TABLE jointable
+(
+id SERIAL REFERENCES users(id),
+event_id SERIAL REFERENCES event(event_id),
+whiskey_id SERIAL REFERENCES whiskey(whiskey_id)
+);
+
 COMMIT;
