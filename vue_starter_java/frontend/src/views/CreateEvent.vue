@@ -5,8 +5,7 @@
     <label for="privateEventBoolean">Is this a private event?</label>
     <input id="privateEventBoolean" type="checkbox" v-model="isPrivateEvent">
     {{isPrivateEvent ? "yes" : "no"}}
-    <vuejs-datepicker></vuejs-datepicker>
-
+    <datepicker v-model="state.date" name="uniquename"></datepicker>
     <label for="locationOfEvent">Location:</label>
     <input type="text" id="locationOfEvent" v-model="eventLocation">
   </form>
@@ -25,7 +24,9 @@ export default {
       userData: {
         eventTitle: "",
         isPrivateEvent: true,
-        date: new Date(2016, 9, 16),
+        state: {
+          date: new Date(2016, 9, 16)
+        },
         eventLocation: ""
       }
     };
