@@ -22,4 +22,4 @@ has_occurred boolean,
 is_private boolean
 )
 
-COMMIT TRANSACTION;
+COMMIT;
