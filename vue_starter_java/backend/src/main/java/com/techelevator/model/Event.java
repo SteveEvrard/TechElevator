@@ -17,6 +17,9 @@ public class Event {
 	private Boolean hasOccured;
 	private Long eventId;
 	
+	public void setEventId(Long eventId) {
+		this.eventId = eventId;
+	}
 	public List<Whiskey> getTastingWhiskeys() {
 		return tastingWhiskeys;
 	}
