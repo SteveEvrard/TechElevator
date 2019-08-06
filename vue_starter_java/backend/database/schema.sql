@@ -10,4 +10,16 @@ CREATE TABLE users (
   role varchar(255) NOT NULL default('user')
 );
 
+DROP TABLE IF EXISTS event;
+
+Create Table event(
+event_id SERIAL PRIMARY KEY,
+date_time TIMESTAMP,
+location varchar(255),
+title varchar(255),
+is_blind boolean,
+has_occurred boolean,
+is_private boolean
+)
+
 COMMIT TRANSACTION;
