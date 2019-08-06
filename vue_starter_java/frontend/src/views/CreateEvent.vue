@@ -20,7 +20,9 @@
           <span slot="afterDateInput" class="animated-placeholder">Choose a Date</span>
         </datepicker>
       </div>
-      <div></div>
+      <div>
+        <vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>
+      </div>
       <div>
         <label for="locationOfEvent">Location:</label>
         <input type="text" id="locationOfEvent" v-model="userData.eventLocation">
@@ -42,11 +44,13 @@
 import Datepicker from "vuejs-datepicker";
 import { en } from "vuejs-datepicker/dist/locale";
 import FormFormat from "../components/FormFormat.vue";
+import VueTimepicker from "vue2-timepicker";
 
 export default {
   components: {
     Datepicker,
-    FormFormat
+    FormFormat,
+    VueTimepicker
   },
 
   data() {
