@@ -13,6 +13,7 @@
     "core-js": "^2.6.5",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",
+    "vue2-timepicker": "^0.1.4",
     "vuejs-datepicker": "^1.6.2",
     "vuejs-form-plugin": "^0.8.0"
   },
