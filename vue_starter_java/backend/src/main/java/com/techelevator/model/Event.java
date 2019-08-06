@@ -15,7 +15,11 @@ public class Event {
 	private Boolean isBlindTasting;
 	private Boolean isPrivate;
 	private Boolean hasOccured;
+	private Long eventId;
 	
+	public void setEventId(Long eventId) {
+		this.eventId = eventId;
+	}
 	public List<Whiskey> getTastingWhiskeys() {
 		return tastingWhiskeys;
 	}
