@@ -49,4 +49,18 @@ id SERIAL REFERENCES users(id),
 event_id SERIAL REFERENCES event(event_id)
 );
 
+DROP TABLE IF EXISTS whiskeyToUser;
+
+CREATE TABLE whiskeyToUser(
+whiskey_id serial References whiskey(whiskey_id),
+id serial References users(id)
+);
+
+DROP TABLE IF EXISTS whiskeyToEvent;
+
+CREATE TABLE whiskeyToEvent(
+whiskey_id serial References whiskey(whiskey_id),
+event_id serial References event(event_id)
+);
+
 COMMIT;
