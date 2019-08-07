@@ -17,7 +17,7 @@ export default {
   props: {
     event: {
       title: String,
-      imgUrl: String
+      imgUrl: String,
       date: DateConstructor,
       time: String,
       location: String,
