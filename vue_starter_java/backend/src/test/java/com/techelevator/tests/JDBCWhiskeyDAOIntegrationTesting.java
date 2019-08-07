@@ -5,12 +5,11 @@ import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.util.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import junit.framework.Assert;
 
 import com.techelevator.model.Whiskey;
-
 
 
 public class JDBCWhiskeyDAOIntegrationTesting extends DAOIntegrationTesting {
@@ -28,7 +27,18 @@ public class JDBCWhiskeyDAOIntegrationTesting extends DAOIntegrationTesting {
 	}
 	
 	//testWhiskey1 = createWhiskey(whiskey_id, brand, price, taste_rating, nose_rating, color_rating ,body_rating, finish_rating, price__rating, overall_rating);
-	
+	//INSERT INTO whiskey (whiskey_id, brand, price, taste_rating, nose_rating, body_rating, finish_rating, price__rating, overall_rating)
+	//VALUES (3, 'test', 13, 4, 5, 3, 2, 3, 4);
+	@Test
+	public void get_all_whiskeys_returns_all_whiskeys() {
+		List<Whiskey>whiskeyList = dao.getAllWhiskeys();
+		
+		int whiskeyListOriginalSize = whiskeyList.size();
+		
+		String sql = "INSERT INTO whiskey(whiskey_id, brand, price) " +
+				"VALUES (4, 'Tech Elevator Whiskey', 6);";
+	}
+
 	
 	@Test 
 	public void save_whiskey_adds_whiskey() {
@@ -37,10 +47,11 @@ public class JDBCWhiskeyDAOIntegrationTesting extends DAOIntegrationTesting {
 		
 		dao.saveWhiskey(whiskey);
 		
-		String sql2 = "";
+		String sql2 = "SELECT brand, price " +
+		"FROM whiskey WHERE brand = ?;";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sql2, "test");
 		result.next();
-		String dataReceived = result.getString("");
+		String dataReceived = result.getString("brand");
 		
 		Assert.assertEquals("test", dataReceived);
 	}
