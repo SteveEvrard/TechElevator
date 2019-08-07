@@ -1,5 +1,13 @@
 package com.techelevator.tests;
 
-public class JdbcWhiskeydao implements WhiskeyDao {
+import com.techelevator.model.Whiskey;
+
+public class JdbcWhiskeyDao implements WhiskeyDao {
+
+	@Override
+	public void saveWhiskey(Whiskey whiskey) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
