@@ -4,12 +4,7 @@
       <h1>Home</h1>
       <p>You must be authenticated to see this</p>
     </div>
-    <!-- <event-list
-      v-if="!showAddProductForm"
-      :apiURL="API_URL"
-      v-on:addReview="addReview"
-      v-on:editReview="editReview($event)"
-    />-->
+    <event-list :apiURL="API_URL"/>
   </div>
 </template>
 
@@ -23,23 +18,8 @@ export default {
   name: "home",
   data() {
     return {
-      API_URL: "http://localhost:8080/whiskey-events-api/api/events",
-      showAddProductForm: false,
-      reviewID: 0
+      API_URL: "http://localhost:8080/whiskey-events-api/api/events"
     };
-  },
-  methods: {
-    addReview() {
-      this.showAddProductForm = true;
-    },
-    editReview(id) {
-      this.reviewID = id;
-      this.showAddProductForm = true;
-    },
-    showReviews() {
-      this.showAddProductForm = false;
-      this.reviewID = 0;
-    }
   }
 };
 </script>
