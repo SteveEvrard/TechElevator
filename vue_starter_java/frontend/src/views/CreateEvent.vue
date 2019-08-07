@@ -20,6 +20,7 @@
         <datepicker v-model="userData.state.date" name="uniquename"></datepicker>
       </form-line>
       <form-line>
+        <h4>Time of Event:</h4>
         <vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>
       </form-line>
       <form-line>
@@ -35,6 +36,11 @@
         <input type="checkbox" v-model="userData.isBlindEvent">
         {{userData.isBlindEvent ? "yes" : "no"}}
       </form-line>
+      <h4>What whiskeys will be tasted?</h4>
+      <select-box>
+        <p>Jamison's 20 Year Select</p>
+      </select-box>
+      <button type="submit">Create Event</button>
     </form>
   </form-format>
 </template>
@@ -43,15 +49,17 @@
 import Datepicker from "vuejs-datepicker";
 import { en } from "vuejs-datepicker/dist/locale";
 import FormFormat from "../components/FormFormat.vue";
-import FormLine from "../components/FormLine.vue";
 import VueTimepicker from "vue2-timepicker";
+import FormLine from "../components/FormLine.vue";
+import SelectBox from "../components/SelectBox.vue";
 
 export default {
   components: {
     Datepicker,
     FormFormat,
     VueTimepicker,
-    FormLine
+    FormLine,
+    SelectBox
   },
 
   data() {
@@ -73,5 +81,19 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+button {
+  display: block;
+  text-align: center;
+  margin: 5%;
+}
+
+/* .select-box {
+  max-height: max-content;
+} */
+</style>
+
+
 
 

@@ -22,17 +22,15 @@ import org.springframework.web.util.UriComponents;
 @CrossOrigin
 public class WhiskeyController {
 
-	public class EventController {
-
-		private final WhiskeyDao whiskeyDao;
-
-		public WhiskeyController(WhiskeyDao whiskeyDao) {
-			this.whiskeyDao = whiskeyDao;
-		}
-
-		@GetMapping
-		public List<Whiskey> getWhiskeyBrands() {
-			return whiskeyDao.getWhiskeyBrands();
-		}
+//		private final WhiskeyDao whiskeyDao;
+//
+//		public WhiskeyController(WhiskeyDao whiskeyDao) {
+//			this.whiskeyDao = whiskeyDao;
+//		}
+//
+//		@GetMapping
+//		public List<Whiskey> getWhiskeyBrands() {
+//			return whiskeyDao.getWhiskeyBrands();
+//		}
 	
 }
