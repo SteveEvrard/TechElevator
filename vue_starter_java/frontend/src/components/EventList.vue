@@ -1,8 +1,8 @@
 <template>
   <div class="event-list">
     <ul id="example-1">
-      <li v-for="event in events" v-bind:key="event">
-        <single-event v-bind: event="{{event}}"></single-event>
+      <li v-for="event in privateEvents" v-bind:key="event">
+        <single-event v-bind:event="event"></single-event>
       </li>
     </ul>
   </div>
@@ -21,7 +21,8 @@ export default {
   },
   data() {
     return {
-      events: []
+      events: [],
+      privateEvents: []
     };
   },
   methods: {
@@ -33,7 +34,17 @@ export default {
         .then(events => {
           this.events = events;
         })
+        .then(events => {
+          listPrivateEvents(this.events);
+        })
         .catch(err => console.error(err));
+    },
+    listPrivateEvents(events) {
+      array.forEach(event => {
+        if (event.isPrivate) {
+          privateEvents.add(event);
+        }
+      });
     }
   }
 };
