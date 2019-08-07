@@ -27,7 +27,7 @@ public class JdbcEventDao implements EventDao {
 	public List<Event> getAllEvents(){
 		List<Event> allEvents = new ArrayList<Event>();
 		
-		String sql = "SELECT event_id, date_time, location, title, is_blind, has_occurred, is_private " + 
+		String sql = "SELECT event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private " + 
 				"FROM event;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		while (results.next()) {
@@ -48,11 +48,11 @@ public class JdbcEventDao implements EventDao {
 	private Event mapRowToEvent(SqlRowSet results) {
 		Event event = new Event();
 		
-		LocalDate date = results.getTimestamp("date_time").toLocalDateTime().toLocalDate();
-		LocalTime time = results.getTimestamp("date_time").toLocalDateTime().toLocalTime();
+//		LocalDate date = results.getTimestamp("date_time").toLocalDateTime().toLocalDate();
+//		LocalTime time = results.getTimestamp("date_time").toLocalDateTime().toLocalTime();
 		
-		event.setTime(time);
-		event.setDate(date);
+		event.setTime(results.getTime("event_time").toLocalTime());
+		event.setDate(results.getDate("event_date").toLocalDate());
 		event.setLocation(results.getString("location"));
 		event.setTitle(results.getString("title"));
 		event.setIsBlindTasting(results.getBoolean("is_blind"));

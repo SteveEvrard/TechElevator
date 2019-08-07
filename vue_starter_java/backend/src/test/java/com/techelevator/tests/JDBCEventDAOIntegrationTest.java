@@ -34,8 +34,8 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 		
 		int eventListOriginalSize = eventsList.size();
 		
-		String sql = "INSERT INTO event(event_id, date_time, location, title, is_blind, has_occurred, is_private) " + 
-				"VALUES (default, '2017-10-10', 'test', 'test', true, true, true);";
+		String sql = "INSERT INTO event(event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private) " + 
+				"VALUES (default, '2017-10-10', '12:00:00', 'test', 'test', 'test', true, true, true);";
 		
 		jdbcTemplate.update(sql);
 		
@@ -49,8 +49,8 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 	@Test
 	public void save_event_adds_event() {
 		
-		String sql = "INSERT INTO event(event_id, date_time, location, title, is_blind, has_occurred, is_private) " + 
-				"VALUES (10, '2017-10-10', 'test', 'test', true, true, true);";
+		String sql = "INSERT INTO event(event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private) " +  
+				"VALUES (default, '2017-10-10', '12:00:00', 'test', 'test', 'test', true, true, true);";
 		jdbcTemplate.update(sql);
 		
 		Event event = createEvent();
@@ -59,11 +59,11 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 		
 		String sql2 = "select event_id, date_time, location, title, is_blind, has_occurred, is_private "
 				+ "from event where event_id = ?;";
-		SqlRowSet result = jdbcTemplate.queryForRowSet(sql2, 10);
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sql2, 20);
 		result.next();
 		Integer dataReceived = result.getInt("event_id");
 		
-		Assert.assertSame(10, dataReceived);
+		Assert.assertSame(20, dataReceived);
 		
 	}
 	
