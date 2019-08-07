@@ -45,6 +45,20 @@ public class JdbcEventDao implements EventDao {
 				event.getIsBlindTasting(), event.getHasOccured(), event.getIsPrivate());
 	}
 	
+	public List<String> getEventsAttendedByUser(Long id){
+		List<String> allEventsByUser = new ArrayList<>();
+		
+		String sql = "select title from event " + 
+				"join jointable on event.event_id = jointable.event_id " + 
+				"where id = ?;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+		while(results.next()) {
+			allEventsByUser.add(results.getString("title"));
+		}
+		
+		return allEventsByUser;
+	}
+	
 	private Event mapRowToEvent(SqlRowSet results) {
 		Event event = new Event();
 		
