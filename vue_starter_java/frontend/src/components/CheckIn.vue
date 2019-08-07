@@ -1,6 +1,6 @@
 <template>
-   <div id="check">
-  <a href="#" :class="{ checkIn: isActive }" @click="isActive = !isActive">Click me</a>
+   <div>
+  <button @click='toggle()'>Check In</button>
 </div>
 </template>
 
@@ -8,8 +8,17 @@
 
 import SingleEvent from "../components/SingleEvent.vue";
 export default {
-
+el: '#app',
+    data: {
+        isChecked: false
+    },
+    methods:{
+        toggle: function(){
+            this.isChecked = !this.isChecked
+        }
+    }
 }
+
 </script>
 
 <style>
