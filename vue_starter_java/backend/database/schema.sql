@@ -21,7 +21,8 @@ location varchar(255),
 title varchar(255),
 is_blind boolean,
 has_occurred boolean,
-is_private boolean
+is_private boolean,
+event_image_name varchar(255)
 );
 
 
@@ -47,6 +48,20 @@ CREATE TABLE jointable
 (
 id SERIAL REFERENCES users(id),
 event_id SERIAL REFERENCES event(event_id)
+);
+
+DROP TABLE IF EXISTS whiskeyToUser;
+
+CREATE TABLE whiskeyToUser(
+whiskey_id serial References whiskey(whiskey_id),
+id serial References users(id)
+);
+
+DROP TABLE IF EXISTS whiskeyToEvent;
+
+CREATE TABLE whiskeyToEvent(
+whiskey_id serial References whiskey(whiskey_id),
+event_id serial References event(event_id)
 );
 
 COMMIT;
