@@ -1,10 +1,10 @@
 package com.techelevator.tests;
 
 import com.techelevator.model.Whiskey;
-import java.util.List;
+//import java.util.List;
 
 public interface WhiskeyDao {
 
-	void saveWhiskey(Whiskey whiskey);
+	public void saveWhiskey(Whiskey whiskey);
 
 }
