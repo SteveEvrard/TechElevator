@@ -46,8 +46,7 @@ DROP TABLE IF EXISTS jointable;
 CREATE TABLE jointable
 (
 id SERIAL REFERENCES users(id),
-event_id SERIAL REFERENCES event(event_id),
-whiskey_id SERIAL REFERENCES whiskey(whiskey_id)
+event_id SERIAL REFERENCES event(event_id)
 );
 
 COMMIT;

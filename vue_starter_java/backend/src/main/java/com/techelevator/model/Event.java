@@ -11,7 +11,7 @@ public class Event {
 	private LocalDate date;
 	private String location;
 	private String title;
-	//private String eventDescription;
+	private String eventDescription;
 	private Boolean isBlindTasting;
 	private Boolean isPrivate;
 	private Boolean hasOccured;
@@ -47,12 +47,12 @@ public class Event {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-//	public String getEventDescription() {
-//		return eventDescription;
-//	}
-//	public void setEventDescription(String eventDescription) {
-//		this.eventDescription = eventDescription;
-//	}
+	public String getEventDescription() {
+		return eventDescription;
+	}
+	public void setEventDescription(String eventDescription) {
+		this.eventDescription = eventDescription;
+	}
 	public Boolean getIsBlindTasting() {
 		return isBlindTasting;
 	}
