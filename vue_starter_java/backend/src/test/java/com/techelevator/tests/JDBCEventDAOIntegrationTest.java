@@ -49,21 +49,17 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 	@Test
 	public void save_event_adds_event() {
 		
-		String sql = "INSERT INTO event(event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private) " +  
-				"VALUES (default, '2017-10-10', '12:00:00', 'test', 'test', 'test', true, true, true);";
-		jdbcTemplate.update(sql);
-		
 		Event event = createEvent();
 		
 		dao.saveEvent(event);
 		
-		String sql2 = "select event_id, date_time, location, title, is_blind, has_occurred, is_private "
-				+ "from event where event_id = ?;";
-		SqlRowSet result = jdbcTemplate.queryForRowSet(sql2, 20);
+		String sql2 = "SELECT event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private "
+				+ "FROM event WHERE location = ?;";
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sql2, "test");
 		result.next();
-		Integer dataReceived = result.getInt("event_id");
+		String dataReceived = result.getString("location");
 		
-		Assert.assertSame(20, dataReceived);
+		Assert.assertEquals("test", dataReceived);
 		
 	}
 	

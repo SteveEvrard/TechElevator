@@ -38,18 +38,15 @@ public class JdbcEventDao implements EventDao {
 	}
 	
 	public void saveEvent(Event event){ 
-		Timestamp ts = Timestamp.valueOf(event.getDate().atStartOfDay());
-		String sql = "INSERT INTO event(event_id, date_time, location, title, is_blind, has_occurred, is_private) " + 
-				"VALUES (DEFAULT, ?, ?, ?, ?, ?, ?);";
-		jdbcTemplate.update(sql, ts, event.getLocation(), event.getTitle(), 
+		//Timestamp ts = Timestamp.valueOf(event.getDate().atStartOfDay());
+		String sql = "INSERT INTO event(event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private) " + 
+				"VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?);";
+		jdbcTemplate.update(sql, event.getDate(), event.getTime(), event.getEventDescription(), event.getLocation(), event.getTitle(), 
 				event.getIsBlindTasting(), event.getHasOccured(), event.getIsPrivate());
 	}
 	
 	private Event mapRowToEvent(SqlRowSet results) {
 		Event event = new Event();
-		
-//		LocalDate date = results.getTimestamp("date_time").toLocalDateTime().toLocalDate();
-//		LocalTime time = results.getTimestamp("date_time").toLocalDateTime().toLocalTime();
 		
 		event.setTime(results.getTime("event_time").toLocalTime());
 		event.setDate(results.getDate("event_date").toLocalDate());
