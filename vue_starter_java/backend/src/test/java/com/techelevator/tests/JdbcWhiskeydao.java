@@ -1,5 +1,6 @@
 package com.techelevator.tests;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -17,13 +18,20 @@ public class JdbcWhiskeyDao implements WhiskeyDao {
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	
-	@Autowired
-	private JdbcWhiskeyDao dao;
 
 	@Autowired 
 	public JdbcWhiskeyDao(DataSource dataSource) {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
+	}
+	
+	public List<Whiskey> getAllBrandAndPriceWhiskey() {
+		List<Whiskey> allBrandAndPrice = new ArrayList<>();
+		String sql = "SELECT brand, price FROM whiskey;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+		while (results.next()) {
+			allBrandAndPrice.add(mapRowToWhiskey(results));
+		}
+		return allBrandAndPrice;
 	}
 	
 	public void saveWhiskey(Whiskey whiskey) {
