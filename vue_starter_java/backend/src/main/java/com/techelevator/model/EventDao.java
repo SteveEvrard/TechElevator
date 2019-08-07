@@ -5,5 +5,6 @@ import java.util.List;
 public interface EventDao {
 
 	List<Event> getAllEvents();
-	public void saveEvent(Event event); 
+	void saveEvent(Event event); 
+	List<String> getEventsAttendedByUser(Long id);
 }
