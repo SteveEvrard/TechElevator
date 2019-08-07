@@ -1,7 +1,7 @@
 <template>
-    <div id="checkIn" class="text-center">
-<form 
-    </div>    
+   <div id="check">
+  <a href="#" :class="{ checkIn: isActive }" @click="isActive = !isActive">Click me</a>
+</div>
 </template>
 
 <script>

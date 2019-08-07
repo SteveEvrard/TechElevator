@@ -1,6 +1,6 @@
 <template>
   <div class="event-list">
-    <ul id="example-1">
+    <ul>
       <li v-for="event in privateEvents" v-bind:key="event">
         <single-event v-bind:event="event"></single-event>
       </li>
@@ -27,7 +27,13 @@ export default {
   },
   methods: {
     createdEvents() {
-      fetch(this.apiURL)
+      fetch(`${process.env.VUE_APP_REMOTE_API}/events`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        }
+      })
         .then(response => {
           return response.json();
         })
