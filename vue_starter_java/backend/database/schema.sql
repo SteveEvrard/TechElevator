@@ -51,9 +51,9 @@ finish_rating INT,
 price__rating INT,
 overall_rating INT
 );
-DROP TABLE IF EXISTS joinTable;
+DROP TABLE IF EXISTS usersToEvent;
 
-CREATE TABLE joinTable
+CREATE TABLE usersToEvent
 (
 id SERIAL REFERENCES users(id),
 event_id SERIAL REFERENCES event(event_id)
@@ -73,9 +73,9 @@ whiskey_id serial References whiskey(whiskey_id),
 event_id serial References event(event_id)
 );
 
-DROP TABLE IF EXISTS previousquestions;
+DROP TABLE IF EXISTS surveyQuestions;
 
-CREATE TABLE previousquestions
+CREATE TABLE surveyQuestions
 (
 question_id SERIAL PRIMARY KEY,
 question VARCHAR (255)
