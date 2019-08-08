@@ -1,11 +1,15 @@
 package com.techelevator.controller;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponents;
 
 import com.techelevator.model.Event;
 import com.techelevator.model.EventDao;
@@ -32,57 +36,15 @@ public class EventController {
 			return eventDao.getEventsAttendedByUser(id);
 		}
 		
-		@PostMapping(path="/api/createEvent")
-		public void createEvent(@PathVariable Event newEvent) {
+		@PostMapping(path="/api/events")
+		public ResponseEntity<Event> createEvent(@RequestBody Event newEvent) {
 			eventDao.saveEvent(newEvent);
+			
+			UriComponents uriComponent = ServletUriComponentsBuilder.fromCurrentRequestUri()
+			.path("/" + newEvent.getEventId()).build();
+			
+			return ResponseEntity.created(uriComponent.toUri()).body(newEvent);
 		}
 		
-		
-		
-
-//		@GetMapping("/{id}")
-//		public ProductReview getProductReview(@PathVariable int id) {
-//			ProductReview productReview = productReviewDao.read(id);
-//
-//			if (productReview != null) {
-//				return productReview;
-//			}
-//
-//			throw new ProductReviewNotFoundException(id, "Product review could not be found.");
-//		}
-//
-//		@PostMapping
-//		public ResponseEntity<ProductReview> createProductReview(@RequestBody ProductReview productReview) {
-//			productReviewDao.create(productReview);
-//
-//			UriComponents uriComponent = ServletUriComponentsBuilder.fromCurrentRequestUri()
-//					.path("/" + Integer.toString(productReview.getId())).build();
-//
-//			return ResponseEntity.created(uriComponent.toUri()).body(productReview);
-//		}
-//
-//		@PutMapping("/{id}")
-//		@ResponseStatus(HttpStatus.NO_CONTENT)
-//		public void updateProductReview(@PathVariable int id, @RequestBody ProductReview productReview) {
-//
-//			if (productReviewDao.read(productReview.getId()) != null) {
-//				productReviewDao.update(productReview);
-//				return;
-//			}
-//
-//			throw new ProductReviewNotFoundException(id, "Product review could not be found.");
-//		}
-//
-//		@DeleteMapping("/{id}")
-//		@ResponseStatus(HttpStatus.NO_CONTENT)
-//		public void deleteProductReview(@PathVariable int id) {
-//			if (productReviewDao.read(id) != null) {
-//				productReviewDao.delete(id);
-//				return;
-//			}
-//
-//			throw new ProductReviewNotFoundException(id, "Product review could not be found.");
-//		}
-//	}
 
 }

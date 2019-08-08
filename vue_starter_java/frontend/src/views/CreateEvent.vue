@@ -62,14 +62,10 @@ export default {
     SelectBox
   },
 
-  props: {
-    apiURLEvent:
-      "http://localhost:8080/AuthenticationApplication/api/createEvents"
-  },
-
   data() {
     return {
       en: en,
+      apiURLEvent: "http://localhost:8080/AuthenticationApplication/api/events",
       API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys",
       userData: {
         eventTitle: "",
@@ -92,12 +88,12 @@ export default {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(this.review)
+        body: JSON.stringify(this.userData)
       })
         .then(response => {
           if (response.ok) {
             this.$emit("showReviews");
-            this.$router.go(home);
+            this.$router.push("/");
           }
         })
         .catch(err => console.error(err));
