@@ -29,8 +29,8 @@ export default {
         .then(response => {
           return response.json();
         })
-        .then(whiskeys => {
-          this.whiskeys = whiskeys;
+        .then(jsonWhiskeys => {
+          this.whiskeys = jsonWhiskeys;
         })
         .catch(err => console.error(err));
     },

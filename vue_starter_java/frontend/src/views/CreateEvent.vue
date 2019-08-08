@@ -40,7 +40,7 @@
       <select-box>
         <p>Jamison's 20 Year Select</p>
       </select-box>
-      <button type="submit" v-on:click.prevent )>Create Event</button>
+      <button type="submit" v-on:click.prevent="saveEvent">Create Event</button>
     </form>
   </form-format>
 </template>
@@ -62,9 +62,15 @@ export default {
     SelectBox
   },
 
+  props: {
+    apiURLEvent:
+      "http://localhost:8080/AuthenticationApplication/api/createEvents"
+  },
+
   data() {
     return {
       en: en,
+      API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys",
       userData: {
         eventTitle: "",
         eventImageURL: "",
@@ -78,6 +84,24 @@ export default {
         isBlindEvent: true
       }
     };
+  },
+  methods: {
+    saveEvent() {
+      fetch(this.apiURLEvent, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.review)
+      })
+        .then(response => {
+          if (response.ok) {
+            this.$emit("showReviews");
+            this.$router.go(home);
+          }
+        })
+        .catch(err => console.error(err));
+    }
   }
 };
 </script>

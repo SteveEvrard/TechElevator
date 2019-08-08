@@ -30,6 +30,7 @@
 						<value>/login</value>
 						<value>/register</value>
 						<value>/api/events</value>
+						<value>/api/whiskeys</value>
 					</list>
 				</property>
 			</bean>
