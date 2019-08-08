@@ -3,6 +3,7 @@
     <div class="home">
       <h1>Home</h1>
       <p>You must be authenticated to see this</p>
+      CheckIn
     </div>
     <event-list :apiURL="API_URL"/>
   </div>
@@ -10,7 +11,7 @@
 
 <script>
 // import EventList from "../components/EventList.vue";
-
+import checkIn from "../components/CheckIn.vue";
 export default {
   // components: {
   //   EventList
