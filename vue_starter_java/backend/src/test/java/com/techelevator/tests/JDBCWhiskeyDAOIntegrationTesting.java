@@ -5,11 +5,14 @@ import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.util.Assert;
+
+import com.techelevator.model.JdbcWhiskeyDao;
+import com.techelevator.model.Whiskey;
+import com.techelevator.model.WhiskeyDao;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.techelevator.model.Whiskey;
 
 
 public class JDBCWhiskeyDAOIntegrationTesting extends DAOIntegrationTesting {
@@ -31,12 +34,20 @@ public class JDBCWhiskeyDAOIntegrationTesting extends DAOIntegrationTesting {
 	//VALUES (3, 'test', 13, 4, 5, 3, 2, 3, 4);
 	@Test
 	public void get_all_whiskeys_returns_all_whiskeys() {
-		List<Whiskey>whiskeyList = dao.getAllWhiskeys();
+		List<Whiskey>whiskeyList = dao.getAllBrandAndPriceWhiskey();
 		
 		int whiskeyListOriginalSize = whiskeyList.size();
 		
 		String sql = "INSERT INTO whiskey(whiskey_id, brand, price) " +
-				"VALUES (4, 'Tech Elevator Whiskey', 6);";
+				"VALUES (default, 'Tech Elevator Whiskey', 6);";
+		
+		jdbcTemplate.update(sql);
+		
+		List<Whiskey> updatedWhiskeyList = dao.getAllBrandAndPriceWhiskey();
+		
+		int whiskeyListNewSize = updatedWhiskeyList.size();
+		
+		Assert.assertEquals(whiskeyListOriginalSize + 1, whiskeyListNewSize);
 	}
 
 	

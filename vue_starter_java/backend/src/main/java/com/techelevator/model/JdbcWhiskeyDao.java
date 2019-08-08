@@ -1,4 +1,4 @@
-package com.techelevator.tests;
+package com.techelevator.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
-import com.techelevator.model.Whiskey;
-
 @Component	
 public class JdbcWhiskeyDao implements WhiskeyDao {
 	
-	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
 	@Autowired 
@@ -48,4 +45,5 @@ public class JdbcWhiskeyDao implements WhiskeyDao {
 		
 		return whiskey;
 	}
+
 }
