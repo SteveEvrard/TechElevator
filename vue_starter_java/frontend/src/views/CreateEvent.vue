@@ -4,7 +4,7 @@
       <h1>Create a New Event</h1>
       <form-line>
         <h4>Title:</h4>
-        <input type="text" v-model="userData.eventTitle">
+        <input type="text" v-model="userData.title">
       </form-line>
       <!-- <form-line>
         <h4>URL for the event image:</h4>
@@ -12,20 +12,28 @@
       </form-line>-->
       <form-line class="checkbox">
         <h4>Is this a private event?</h4>
-        <input type="checkbox" v-model="userData.isPrivateEvent">
+        <input type="checkbox" v-model="userData.isPrivate">
         {{userData.isPrivateEvent ? "yes" : "no"}}
       </form-line>
       <form-line>
         <h4>Date of Event:</h4>
-        <datepicker v-model="userData.state.date" name="uniquename"></datepicker>
+        <!-- <datepicker format="MM/DD/YYYY" v-model="userData.date" name="uniquename"></datepicker> -->
+        <input
+          type="date"
+          id="start"
+          name="trip-start"
+          value="2018-07-22"
+          min="2018-01-01"
+          max="2018-12-31"
+        >
       </form-line>
       <form-line>
         <h4>Time of Event:</h4>
-        <vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>
+        <vue-timepicker format="hh:mm A" :minute-interval="30" v-model="userData.time"></vue-timepicker>
       </form-line>
       <form-line>
         <h4>Location:</h4>
-        <input type="text" v-model="userData.eventLocation">
+        <input type="text" v-model="userData.location">
       </form-line>
       <form-line>
         <h4>Additional Information:</h4>
@@ -33,7 +41,7 @@
       </form-line>
       <form-line class="checkbox">
         <h4>Is this a blind tasting?</h4>
-        <input type="checkbox" v-model="userData.isBlindEvent">
+        <input type="checkbox" v-model="userData.isBlindTasting">
         {{userData.isBlindEvent ? "yes" : "no"}}
       </form-line>
       <h4>What whiskeys will be tasted?</h4>
@@ -66,16 +74,14 @@ export default {
       apiURLEvent: "http://localhost:8080/AuthenticationApplication/api/events",
       API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys",
       userData: {
-        eventTitle: "",
-        eventImageURL: "",
-        isPrivateEvent: true,
-        state: {
-          date: new Date(2019, 7, 6),
-          placeholder: "Select a date."
-        },
-        eventLocation: "",
+        title: "",
+        // eventImageURL: "",
+        isPrivate: true,
+        date: new Date(),
+        time: "",
+        location: "",
         eventDescription: "",
-        isBlindEvent: true
+        isBlindTasting: true
       }
     };
   },

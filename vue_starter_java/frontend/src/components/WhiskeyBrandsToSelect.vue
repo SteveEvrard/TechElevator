@@ -2,11 +2,12 @@
   <div class="whiskey-brands">
     <div>
       <multiselect
+        class="whiskey-selection"
         v-model="selected"
         :options="listOfBrands"
         :multiple="true"
         :close-on-select="false"
-        placeholder="Pick whiskeys"
+        placeholder=" Pick whiskeys"
       />
     </div>
   </div>
@@ -52,3 +53,22 @@ export default {
   }
 };
 </script>
+
+<style>
+.whiskey-selection {
+  background-color: #f1f1f1;
+  padding: 10px;
+  text-align: center;
+  width: fit-content;
+  border-radius: 5px;
+}
+</style>
+
+<style scoped>
+li:nth-child(odd) {
+  background-color: #598899;
+  width: 100%;
+  padding: 10px;
+  margin: 5px;
+}
+</style>
