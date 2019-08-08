@@ -38,7 +38,7 @@ public class JDBCWhiskeyRatingDAOIntegrationTest extends DAOIntegrationTesting{
 				"values (default, 2, 1, 2, 3, 3, 3, 3, 3, 3, 3);";
 		jdbcTemplate.update(sql2);
 		
-		List<WhiskeyRating> ratingsForEvent = dao.getRatingsByEvent();
+		List<WhiskeyRating> ratingsForEvent = dao.getRatingsByEvent((long) 1);
 		
 		Assert.assertEquals(2, ratingsForEvent.size());
 	}
