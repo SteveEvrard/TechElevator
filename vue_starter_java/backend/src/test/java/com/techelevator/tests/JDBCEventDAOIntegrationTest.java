@@ -73,7 +73,7 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 		
 		jdbcTemplate.update(sql);
 		
-		String sql2 = "insert into jointable(id, event_id) " + 
+		String sql2 = "insert into userstoevent(id, event_id) " + 
 				"values (1, 10);";
 		
 		jdbcTemplate.update(sql2);
