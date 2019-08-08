@@ -37,10 +37,8 @@
         {{userData.isBlindEvent ? "yes" : "no"}}
       </form-line>
       <h4>What whiskeys will be tasted?</h4>
-      <select-box>
-        <p>Jamison's 20 Year Select</p>
-      </select-box>
-      <button type="submit" v-on:click.prevent )>Create Event</button>
+      <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select>
+      <button type="submit" v-on:click.prevent="saveEvent">Create Event</button>
     </form>
   </form-format>
 </template>
@@ -51,7 +49,7 @@ import { en } from "vuejs-datepicker/dist/locale";
 import FormFormat from "../components/FormFormat.vue";
 import VueTimepicker from "vue2-timepicker";
 import FormLine from "../components/FormLine.vue";
-import SelectBox from "../components/SelectBox.vue";
+import WhiskeyBrandsToSelect from "../components/WhiskeyBrandsToSelect.vue";
 
 export default {
   components: {
@@ -59,12 +57,14 @@ export default {
     FormFormat,
     VueTimepicker,
     FormLine,
-    SelectBox
+    WhiskeyBrandsToSelect
   },
 
   data() {
     return {
       en: en,
+      apiURLEvent: "http://localhost:8080/AuthenticationApplication/api/events",
+      API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys",
       userData: {
         eventTitle: "",
         eventImageURL: "",
@@ -78,6 +78,24 @@ export default {
         isBlindEvent: true
       }
     };
+  },
+  methods: {
+    saveEvent() {
+      fetch(this.apiURLEvent, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.userData)
+      })
+        .then(response => {
+          if (response.ok) {
+            this.$emit("showReviews");
+            this.$router.push("/");
+          }
+        })
+        .catch(err => console.error(err));
+    }
   }
 };
 </script>

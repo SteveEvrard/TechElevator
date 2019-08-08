@@ -1,45 +1,53 @@
 <template>
   <div class="whiskey-brands">
-    <div v-for="whiskey in whiskeys" v-bind:key="whiskey" v-on:click="selected(contentValue)">
-      <select-box v-bind:whiskey="whiskey"></select-box>
+    <div>
+      <multiselect
+        v-model="selected"
+        :options="listOfBrands"
+        :multiple="true"
+        :close-on-select="false"
+        placeholder="Pick whiskeys"
+      />
     </div>
   </div>
 </template>
+        
+        
 
 <script>
-import SelectBox from "../components/SelectBox.vue";
+import Multiselect from "vue-multiselect";
 
 export default {
+  name: "WhiskeyBrandsToSelect",
   components: {
-    SelectBox
+    Multiselect
   },
-  name: "WhiskeyBrands",
   props: {
     apiURL: String
   },
   data() {
     return {
       whiskeys: [],
-      privateEvents: []
+      listOfBrands: [],
+      selected: []
     };
   },
+  created() {
+    this.existingWhiskeys();
+  },
   methods: {
-    createdEvents() {
+    existingWhiskeys() {
       fetch(this.apiURL)
         .then(response => {
           return response.json();
         })
-        .then(whiskeys => {
-          this.whiskeys = whiskeys;
+        .then(jsonWhiskeys => {
+          this.whiskeys = jsonWhiskeys;
+          this.whiskeys.forEach(element => {
+            this.listOfBrands.push(element.brand);
+          });
         })
         .catch(err => console.error(err));
-    },
-    listPrivateEvents(events) {
-      array.forEach(event => {
-        if (event.isPrivate) {
-          privateEvents.add(event);
-        }
-      });
     }
   }
 };
