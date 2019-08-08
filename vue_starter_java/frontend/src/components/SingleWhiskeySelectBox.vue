@@ -1,26 +1,26 @@
 <template>
-  <div class="select-box" v-bind:id="tagId" v-on:click="selected(contentValue)">
-    <slot></slot>
-  </div>
+  <div class="select-box" v-bind:id="tagId" v-on:click="selected(whiskey.brand)">{{whiskey.brand}}</div>
 </template>
 
 
 <script>
 export default {
-  name: "SelectBox",
+  name: "SingleWhiskeySelectBox",
   data() {
     return {
       tagId: "not-selected",
+      whiskeys: [],
       contentValue: ""
     };
   },
   methods: {
-    selected(contentValue) {
+    selected(brand) {
       if (id === "selected") {
         tagId = "not-selected";
       } else {
         tagId = "selected";
-        this.$emit("trackSelected");
+        whiskeys.add(brand);
+        this.$emit("trackSelected", this.whiskeys);
       }
     }
   }

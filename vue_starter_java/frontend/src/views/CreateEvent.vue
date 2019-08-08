@@ -37,9 +37,7 @@
         {{userData.isBlindEvent ? "yes" : "no"}}
       </form-line>
       <h4>What whiskeys will be tasted?</h4>
-      <select-box>
-        <p>Jamison's 20 Year Select</p>
-      </select-box>
+      <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select>
       <button type="submit" v-on:click.prevent="saveEvent">Create Event</button>
     </form>
   </form-format>
@@ -51,7 +49,7 @@ import { en } from "vuejs-datepicker/dist/locale";
 import FormFormat from "../components/FormFormat.vue";
 import VueTimepicker from "vue2-timepicker";
 import FormLine from "../components/FormLine.vue";
-import SelectBox from "../components/SelectBox.vue";
+import WhiskeyBrandsToSelect from "../components/WhiskeyBrandsToSelect.vue";
 
 export default {
   components: {
@@ -59,7 +57,7 @@ export default {
     FormFormat,
     VueTimepicker,
     FormLine,
-    SelectBox
+    WhiskeyBrandsToSelect
   },
 
   data() {

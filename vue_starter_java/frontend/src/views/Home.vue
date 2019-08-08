@@ -5,7 +5,7 @@
       <p>You must be authenticated to see this</p>CheckIn
     </div>
     <div>
-      <event-list :apiURL="API_URL">{{API_URL}}</event-list>
+      <event-list :apiURL="API_URL"></event-list>
     </div>
   </div>
 </template>
