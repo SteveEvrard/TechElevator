@@ -7,7 +7,7 @@ import java.util.List;
 public class Event {
 	
 	//private List<Whiskey> tastingWhiskeys;
-	private LocalTime time;
+	private String time;
 	private LocalDate date;
 	private String location;
 	private String title;
@@ -23,10 +23,10 @@ public class Event {
 //	public void setTastingWhiskeys(List<Whiskey> tastingWhiskeys) {
 //		this.tastingWhiskeys = tastingWhiskeys;
 //	}
-	public LocalTime getTime() {
+	public String getTime() {
 		return time;
 	}
-	public void setTime(LocalTime time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 	public LocalDate getDate() {
