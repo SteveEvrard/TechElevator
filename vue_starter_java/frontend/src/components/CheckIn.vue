@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "check"
+  name: "Checkin"
   // props: {
   //     post
   // }
