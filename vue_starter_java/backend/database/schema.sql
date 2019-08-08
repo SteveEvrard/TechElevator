@@ -33,7 +33,16 @@ CREATE TABLE whiskey
 (
 whiskey_id SERIAL PRIMARY KEY,
 brand varchar(255),
-price INT,
+price INT
+);
+DROP TABLE IF EXISTS whiskeyscores;
+
+CREATE TABLE whiskeyrating
+(
+whiskey_rating_id SERIAL PRIMARY KEY,
+whiskey_id SERIAL REFERENCES whiskey(whiskey_id),
+event_id SERIAL REFERENCES event(event_id),
+user_id SERIAL REFERENCES users(id),
 taste_rating INT,
 nose_rating INT,
 color_rating INT,
