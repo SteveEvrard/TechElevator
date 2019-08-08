@@ -19,12 +19,13 @@
         <h4>Date of Event:</h4>
         <!-- <datepicker format="MM/DD/YYYY" v-model="userData.date" name="uniquename"></datepicker> -->
         <input
-          type="date"
-          id="start"
-          name="trip-start"
-          value="2018-07-22"
-          min="2018-01-01"
-          max="2018-12-31"
+          type="datetime-local"
+          id="time"
+          name="time"
+          value="2018-06-12T19:30"
+          min="2018-06-07T00:00"
+          max="2018-06-14T00:00"
+          v-model="userData.date"
         >
       </form-line>
       <form-line>
