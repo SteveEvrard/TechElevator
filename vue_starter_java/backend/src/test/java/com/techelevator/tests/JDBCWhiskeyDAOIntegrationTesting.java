@@ -1,15 +1,18 @@
-package com.techelevator.model;
+package com.techelevator.tests;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.util.Assert;
+
+import com.techelevator.model.JdbcWhiskeyDao;
+import com.techelevator.model.Whiskey;
+import com.techelevator.model.WhiskeyDao;
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.techelevator.tests.DAOIntegrationTesting;
 
 
 public class JDBCWhiskeyDAOIntegrationTesting extends DAOIntegrationTesting {
