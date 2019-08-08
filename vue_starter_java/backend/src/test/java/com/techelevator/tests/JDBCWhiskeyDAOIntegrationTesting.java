@@ -34,7 +34,7 @@ public class JDBCWhiskeyDAOIntegrationTesting extends DAOIntegrationTesting {
 	//VALUES (3, 'test', 13, 4, 5, 3, 2, 3, 4);
 	@Test
 	public void get_all_whiskeys_returns_all_whiskeys() {
-		List<Whiskey>whiskeyList = dao.getAllWhiskeys();
+		List<Whiskey>whiskeyList = dao.getAllBrandAndPriceWhiskey();
 		
 		int whiskeyListOriginalSize = whiskeyList.size();
 		
@@ -43,7 +43,7 @@ public class JDBCWhiskeyDAOIntegrationTesting extends DAOIntegrationTesting {
 		
 		jdbcTemplate.update(sql);
 		
-		List<Whiskey> updatedWhiskeyList = dao.getAllWhiskeys();
+		List<Whiskey> updatedWhiskeyList = dao.getAllBrandAndPriceWhiskey();
 		
 		int whiskeyListNewSize = updatedWhiskeyList.size();
 		
