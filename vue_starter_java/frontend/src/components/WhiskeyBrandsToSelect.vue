@@ -1,10 +1,18 @@
 <template>
   <div class="whiskey-brands">
     <div>
-      <multiselect v-model="selected" :options="whiskeys"></multiselect>
+      <multiselect
+        v-model="selected"
+        :options="listOfBrands"
+        :multiple="true"
+        :close-on-select="false"
+        placeholder="Pick whiskeys"
+      />
     </div>
   </div>
 </template>
+        
+        
 
 <script>
 import Multiselect from "vue-multiselect";
@@ -20,8 +28,8 @@ export default {
   data() {
     return {
       whiskeys: [],
-      privateEvents: [],
-      selected: null
+      listOfBrands: [],
+      selected: []
     };
   },
   created() {
@@ -35,7 +43,9 @@ export default {
         })
         .then(jsonWhiskeys => {
           this.whiskeys = jsonWhiskeys;
-          console.log(this.whiskeys);
+          this.whiskeys.forEach(element => {
+            this.listOfBrands.push(element.brand);
+          });
         })
         .catch(err => console.error(err));
     }
