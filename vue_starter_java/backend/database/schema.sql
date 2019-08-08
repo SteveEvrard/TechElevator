@@ -33,7 +33,16 @@ CREATE TABLE whiskey
 (
 whiskey_id SERIAL PRIMARY KEY,
 brand varchar(255),
-price INT,
+price INT
+);
+DROP TABLE IF EXISTS whiskeyscores;
+
+CREATE TABLE whiskeyrating
+(
+whiskey_rating_id SERIAL PRIMARY KEY,
+whiskey_id SERIAL REFERENCES whiskey(whiskey_id),
+event_id SERIAL REFERENCES event(event_id),
+user_id SERIAL REFERENCES users(id),
 taste_rating INT,
 nose_rating INT,
 color_rating INT,
@@ -42,9 +51,9 @@ finish_rating INT,
 price__rating INT,
 overall_rating INT
 );
-DROP TABLE IF EXISTS jointable;
+DROP TABLE IF EXISTS usersToEvent;
 
-CREATE TABLE jointable
+CREATE TABLE usersToEvent
 (
 id SERIAL REFERENCES users(id),
 event_id SERIAL REFERENCES event(event_id)
@@ -62,6 +71,14 @@ DROP TABLE IF EXISTS whiskeyToEvent;
 CREATE TABLE whiskeyToEvent(
 whiskey_id serial References whiskey(whiskey_id),
 event_id serial References event(event_id)
+);
+
+DROP TABLE IF EXISTS surveyQuestions;
+
+CREATE TABLE surveyQuestions
+(
+question_id SERIAL PRIMARY KEY,
+question VARCHAR (255)
 );
 
 COMMIT;

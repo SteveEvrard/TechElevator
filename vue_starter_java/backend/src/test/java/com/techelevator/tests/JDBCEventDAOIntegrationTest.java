@@ -77,11 +77,6 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 				"values (1, 10);";
 		
 		jdbcTemplate.update(sql2);
-
-		String sql3 = "select title from event " + 
-				"join jointable on event.event_id = jointable.event_id " + 
-				"where id = ?;";
-		SqlRowSet result = jdbcTemplate.queryForRowSet(sql3, 10);
 		
 		eventsByUserList = dao.getEventsAttendedByUser((long) 1);
 		
