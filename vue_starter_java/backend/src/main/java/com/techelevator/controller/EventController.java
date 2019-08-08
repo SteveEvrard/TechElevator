@@ -3,7 +3,8 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.techelevator.model.Event;
@@ -12,7 +13,6 @@ import com.techelevator.model.EventDao;
 
 
 @RestController
-@RequestMapping("/api/events")
 @CrossOrigin
 public class EventController {
 
@@ -22,15 +22,23 @@ public class EventController {
 			this.eventDao = eventDao;
 		}
 
-		@GetMapping
+		@GetMapping(path="/api/events")
 		public List<Event> getAllEvents() {
 			return eventDao.getAllEvents();
 		}
 		
-//		@RequestMapping(path="/api/events", method=RequestMethod.GET)
-//		public List<Event> getAllEvents() {
-//			return eventDao.getAllEvents();
-//		}
+		@GetMapping(path="/api/users/{id}/events")
+		public List<String> getAllEventsByUser(@PathVariable long id) {
+			return eventDao.getEventsAttendedByUser(id);
+		}
+		
+		@PostMapping(path="/api/createEvent")
+		public void createEvent(@PathVariable Event newEvent) {
+			eventDao.saveEvent(newEvent);
+		}
+		
+		
+		
 
 //		@GetMapping("/{id}")
 //		public ProductReview getProductReview(@PathVariable int id) {

@@ -1,7 +1,7 @@
 <template>
   <div class="event-list">
     <ul>
-      <li v-for="event in privateEvents" v-bind:key="event">
+      <li v-for="event in publicEvents" v-bind:key="event">
         <single-event v-bind:event="event"></single-event>
       </li>
     </ul>
@@ -22,36 +22,37 @@ export default {
   data() {
     return {
       events: [],
-      privateEvents: []
+      publicEvents: []
     };
+  },
+  created() {
+    this.createdEvents();
   },
   methods: {
     createdEvents() {
-      fetch(`${process.env.VUE_APP_REMOTE_API}/events`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      })
+      fetch(this.apiURL)
         .then(response => {
+          console.log(response);
           return response.json();
         })
-        .then(events => {
-          this.events = events;
+        .then(jsonEvents => {
+          this.events = jsonEvents;
+          console.log(jsonEvents);
+          this.events.forEach(event => {
+            if (!event.isPrivate) {
+              this.publicEvents.push(event);
+            }
+          });
         })
-        .then(events => {
-          listPrivateEvents(this.events);
-        })
+
         .catch(err => console.error(err));
-    },
-    listPrivateEvents(events) {
-      array.forEach(event => {
-        if (event.isPrivate) {
-          privateEvents.add(event);
-        }
-      });
     }
   }
 };
 </script>
+
+<style>
+li {
+  list-style: none;
+}
+</style>

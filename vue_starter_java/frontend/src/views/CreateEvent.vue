@@ -6,10 +6,10 @@
         <h4>Title:</h4>
         <input type="text" v-model="userData.eventTitle">
       </form-line>
-      <form-line>
+      <!-- <form-line>
         <h4>URL for the event image:</h4>
         <input type="text" v-model="userData.eventImageURL">
-      </form-line>
+      </form-line>-->
       <form-line class="checkbox">
         <h4>Is this a private event?</h4>
         <input type="checkbox" v-model="userData.isPrivateEvent">
@@ -40,7 +40,7 @@
       <select-box>
         <p>Jamison's 20 Year Select</p>
       </select-box>
-      <button type="submit">Create Event</button>
+      <button type="submit" v-on:click.prevent )>Create Event</button>
     </form>
   </form-format>
 </template>
