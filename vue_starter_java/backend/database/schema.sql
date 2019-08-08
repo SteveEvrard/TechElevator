@@ -21,8 +21,7 @@ location varchar(255),
 title varchar(255),
 is_blind boolean,
 has_occurred boolean,
-is_private boolean,
-event_image_name varchar(255)
+is_private boolean
 );
 
 
