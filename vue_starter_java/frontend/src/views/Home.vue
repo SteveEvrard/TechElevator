@@ -12,11 +12,12 @@
 
 <script>
 import EventList from "../components/EventList.vue";
-import checkIn from "../components/CheckIn.vue";
+import CheckIn from "../components/CheckIn.vue";
 
 export default {
   components: {
-    EventList
+    EventList,
+    CheckIn
   },
   name: "home",
   data() {
