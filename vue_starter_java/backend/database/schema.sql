@@ -51,9 +51,9 @@ finish_rating INT,
 price__rating INT,
 overall_rating INT
 );
-DROP TABLE IF EXISTS jointable;
+DROP TABLE IF EXISTS joinTable;
 
-CREATE TABLE jointable
+CREATE TABLE joinTable
 (
 id SERIAL REFERENCES users(id),
 event_id SERIAL REFERENCES event(event_id)
