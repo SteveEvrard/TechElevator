@@ -40,7 +40,13 @@ public class JdbcWhiskeyRatingDao implements WhiskeyRatingDao {
 
 	@Override
 	public void submitRating(WhiskeyRating rating) {
-		// TODO Auto-generated method stub
+		
+		String sql = "insert into whiskeyrating (whiskey_rating_id, whiskey_id, event_id, user_id, taste_rating, nose_rating, color_rating, " + 
+				"body_rating, finish_rating, price__rating, overall_rating) " + 
+				"values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+		jdbcTemplate.update(sql, rating.getWhiskeyId(), rating.getEventId(), rating.getUserId(), rating.getTasteRating(),
+				rating.getSmellRating(), rating.getColorRating(), rating.getBodyRating(), rating.getFinishRating(),
+				rating.getPriceRating(), rating.getOverallRating());
 
 	}
 	

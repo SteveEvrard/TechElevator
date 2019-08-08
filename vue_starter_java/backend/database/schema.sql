@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS event;
 Create Table event(
 event_id SERIAL PRIMARY KEY,
 event_date date,
-event_time time,
+event_time varchar(255),
 description varchar(255),
 location varchar(255),
 title varchar(255),

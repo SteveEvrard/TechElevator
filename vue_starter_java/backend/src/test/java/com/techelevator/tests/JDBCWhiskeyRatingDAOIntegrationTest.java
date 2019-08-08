@@ -47,11 +47,6 @@ public class JDBCWhiskeyRatingDAOIntegrationTest extends DAOIntegrationTesting{
 	@Test
 	public void submit_rating_adds_rating_to_database() {
 		
-//		String sql = "insert into whiskeyrating (whiskey_rating_id, whiskey_id, event_id, user_id, taste_rating, nose_rating, color_rating, " + 
-//				"body_rating, finish_rating, price__rating, overall_rating) " + 
-//				"values (default, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3);";
-//		jdbcTemplate.update(sql);
-//		
 		WhiskeyRating testRating = createWhiskeyRating();
 		
 		dao.submitRating(testRating);

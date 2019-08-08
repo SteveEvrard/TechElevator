@@ -62,7 +62,7 @@ public class JdbcEventDao implements EventDao {
 	private Event mapRowToEvent(SqlRowSet results) {
 		Event event = new Event();
 		
-		event.setTime(results.getTime("event_time").toLocalTime());
+		event.setTime(results.getString("event_time"));
 		event.setDate(results.getDate("event_date").toLocalDate());
 		event.setLocation(results.getString("location"));
 		event.setTitle(results.getString("title"));

@@ -89,7 +89,7 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 		Event event = new Event();
 		event.setEventId((long) Math.random() * 100);
 		event.setDate(LocalDate.of(2019,9,9));
-		event.setTime(LocalTime.of(12, 0,0));
+		event.setTime("12:00:00");
 		event.setLocation("test");
 		event.setTitle("title");
 		event.setHasOccured(true);
