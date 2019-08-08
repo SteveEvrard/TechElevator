@@ -1,22 +1,19 @@
 <template>
    <div>
-  <button @click='toggle()'>Check In</button>
+  <input type="checkbox" id="scales" name="scales"
+         checked>
+  <label for="scales">Scales</label>
 </div>
 </template>
 
 <script>
 
-import SingleEvent from "../components/SingleEvent.vue";
+
 export default {
-el: '#app',
-    data: {
-        isChecked: false
-    },
-    methods:{
-        toggle: function(){
-            this.isChecked = !this.isChecked
-        }
-    }
+name: "check",
+props: {
+    post
+}
 }
 
 </script>

@@ -73,4 +73,12 @@ whiskey_id serial References whiskey(whiskey_id),
 event_id serial References event(event_id)
 );
 
+DROP TABLE IF EXISTS previousquestions;
+
+CREATE TABLE previousquestions
+(
+question_id SERIAL PRIMARY KEY,
+question VARCHAR (255)
+);
+
 COMMIT;
