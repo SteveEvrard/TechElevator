@@ -1,4 +1,4 @@
-package com.techelevator.tests;
+package com.techelevator.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import org.springframework.util.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.techelevator.model.Whiskey;
+import com.techelevator.tests.DAOIntegrationTesting;
 
 
 public class JDBCWhiskeyDAOIntegrationTesting extends DAOIntegrationTesting {
@@ -36,7 +36,15 @@ public class JDBCWhiskeyDAOIntegrationTesting extends DAOIntegrationTesting {
 		int whiskeyListOriginalSize = whiskeyList.size();
 		
 		String sql = "INSERT INTO whiskey(whiskey_id, brand, price) " +
-				"VALUES (4, 'Tech Elevator Whiskey', 6);";
+				"VALUES (default, 'Tech Elevator Whiskey', 6);";
+		
+		jdbcTemplate.update(sql);
+		
+		List<Whiskey> updatedWhiskeyList = dao.getAllWhiskeys();
+		
+		int whiskeyListNewSize = updatedWhiskeyList.size();
+		
+		Assert.assertEquals(whiskeyListOriginalSize + 1, whiskeyListNewSize);
 	}
 
 	
