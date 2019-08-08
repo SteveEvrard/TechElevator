@@ -8,6 +8,5 @@ public interface WhiskeyDao {
 	
 	List<Whiskey> getAllBrandAndPriceWhiskey();
 	void saveWhiskey(Whiskey whiskey);
-	
 
 }
