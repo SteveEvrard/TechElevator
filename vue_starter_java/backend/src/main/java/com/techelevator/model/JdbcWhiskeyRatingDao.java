@@ -32,7 +32,7 @@ public class JdbcWhiskeyRatingDao implements WhiskeyRatingDao {
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, eventId);
 		
 		while(results.next()) {
-			ratingsForEvent.add(mapRowToEvent(results));
+			ratingsForEvent.add(mapRowToRating(results));
 		}
 		
 		return ratingsForEvent;
@@ -44,7 +44,7 @@ public class JdbcWhiskeyRatingDao implements WhiskeyRatingDao {
 
 	}
 	
-	private WhiskeyRating mapRowToEvent(SqlRowSet results) {
+	private WhiskeyRating mapRowToRating(SqlRowSet results) {
 		WhiskeyRating rating = new WhiskeyRating();
 		
 		rating.setWhiskeyId(results.getLong("whiskey_id"));

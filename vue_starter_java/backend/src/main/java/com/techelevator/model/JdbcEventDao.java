@@ -49,7 +49,7 @@ public class JdbcEventDao implements EventDao {
 		List<String> allEventsByUser = new ArrayList<>();
 		
 		String sql = "select title from event " + 
-				"join jointable on event.event_id = jointable.event_id " + 
+				"join userstoevent on event.event_id = userstoevent.event_id " + 
 				"where id = ?;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
 		while(results.next()) {
