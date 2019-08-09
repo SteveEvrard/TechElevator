@@ -83,6 +83,25 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 		Assert.assertEquals(1, eventsByUserList.size());
 	}
 	
+	@Test
+	public void get_event_details_by_event_id_returns_event_details() {
+		String sql = "insert into event(event_id, event_date, event_time, description, location, " + 
+				"title, is_blind, has_occurred, is_private) " + 
+				"Values (1, '08/08/2019', '7:00 PM', 'All-you-can-taste!', " + 
+				"'104 Farrow Ave Suite 7', 'Blue Blind Paralytic Drunk', true, false, false);";
+		jdbcTemplate.update(sql);
+		
+		Event event = dao.getEventDetailsByEventId((long) 1);
+		
+		String sql2 = "select event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private " + 
+				"from event " + 
+				"where event_id = ?;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql2, 1);
+		results.next();
+		String eventTitle = results.getString("title");
+		
+		Assert.assertEquals(event.getTitle(), eventTitle);
+	}
 	
 	private Event createEvent() {
 		
