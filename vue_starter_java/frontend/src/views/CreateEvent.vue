@@ -5,7 +5,7 @@
       <h1>Create a New Event</h1><br><br><br>
       
         <h4>Title:<br>
-        <input type="text" v-model="userData.title" placeholder="Event Title Here">
+        <input type="text" class="text" v-model="userData.title" placeholder="Event Title Here">
     </h4><br>
       <!-- <form-line>
         <h4>URL for the event image:</h4>
@@ -25,19 +25,19 @@
         <vue-timepicker format="hh:mm A" :minute-interval="30" v-model="userData.time"></vue-timepicker></h4><br>
       
         <h4>Location:<br>
-        <input type="text" v-model="userData.location"></h4><br>
+        <input type="text" class="text" v-model="userData.location"></h4><br>
       
         <h4>Additional Information:<br>
-        <textarea v-model="userData.eventDescription"></textarea></h4><br>
+        <textarea v-model="userData.eventDescription" class="text"></textarea></h4><br>
      
      
-        <h4>Is this a blind tasting?
+        <h4>Is this a blind tasting?f
         <input type="checkbox" v-model="userData.isBlindTasting">
         {{userData.isBlindEvent ? "yes" : "no"}}</h4><br>
      
-      <h4>What whiskeys will be tasted?
+      <h4>What whiskeys will be tasted?<br>
       <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select></h4><br>
-      <button type="submit" v-on:click.prevent="saveEvent">Create Event</button>
+      <h4><button type="submit" v-on:click.prevent="saveEvent">Create Event</button></h4>
       </div>
    
 
@@ -112,13 +112,18 @@ h1{
   text-align: center;
   background: black;
   color: white;
+  
 }
 h4{
-  
+ font-size-adjust: 20px;
+  font-size: 20px;
   align-content: center;
   text-align: center;
   align-items: center;
   align-self: center;
+  text-align: center;
+ 
+  
   
   
 }
@@ -126,8 +131,11 @@ div {
  align-content: center;
   text-align: center;
   align-items: center;
-  align-self: center;
-  
+
+  background: #f1f1f1;
+}
+.text{
+  font-size: 20px;
 }
 
 </style>
