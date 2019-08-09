@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form class="event">
+    
       <h1>Create a New Event</h1>
 
       <h4>Title:</h4>
@@ -8,14 +8,11 @@
       <input type="text" v-model="eventData.title">
       <br>
 
-      <!-- <form-line>
-        <h4>URL for the event image:</h4>
-        <input type="text" v-model="eventData.eventImageURL">
-      </form-line>-->
+    
 
-      <h4>Is this a private event?</h4>
+      <h4>Is this a private event?
       <input type="checkbox" v-model="eventData.isPrivate">
-      {{eventData.isPrivate ? "yes" : "no"}}
+      {{eventData.isPrivate ? "yes" : "no"}}</h4>
       <br>
       <h4>Date of Event:</h4>
       <br>
@@ -49,7 +46,7 @@
       <h4>
         <button type="submit" v-on:click.prevent="saveEvent">Create Event</button>
       </h4>
-    </form>
+    
   </div>
 </template>
 
@@ -104,16 +101,14 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 button {
-  display: block;
+  
   text-align: center;
   margin: 5%;
 }
 
-/* .select-box {
-  max-height: max-content;
-} */
+
 h1 {
   text-align: center;
   background: black;
@@ -126,13 +121,18 @@ h4 {
   align-items: center;
   align-self: center;
 }
-div {
-  align-content: center;
+div{
   text-align: center;
   align-items: center;
   align-self: center;
   background: #f1f1f1;
 }
+.create{
+ text-align: center;
+  align-items: center;
+  align-self: center;
+}
+
 </style>
 
 
