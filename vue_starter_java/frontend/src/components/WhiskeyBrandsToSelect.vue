@@ -54,12 +54,12 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .whiskey-selection {
   background-color: #f1f1f1;
-  padding: 10px;
+  padding: 0px;
   text-align: center;
-  width: fit-content;
+  
   border-radius: 5px;
 }
 </style>
@@ -67,8 +67,8 @@ export default {
 <style scoped>
 li:nth-child(odd) {
   background-color: #598899;
-  width: 100%;
-  padding: 10px;
-  margin: 5px;
+  
+  padding: 0px;
+  margin: 0px;
 }
 </style>
