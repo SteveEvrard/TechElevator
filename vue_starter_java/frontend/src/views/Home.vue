@@ -24,11 +24,15 @@ export default {
 </script>
 
 <style>
+.home {
+  display: flex;
+  justify-content: center;
+  background-color: #f1f1f1;
+}
 .list-of-events {
   background-color: #2e4d58;
   padding: 1px;
-  width: 80%;
-  height: fit-content;
+  width: 90%;
   border-radius: 10px;
   margin: 5%;
   box-shadow: -2px 10px 18px -4px rgba(0, 0, 0, 0.75);

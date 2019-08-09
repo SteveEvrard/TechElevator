@@ -54,10 +54,9 @@ h2 {
   text-align: center;
 }
 .event {
-  display: inline-block;
   padding: 2%;
-  margin: 2%;
   background-color: white;
-  width: fit-content;
+  width: 320px;
+  min-height: 320px;
 }
 </style>
