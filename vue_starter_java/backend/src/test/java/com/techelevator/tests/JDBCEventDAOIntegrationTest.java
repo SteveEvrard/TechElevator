@@ -87,16 +87,16 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 	public void get_event_details_by_event_id_returns_event_details() {
 		String sql = "insert into event(event_id, event_date, event_time, description, location, " + 
 				"title, is_blind, has_occurred, is_private) " + 
-				"Values (1, '08/08/2019', '7:00 PM', 'All-you-can-taste!', " + 
+				"Values (100, '08/08/2019', '7:00 PM', 'All-you-can-taste!', " + 
 				"'104 Farrow Ave Suite 7', 'Blue Blind Paralytic Drunk', true, false, false);";
 		jdbcTemplate.update(sql);
 		
-		Event event = dao.getEventDetailsByEventId((long) 1);
+		Event event = dao.getEventDetailsByEventId((long) 100);
 		
 		String sql2 = "select event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private " + 
 				"from event " + 
 				"where event_id = ?;";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql2, 1);
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql2, 100);
 		results.next();
 		String eventTitle = results.getString("title");
 		
