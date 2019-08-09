@@ -1,61 +1,50 @@
 <template>
-  
-    
-      <div>
-      <h1>Create a New Event</h1><br><br><br>
-      
-        <h4>Title:<br>
-        <input type="text" v-model="userData.title" placeholder="Event Title Here">
-    </h4><br>
+  <form-format>
+    <form class="event">
+      <h1>Create a New Event</h1>
+
+      <h4>Title:</h4>
+      <input type="text" v-model="eventData.title">
+
       <!-- <form-line>
         <h4>URL for the event image:</h4>
-        <input type="text" v-model="userData.eventImageURL">
+        <input type="text" v-model="eventData.eventImageURL">
       </form-line>-->
-     
-        <h4>Is this a private event?
-        <input type="checkbox" v-model="userData.isPrivate">
-       {{userData.isPrivateEvent ? "yes" : "no"}}</h4><br>
-      
-      
-        <h4>Date of Event:<br>
-        <datepicker format="MM/DD/YYYY" v-model="userData.date" name="uniquename"></datepicker></h4><br>
-      
-     
-        <h4>Time of Event:<br>
-        <vue-timepicker format="hh:mm A" :minute-interval="30" v-model="userData.time"></vue-timepicker></h4><br>
-      
-        <h4>Location:<br>
-        <input type="text" v-model="userData.location"></h4><br>
-      
-        <h4>Additional Information:<br>
-        <textarea v-model="userData.eventDescription"></textarea></h4><br>
-     
-     
-        <h4>Is this a blind tasting?
-        <input type="checkbox" v-model="userData.isBlindTasting">
-        {{userData.isBlindEvent ? "yes" : "no"}}</h4><br>
-     
-      <h4>What whiskeys will be tasted?
-      <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select></h4><br>
-      <button type="submit" v-on:click.prevent="saveEvent">Create Event</button>
-      </div>
-   
 
+      <h4>Is this a private event?</h4>
+      <input type="checkbox" v-model="eventData.isPrivate">
+      {{eventData.isPrivate ? "yes" : "no"}}
+      <h4>Date of Event:</h4>
+      <input type="date" v-model="eventData.date">
+
+      <h4>Time of Event:</h4>
+      <input type="text" v-model="eventData.time">
+
+      <h4>Location:</h4>
+      <input type="text" v-model="eventData.location">
+
+      <h4>Additional Information:</h4>
+      <textarea v-model="eventData.eventDescription"></textarea>
+
+      <h4>Is this a blind tasting?</h4>
+      <input type="checkbox" v-model="eventData.isBlindTasting">
+      {{eventData.isBlindTasting ? "yes" : "no"}}
+      <h4>What whiskeys will be tasted?</h4>
+      <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select>
+      <button type="submit" v-on:click.prevent="saveEvent">Create Event</button>
+    </form>
+  </form-format>
 </template>
 
 <script>
-import Datepicker from "vuejs-datepicker";
 import { en } from "vuejs-datepicker/dist/locale";
 import FormFormat from "../components/FormFormat.vue";
-import VueTimepicker from "vue2-timepicker";
 import FormLine from "../components/FormLine.vue";
 import WhiskeyBrandsToSelect from "../components/WhiskeyBrandsToSelect.vue";
 
 export default {
   components: {
-    Datepicker,
     FormFormat,
-    VueTimepicker,
     FormLine,
     WhiskeyBrandsToSelect
   },
@@ -65,12 +54,12 @@ export default {
       en: en,
       apiURLEvent: "http://localhost:8080/AuthenticationApplication/api/events",
       API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys",
-      userData: {
+      eventData: {
         title: "",
         // eventImageURL: "",
         isPrivate: true,
         date: new Date(),
-        time: "",
+        // time: "",
         location: "",
         eventDescription: "",
         isBlindTasting: true
@@ -84,7 +73,7 @@ export default {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(this.userData)
+        body: JSON.stringify(this.eventData)
       })
         .then(response => {
           if (response.ok) {
@@ -108,28 +97,23 @@ button {
 /* .select-box {
   max-height: max-content;
 } */
-h1{
+h1 {
   text-align: center;
   background: black;
   color: white;
 }
-h4{
-  
+h4 {
   align-content: center;
   text-align: center;
   align-items: center;
   align-self: center;
-  
-  
 }
 div {
- align-content: center;
+  align-content: center;
   text-align: center;
   align-items: center;
   align-self: center;
-  
 }
-
 </style>
 
 
