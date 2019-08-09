@@ -24,7 +24,7 @@ body {
 .main-logo img {
   max-width: 600px;
   padding: 5%;
-  margin-left: 30%;
+  margin-left: 20%;
   margin-right: 30%;
 }
 .nav {
