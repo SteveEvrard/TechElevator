@@ -2,7 +2,14 @@
   <div id="app">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <div id="nav">
-      <router-link to="/">Home</router-link>
+      <router-link to="/">Home   </router-link><br>
+
+      <router-link to="/CreateEvent">Create Event   </router-link><br>
+
+      <router-link to="/Login">Login   </router-link><br>
+
+      <router-link to="/Register">Register   </router-link>
+
     </div>
     <router-view/>
   </div>
