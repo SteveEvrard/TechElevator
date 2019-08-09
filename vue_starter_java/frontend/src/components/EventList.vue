@@ -1,11 +1,8 @@
 <template>
   <div class="event-list">
-    <ul>
-      <li v-for="event in publicEvents" v-bind:key="event">
-        <single-event v-bind:event="event"></single-event>
-        
-      </li>
-    </ul>
+    <div v-for="event in publicEvents" v-bind:key="event">
+      <single-event v-bind:event="event"></single-event>
+    </div>
   </div>
 </template>
 
@@ -55,6 +52,12 @@ export default {
 </script>
 
 <style>
+.event-list {
+  display: flex;
+  justify-content: space-around;
+  align-content: flex-start;
+  margin: 15px 0px 15px 0px;
+}
 li {
   list-style: none;
 }
