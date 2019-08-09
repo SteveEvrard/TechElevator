@@ -12,7 +12,7 @@ export default {
     
   },
  methods:{
-        check: function(){
+        check(){
             this.checkin = !this.checkin;
         }
     }
