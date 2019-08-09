@@ -17,6 +17,6 @@ export default {
   border: 1px solid #f1f1f1;
   padding: 2%;
   margin: 2%;
-  box-shadow: 1px 1px #75787b;
+  box-shadow: -2px 10px 18px -4px rgba(0, 0, 0, 0.75);
 }
 </style>
