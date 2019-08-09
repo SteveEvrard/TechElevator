@@ -20,7 +20,6 @@ description varchar(255),
 location varchar(255),
 title varchar(255),
 is_blind boolean,
-has_occurred boolean,
 is_private boolean
 );
 
@@ -78,12 +77,14 @@ CREATE TABLE surveyQuestions
 question_id SERIAL PRIMARY KEY,
 question VARCHAR (255)
 );
-Insert Into event Values (default, '08/08/2019', '7:00 PM', 'All-you-can-taste!', '104 Farrow Ave Suite 7', 'Blue Blind Paralytic Drunk', true, false, false);
+Insert Into event Values (default, '08/08/2019', '7:00 PM', 'All-you-can-taste!', '104 Farrow Ave Suite 7', 'Blue Blind Paralytic Drunk', true, false);
 
-Insert Into event Values (default, '10/31/2019', '1:00 PM', 'A soul-stirring taste of whiskey that will haunt you.', '31 All Hallows Blvd', 'Terrifying Tastes', true, false, false);
+Insert Into event Values (default, '10/31/2019', '1:00 PM', 'A soul-stirring taste of whiskey that will haunt you.', '31 All Hallows Blvd', 'Terrifying Tastes', true, false);
 
 Insert Into whiskey (brand, price) Values ('Jamisons 18 Year Limited reserve', 200);
 Insert Into whiskey (brand, price) Values ('Colonel Taylor Small Batch KY Bourbon', 40);
+
+insert into users (id, username, password, salt, role) values (2, 'test', 'test', 'test', 'test');
 
 
 COMMIT;
