@@ -1,19 +1,36 @@
 <template>
-  <div class="event">
+  <tile-format class="event">
     <h2>{{event.title}}</h2>
     <!-- <img src="{{event.imgUrl}}"> -->
-    <h4>Date:</h4>
-    <p>{{event.date.month}} {{event.date.dayOfMonth}}, {{event.date.year}}</p>
-    <h4>Time:</h4>
-    <p>{{event.time.hour}}</p>
-    <h4>Location:</h4>
-    <p>{{event.location}}</p>
-    <p>{{event.info}}</p>
-  </div>
+
+    <ul>
+      <li>
+        <h4>Date:</h4>
+        <p>{{event.date.month}} {{event.date.dayOfMonth}}, {{event.date.year}}</p>
+      </li>
+
+      <li>
+        <h4>Time:</h4>
+        <p>{{event.time}}</p>
+      </li>
+      <li>
+        <h4>Location:</h4>
+        <p>{{event.location}}</p>
+      </li>
+      <li>
+        <p>{{event.eventDescription}}</p>
+      </li>
+    </ul>
+  </tile-format>
 </template>
 
 <script>
+import TileFormat from "../components/TileFormat.vue";
+
 export default {
+  components: {
+    TileFormat
+  },
   props: {
     event: {
       title: String,
@@ -29,8 +46,18 @@ export default {
 </script>
 
 <style>
+h4,
+p {
+  display: inline-block;
+}
+h2 {
+  text-align: center;
+}
 .event {
+  display: inline-block;
   padding: 2%;
   margin: 2%;
+  background-color: white;
+  width: fit-content;
 }
 </style>
