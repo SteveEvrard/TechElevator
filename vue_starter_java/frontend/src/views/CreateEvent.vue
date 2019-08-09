@@ -3,7 +3,7 @@
     <form class="event">
       <h1>Create a New Event</h1>
 
-      <h4>Title:</h4>
+      <h4>Title:</h4><br>
       <input type="text" v-model="eventData.title"><br>
 
       <!-- <form-line>
@@ -14,16 +14,16 @@
       <h4>Is this a private event?</h4>
       <input type="checkbox" v-model="eventData.isPrivate">
       {{eventData.isPrivate ? "yes" : "no"}}<br>
-      <h4>Date of Event:</h4>
+      <h4>Date of Event:</h4><br>
       <input type="date" v-model="eventData.date"><br>
 
-      <h4>Time of Event:</h4>
+      <h4>Time of Event:</h4><br>
       <input type="text" v-model="eventData.time"><br>
 
-      <h4>Location:</h4>
+      <h4>Location:</h4><br>
       <input type="text" v-model="eventData.location"><br>
 
-      <h4>Additional Information:</h4>
+      <h4>Additional Information:</h4><br>
       <textarea v-model="eventData.eventDescription"></textarea><br>
 
       <h4>Is this a blind tasting?</h4>
@@ -105,16 +105,21 @@ h1 {
   
 }
 h4 {
+  font-size: 20px;
   align-content: center;
   text-align: center;
   align-items: center;
   align-self: center;
+  
 }
 div {
   align-content: center;
   text-align: center;
   align-items: center;
   align-self: center;
+  background: #f1f1f1;
+ 
+  
 }
 </style>
 
