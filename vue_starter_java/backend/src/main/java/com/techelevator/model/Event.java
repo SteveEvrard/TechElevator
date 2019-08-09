@@ -1,13 +1,14 @@
 package com.techelevator.model;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class Event {
 	
 	//private List<Whiskey> tastingWhiskeys;
 	private String time;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate date;
 	private String location;
 	private String title;
