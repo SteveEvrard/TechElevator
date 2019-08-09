@@ -21,11 +21,15 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+.main-logo {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
 .main-logo img {
   max-width: 600px;
   padding: 5%;
-  margin-left: 30%;
-  margin-right: 30%;
 }
 .nav {
   background-color: #75787b;
