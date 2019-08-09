@@ -3,6 +3,7 @@
     <ul>
       <li v-for="event in publicEvents" v-bind:key="event">
         <single-event v-bind:event="event"></single-event>
+        
       </li>
     </ul>
   </div>
@@ -10,10 +11,12 @@
 
 <script>
 import SingleEvent from "../components/SingleEvent.vue";
+import CheckIn from "../components/CheckIn.vue";
 
 export default {
   components: {
-    SingleEvent
+    SingleEvent,
+    CheckIn
   },
   name: "EventList",
   props: {
