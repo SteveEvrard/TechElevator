@@ -35,8 +35,8 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 		
 		int eventListOriginalSize = eventsList.size();
 		
-		String sql = "INSERT INTO event(event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private) " + 
-				"VALUES (default, '2017-10-10', '12:00:00', 'test', 'test', 'test', true, true, true);";
+		String sql = "INSERT INTO event(event_id, event_date, event_time, description, location, title, is_blind, is_private) " + 
+				"VALUES (default, '2017-10-10', '12:00:00', 'test', 'test', 'test', true, true);";
 		
 		jdbcTemplate.update(sql);
 		
@@ -54,7 +54,7 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 		
 		dao.saveEvent(event);
 		
-		String sql = "SELECT event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private "
+		String sql = "SELECT event_id, event_date, event_time, description, location, title, is_blind, is_private "
 				+ "FROM event WHERE location = ?;";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, "test");
 		result.next();
@@ -68,8 +68,8 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 	public void get_event_by_user() {
 		List<String> eventsByUserList = dao.getEventsAttendedByUser((long) 1);
 		
-		String sql = "insert into event(event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private) " + 
-				"values (10, '2017-10-10', '12:00:00', 'test', 'test', 'test', true, true, true);";
+		String sql = "insert into event(event_id, event_date, event_time, description, location, title, is_blind, is_private) " + 
+				"values (10, '2017-10-10', '12:00:00', 'test', 'test', 'test', true, true);";
 		
 		jdbcTemplate.update(sql);
 		
@@ -86,14 +86,14 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 	@Test
 	public void get_event_details_by_event_id_returns_event_details() {
 		String sql = "insert into event(event_id, event_date, event_time, description, location, " + 
-				"title, is_blind, has_occurred, is_private) " + 
+				"title, is_blind, is_private) " + 
 				"Values (100, '08/08/2019', '7:00 PM', 'All-you-can-taste!', " + 
-				"'104 Farrow Ave Suite 7', 'Blue Blind Paralytic Drunk', true, false, false);";
+				"'104 Farrow Ave Suite 7', 'Blue Blind Paralytic Drunk', true, false);";
 		jdbcTemplate.update(sql);
 		
 		Event event = dao.getEventDetailsByEventId((long) 100);
 		
-		String sql2 = "select event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private " + 
+		String sql2 = "select event_id, event_date, event_time, description, location, title, is_blind, is_private " + 
 				"from event " + 
 				"where event_id = ?;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql2, 100);
@@ -111,7 +111,6 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 		event.setTime("12:00:00");
 		event.setLocation("test");
 		event.setTitle("title");
-		event.setHasOccured(true);
 		event.setIsBlindTasting(true);
 		event.setIsPrivate(true);
 		

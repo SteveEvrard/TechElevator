@@ -27,7 +27,7 @@ public class JdbcEventDao implements EventDao {
 	public List<Event> getAllEvents(){
 		List<Event> allEvents = new ArrayList<Event>();
 		
-		String sql = "SELECT event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private " + 
+		String sql = "SELECT event_id, event_date, event_time, description, location, title, is_blind, is_private " + 
 				"FROM event;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		while (results.next()) {
@@ -39,10 +39,10 @@ public class JdbcEventDao implements EventDao {
 	
 	public void saveEvent(Event event){ 
 		
-		String sql = "INSERT INTO event(event_id, event_date, event_time, description, location, title, is_blind, has_occurred, is_private) " + 
-				"VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?, ?);";
+		String sql = "INSERT INTO event(event_id, event_date, event_time, description, location, title, is_blind, is_private) " + 
+				"VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?);";
 		jdbcTemplate.update(sql, event.getDate(), event.getTime(), event.getEventDescription(), event.getLocation(), event.getTitle(), 
-				event.getIsBlindTasting(), event.getHasOccured(), event.getIsPrivate());
+				event.getIsBlindTasting(), event.getIsPrivate());
 	}
 	
 	public List<String> getEventsAttendedByUser(Long id){
@@ -63,7 +63,7 @@ public class JdbcEventDao implements EventDao {
 		Event event = new Event();
 		
 		String sql = "SELECT event_id, event_date, event_time, description, location, " + 
-				"title, is_blind, has_occurred, is_private " + 
+				"title, is_blind, is_private " + 
 				"FROM event " + 
 				"WHERE event_id = ?;";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
@@ -82,7 +82,6 @@ public class JdbcEventDao implements EventDao {
 		event.setTitle(results.getString("title"));
 		event.setIsBlindTasting(results.getBoolean("is_blind"));
 		event.setIsPrivate(results.getBoolean("is_private"));
-		event.setHasOccured(results.getBoolean("has_occurred"));
 		event.setEventId(results.getLong("event_id"));
 		
 		return event;
