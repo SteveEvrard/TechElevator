@@ -2,22 +2,22 @@
   <div>
     <div class="home">
       <h1>Home</h1>
-      <p>You must be authenticated to see this</p>CheckIn
+      <p>You must be authenticated to see this</p>
     </div>
     <div>
       <event-list :apiURL="API_URL"></event-list>
+      <check-in></check-in>
     </div>
   </div>
 </template>
 
 <script>
 import EventList from "../components/EventList.vue";
-import CheckIn from "../components/CheckIn.vue";
+
 
 export default {
   components: {
     EventList,
-    CheckIn
   },
   name: "home",
   data() {

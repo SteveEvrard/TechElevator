@@ -8,8 +8,7 @@
 <script>
 export default {
   data: {
-    checkin: false
-    
+    checkin: false   
   },
  methods:{
         check(){
@@ -20,4 +19,5 @@ export default {
 </script>
 
 <style>
+
 </style>
