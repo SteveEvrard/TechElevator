@@ -1,52 +1,50 @@
 <template>
   <div>
-    
-      <h1>Create a New Event</h1>
+    <h1>Create a New Event</h1>
 
-      <h4>Title:</h4>
-      <br>
-      <input type="text" v-model="eventData.title">
-      <br>
+    <h4>Title:</h4>
+    <br>
+    <input type="text" v-model="eventData.title">
+    <br>
 
-    
-
-      <h4>Is this a private event?
+    <h4>
+      Is this a private event?
       <input type="checkbox" v-model="eventData.isPrivate">
-      {{eventData.isPrivate ? "yes" : "no"}}</h4>
-      <br>
-      <h4>Date of Event:</h4>
-      <br>
-      <input type="date" v-model="eventData.date">
-      <br>
+      {{eventData.isPrivate ? "yes" : "no"}}
+    </h4>
+    <br>
+    <h4>Date of Event:</h4>
+    <br>
+    <input type="date" v-model="eventData.date">
+    <br>
 
-      <h4>Time of Event:</h4>
-      <br>
-      <input type="text" v-model="eventData.time">
-      <br>
+    <h4>Time of Event:</h4>
+    <br>
+    <input type="text" v-model="eventData.time">
+    <br>
 
-      <h4>Location:</h4>
-      <br>
-      <input type="text" v-model="eventData.location">
-      <br>
+    <h4>Location:</h4>
+    <br>
+    <input type="text" v-model="eventData.location">
+    <br>
 
-      <h4>Additional Information:</h4>
-      <br>
-      <textarea v-model="eventData.eventDescription"></textarea>
-      <br>
+    <h4>Additional Information:</h4>
+    <br>
+    <textarea v-model="eventData.eventDescription"></textarea>
+    <br>
 
-      <h4>Is this a blind tasting?</h4>
-      <input type="checkbox" v-model="eventData.isBlindTasting">
-      {{eventData.isBlindTasting ? "yes" : "no"}}
-      <br>
-      <h4>What whiskeys will be tasted?</h4>
-      <h4>
-        <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select>
-      </h4>
-      <br>
-      <h4>
-        <button type="submit" v-on:click.prevent="saveEvent">Create Event</button>
-      </h4>
-    
+    <h4>Is this a blind tasting?</h4>
+    <input type="checkbox" v-model="eventData.isBlindTasting">
+    {{eventData.isBlindTasting ? "yes" : "no"}}
+    <br>
+    <h4>What whiskeys will be tasted?</h4>
+    <h4>
+      <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select>
+    </h4>
+    <br>
+    <h4>
+      <button type="submit" v-on:click.prevent="saveEvent">Create Event</button>
+    </h4>
   </div>
 </template>
 
@@ -101,13 +99,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 button {
-  
   text-align: center;
   margin: 5%;
 }
-
 
 h1 {
   text-align: center;
@@ -121,18 +117,17 @@ h4 {
   align-items: center;
   align-self: center;
 }
-div{
+div {
   text-align: center;
   align-items: center;
   align-self: center;
   background: #f1f1f1;
 }
-.create{
- text-align: center;
+.create {
+  text-align: center;
   align-items: center;
   align-self: center;
 }
-
 </style>
 
 
