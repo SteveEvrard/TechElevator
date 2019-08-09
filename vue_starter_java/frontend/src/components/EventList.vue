@@ -22,7 +22,8 @@ export default {
   data() {
     return {
       events: [],
-      publicEvents: []
+      publicEvents: [],
+      attendedEvents: []
     };
   },
   created() {
@@ -37,7 +38,6 @@ export default {
         })
         .then(jsonEvents => {
           this.events = jsonEvents;
-          console.log(jsonEvents);
           this.events.forEach(event => {
             if (!event.isPrivate) {
               this.publicEvents.push(event);
