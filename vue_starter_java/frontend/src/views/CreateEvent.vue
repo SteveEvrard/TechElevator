@@ -1,10 +1,10 @@
 <template>
-  <form-format>
+  <div>
     <form class="event">
       <h1>Create a New Event</h1>
 
       <h4>Title:</h4>
-      <input type="text" v-model="eventData.title">
+      <input type="text" v-model="eventData.title"><br>
 
       <!-- <form-line>
         <h4>URL for the event image:</h4>
@@ -13,27 +13,28 @@
 
       <h4>Is this a private event?</h4>
       <input type="checkbox" v-model="eventData.isPrivate">
-      {{eventData.isPrivate ? "yes" : "no"}}
+      {{eventData.isPrivate ? "yes" : "no"}}<br>
       <h4>Date of Event:</h4>
-      <input type="date" v-model="eventData.date">
+      <input type="date" v-model="eventData.date"><br>
 
       <h4>Time of Event:</h4>
-      <input type="text" v-model="eventData.time">
+      <input type="text" v-model="eventData.time"><br>
 
       <h4>Location:</h4>
-      <input type="text" v-model="eventData.location">
+      <input type="text" v-model="eventData.location"><br>
 
       <h4>Additional Information:</h4>
-      <textarea v-model="eventData.eventDescription"></textarea>
+      <textarea v-model="eventData.eventDescription"></textarea><br>
 
       <h4>Is this a blind tasting?</h4>
       <input type="checkbox" v-model="eventData.isBlindTasting">
-      {{eventData.isBlindTasting ? "yes" : "no"}}
+      {{eventData.isBlindTasting ? "yes" : "no"}}<br>
       <h4>What whiskeys will be tasted?</h4>
-      <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select>
-      <button type="submit" v-on:click.prevent="saveEvent">Create Event</button>
+      <h4><whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select></h4><br>
+      <h4><button type="submit" v-on:click.prevent="saveEvent">Create Event</button></h4>
     </form>
-  </form-format>
+  </div>
+  
 </template>
 
 <script>
