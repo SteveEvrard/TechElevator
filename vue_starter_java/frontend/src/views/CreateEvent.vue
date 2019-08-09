@@ -100,10 +100,6 @@ button {
   text-align: center;
   margin: 5%;
 }
-
-/* .select-box {
-  max-height: max-content;
-} */
 </style>
 
 
