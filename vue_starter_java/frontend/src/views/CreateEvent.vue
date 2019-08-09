@@ -59,7 +59,7 @@ export default {
         // eventImageURL: "",
         isPrivate: true,
         date: new Date(),
-        // time: "",
+        time: "",
         location: "",
         eventDescription: "",
         isBlindTasting: true

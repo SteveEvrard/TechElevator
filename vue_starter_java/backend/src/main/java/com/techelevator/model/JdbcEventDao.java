@@ -48,9 +48,9 @@ public class JdbcEventDao implements EventDao {
 	public List<String> getEventsAttendedByUser(Long id){
 		List<String> allEventsByUser = new ArrayList<>();
 		
-		String sql = "select title from event " + 
-				"join userstoevent on event.event_id = userstoevent.event_id " + 
-				"where id = ?;";
+		String sql = "SELECT title FROM event " + 
+				"JOIN userstoevent on event.event_id = userstoevent.event_id " + 
+				"WHERE id = ?;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
 		while(results.next()) {
 			allEventsByUser.add(results.getString("title"));
@@ -62,10 +62,10 @@ public class JdbcEventDao implements EventDao {
 	public Event getEventDetailsByEventId(Long id) {
 		Event event = new Event();
 		
-		String sql = "select event_id, event_date, event_time, description, location, " + 
+		String sql = "SELECT event_id, event_date, event_time, description, location, " + 
 				"title, is_blind, has_occurred, is_private " + 
-				"from event " + 
-				"where event_id = ?;";
+				"FROM event " + 
+				"WHERE event_id = ?;";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
 		if(result.next()) {
 			event = mapRowToEvent(result);

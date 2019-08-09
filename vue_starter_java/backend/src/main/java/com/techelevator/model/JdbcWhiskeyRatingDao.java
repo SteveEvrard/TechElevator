@@ -25,10 +25,10 @@ public class JdbcWhiskeyRatingDao implements WhiskeyRatingDao {
 	public List<WhiskeyRating> getRatingsByEvent(long eventId) {
 		List<WhiskeyRating> ratingsForEvent = new ArrayList<WhiskeyRating>();
 		
-		String sql = "select whiskey_rating_id, whiskey_id, event_id, user_id, taste_rating, nose_rating, color_rating, " + 
+		String sql = "SELECT whiskey_rating_id, whiskey_id, event_id, user_id, taste_rating, nose_rating, color_rating, " + 
 				"body_rating, finish_rating, price__rating, overall_rating " + 
-				"from whiskeyrating " + 
-				"where event_id = ?;";
+				"FROM whiskeyrating " + 
+				"WHERE event_id = ?;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, eventId);
 		
 		while(results.next()) {
@@ -41,9 +41,9 @@ public class JdbcWhiskeyRatingDao implements WhiskeyRatingDao {
 	@Override
 	public void submitRating(WhiskeyRating rating) {
 		
-		String sql = "insert into whiskeyrating (whiskey_rating_id, whiskey_id, event_id, user_id, taste_rating, nose_rating, color_rating, " + 
+		String sql = "INSERT INTO whiskeyrating (whiskey_rating_id, whiskey_id, event_id, user_id, taste_rating, nose_rating, color_rating, " + 
 				"body_rating, finish_rating, price__rating, overall_rating) " + 
-				"values (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+				"VALUES (default, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 		jdbcTemplate.update(sql, rating.getWhiskeyId(), rating.getEventId(), rating.getUserId(), rating.getTasteRating(),
 				rating.getSmellRating(), rating.getColorRating(), rating.getBodyRating(), rating.getFinishRating(),
 				rating.getPriceRating(), rating.getOverallRating());
