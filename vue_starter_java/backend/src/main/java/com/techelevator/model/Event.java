@@ -8,7 +8,6 @@ public class Event {
 	
 	//private List<Whiskey> tastingWhiskeys;
 	private String time;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private LocalDate date;
 	private String location;
 	private String title;
