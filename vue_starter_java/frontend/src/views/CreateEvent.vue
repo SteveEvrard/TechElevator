@@ -1,56 +1,61 @@
 <template>
-  <form-format>
-    <form class="event">
+  
+    
+      <div>
       <h1>Create a New Event</h1><br><br><br>
       
         <h4>Title:<br>
         <input type="text" v-model="userData.title" placeholder="Event Title Here">
-    </h4>
+    </h4><br>
       <!-- <form-line>
         <h4>URL for the event image:</h4>
-        <input type="text" v-model="eventData.eventImageURL">
+        <input type="text" v-model="userData.eventImageURL">
       </form-line>-->
      
         <h4>Is this a private event?
         <input type="checkbox" v-model="userData.isPrivate">
-       {{userData.isPrivateEvent ? "yes" : "no"}}</h4>
+       {{userData.isPrivateEvent ? "yes" : "no"}}</h4><br>
       
       
         <h4>Date of Event:<br>
-        <datepicker class ="center" format="MM/DD/YYYY" v-model="userData.date" name="uniquename"></datepicker></h4>
+        <datepicker format="MM/DD/YYYY" v-model="userData.date" name="uniquename"></datepicker></h4><br>
       
      
         <h4>Time of Event:<br>
-        <vue-timepicker format="hh:mm A" :minute-interval="30" v-model="userData.time"></vue-timepicker></h4>
+        <vue-timepicker format="hh:mm A" :minute-interval="30" v-model="userData.time"></vue-timepicker></h4><br>
       
         <h4>Location:<br>
-        <input type="text" v-model="userData.location"></h4>
+        <input type="text" v-model="userData.location"></h4><br>
       
         <h4>Additional Information:<br>
-        <textarea v-model="userData.eventDescription"></textarea></h4>
+        <textarea v-model="userData.eventDescription"></textarea></h4><br>
      
      
         <h4>Is this a blind tasting?
         <input type="checkbox" v-model="userData.isBlindTasting">
-        {{userData.isBlindEvent ? "yes" : "no"}}</h4>
+        {{userData.isBlindEvent ? "yes" : "no"}}</h4><br>
      
-      <h4>What whiskeys will be tasted?<br>
-      <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select></h4>
-
+      <h4>What whiskeys will be tasted?
+      <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select></h4><br>
       <button type="submit" v-on:click.prevent="saveEvent">Create Event</button>
-    </form>
-  </form-format>
+      </div>
+   
+
 </template>
 
 <script>
+import Datepicker from "vuejs-datepicker";
 import { en } from "vuejs-datepicker/dist/locale";
 import FormFormat from "../components/FormFormat.vue";
+import VueTimepicker from "vue2-timepicker";
 import FormLine from "../components/FormLine.vue";
 import WhiskeyBrandsToSelect from "../components/WhiskeyBrandsToSelect.vue";
 
 export default {
   components: {
+    Datepicker,
     FormFormat,
+    VueTimepicker,
     FormLine,
     WhiskeyBrandsToSelect
   },
@@ -60,12 +65,12 @@ export default {
       en: en,
       apiURLEvent: "http://localhost:8080/AuthenticationApplication/api/events",
       API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys",
-      eventData: {
+      userData: {
         title: "",
         // eventImageURL: "",
         isPrivate: true,
         date: new Date(),
-        // time: "",
+        time: "",
         location: "",
         eventDescription: "",
         isBlindTasting: true
@@ -79,7 +84,7 @@ export default {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(this.eventData)
+        body: JSON.stringify(this.userData)
       })
         .then(response => {
           if (response.ok) {
@@ -117,8 +122,12 @@ h4{
   
   
 }
-.center{
+div {
+ align-content: center;
+  text-align: center;
   align-items: center;
+  align-self: center;
+  
 }
 
 </style>
