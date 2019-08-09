@@ -1,17 +1,22 @@
 <template>
   <div>
-    <input type="checkbox" id="scales" name="scales" checked>
-    <label for="scales">Scales</label>
+    <input type="checkbox" id="checkin" name="checkin" @click: ='check()'>
+    <label for="checkin">Check In</label>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Checkin"
-  // props: {
-  //     post
-  // }
-};
+  data: {
+    checkin: false
+    
+  },
+ methods:{
+        check: function(){
+            this.checkin = !this.checkin;
+        }
+    }
+}
 </script>
 
 <style>
