@@ -7,8 +7,10 @@
 
 <script>
 export default {
-  data: {
-    checkin: false
+  data() {
+    return {
+      checkin: false
+    };
   },
   methods: {
     check() {

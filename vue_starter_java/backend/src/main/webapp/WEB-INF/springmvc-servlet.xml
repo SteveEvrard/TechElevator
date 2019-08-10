@@ -32,6 +32,7 @@
 						<value>/api/events</value>
 						<value>/api/whiskeys</value>
 						<value>/api/users/{id}/events</value>
+						<value>/api/users/{userId}{eventId}{whiskeyId}/whiskeyRating</value>
 					</list>
 				</property>
 			</bean>

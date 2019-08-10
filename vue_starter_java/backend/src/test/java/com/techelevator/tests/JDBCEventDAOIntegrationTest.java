@@ -1,8 +1,8 @@
 package com.techelevator.tests;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.junit.Assert;
@@ -50,7 +50,7 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 	@Test
 	public void save_event_adds_event() {
 		
-		Event event = createEvent();
+		Event event = createEventWithId();
 		
 		dao.saveEvent(event);
 		
@@ -66,51 +66,82 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 	
 	@Test
 	public void get_event_by_user() {
-		List<String> eventsByUserList = dao.getEventsAttendedByUser((long) 1);
+		List<Event> eventsByUserList = dao.getEventsAttendedByUser((long) 1);
+		int startingLength = eventsByUserList.size();
 		
-		String sql = "insert into event(event_id, event_date, event_time, description, location, title, is_blind, is_private) " + 
-				"values (10, '2017-10-10', '12:00:00', 'test', 'test', 'test', true, true);";
+		Event testEvent = createEventWithId();
 		
-		jdbcTemplate.update(sql);
+		String sql = "INSERT INTO event(event_id, event_date, event_time, description, location, title, is_blind, is_private) " + 
+				"VALUES (?, '2017-10-10', '12:00:00', 'test', 'test', 'test', true, true);";
+		jdbcTemplate.update(sql, testEvent.getEventId());
 		
 		String sql2 = "insert into userstoevent(id, event_id) " + 
-				"values (1, 10);";
+				"values (1, ?);";
 		
-		jdbcTemplate.update(sql2);
+		jdbcTemplate.update(sql2, testEvent.getEventId());
 		
 		eventsByUserList = dao.getEventsAttendedByUser((long) 1);
 		
-		Assert.assertEquals(1, eventsByUserList.size());
+		Assert.assertEquals(startingLength + 1, eventsByUserList.size());
 	}
 	
 	@Test
 	public void get_event_details_by_event_id_returns_event_details() {
-		String sql = "insert into event(event_id, event_date, event_time, description, location, " + 
-				"title, is_blind, is_private) " + 
-				"Values (100, '08/08/2019', '7:00 PM', 'All-you-can-taste!', " + 
-				"'104 Farrow Ave Suite 7', 'Blue Blind Paralytic Drunk', true, false);";
-		jdbcTemplate.update(sql);
+		Event testEvent = createEventWithId();
 		
-		Event event = dao.getEventDetailsByEventId((long) 100);
+		String sql = "INSERT INTO event(event_id, event_date, event_time, description, location, title, is_blind, is_private) " + 
+				"VALUES (?, '2017-10-10', '12:00:00', 'test', 'test', 'test', true, true);";
+		jdbcTemplate.update(sql, testEvent.getEventId());
 		
-		String sql2 = "select event_id, event_date, event_time, description, location, title, is_blind, is_private " + 
-				"from event " + 
-				"where event_id = ?;";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql2, 100);
-		results.next();
-		String eventTitle = results.getString("title");
+		testEvent = dao.getEventIdByTitleDateLocationTime(testEvent);
 		
-		Assert.assertEquals(event.getTitle(), eventTitle);
+		Event event = dao.getEventDetailsByEventId(testEvent.getEventId());
+		
+		Assert.assertEquals(testEvent.getTitle(), event.getTitle());
 	}
 	
-	private Event createEvent() {
+	@Test
+	public void set_event_id_from_database() {
 		
+		Event newEvent = createEventWithoutId();
+		
+		Long resultsBeforeSql = newEvent.getEventId();
+		dao.saveEvent(newEvent);
+		
+		System.out.println(newEvent.getEventId());
+		
+		dao.getEventIdByTitleDateLocationTime(newEvent);
+		System.out.println(newEvent.getEventId());
+		
+		Assert.assertTrue(resultsBeforeSql != newEvent.getEventId());
+	}
+	
+	private Long generateId() {
+		String randomNumberAsString = Double.toString(Math.random() * 1000000);
+		return Long.parseLong(randomNumberAsString.substring(0,4));
+	}
+	
+	private Event createEventWithId() {
+
 		Event event = new Event();
-		event.setEventId((long) Math.random() * 100);
+		event.setEventId(generateId());
 		event.setDate(LocalDate.of(2019,9,9));
 		event.setTime("12:00:00");
 		event.setLocation("test");
-		event.setTitle("title");
+		event.setTitle("test");
+		event.setIsBlindTasting(true);
+		event.setIsPrivate(true);
+		
+		return event;
+	}
+
+	
+	private Event createEventWithoutId() {
+		Event event = new Event();
+		event.setDate(LocalDate.of(2019,9,9));
+		event.setTime("12:00:00");
+		event.setLocation("test");
+		event.setTitle("test");
 		event.setIsBlindTasting(true);
 		event.setIsPrivate(true);
 		

@@ -39,21 +39,22 @@ public class JdbcEventDao implements EventDao {
 	
 	public void saveEvent(Event event){ 
 		
-		String sql = "INSERT INTO event(event_id, event_date, event_time, description, location, title, is_blind, is_private) " + 
-				"VALUES (DEFAULT, ?, ?, ?, ?, ?, ?, ?);";
+		String sql = "INSERT INTO event(event_date, event_time, description, location, title, is_blind, is_private) " + 
+				"VALUES (?, ?, ?, ?, ?, ?, ?);";
 		jdbcTemplate.update(sql, event.getDate(), event.getTime(), event.getEventDescription(), event.getLocation(), event.getTitle(), 
 				event.getIsBlindTasting(), event.getIsPrivate());
 	}
 	
-	public List<String> getEventsAttendedByUser(Long id){
-		List<String> allEventsByUser = new ArrayList<>();
+	public List<Event> getEventsAttendedByUser(Long id){
+		List<Event> allEventsByUser = new ArrayList<>();
 		
-		String sql = "SELECT title FROM event " + 
+		String sql = "SELECT event.event_id, event_date, event_time, description, location, " +
+				"title, is_blind, is_private From event " + 
 				"JOIN userstoevent on event.event_id = userstoevent.event_id " + 
 				"WHERE id = ?;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
 		while(results.next()) {
-			allEventsByUser.add(results.getString("title"));
+			allEventsByUser.add(mapRowToEvent(results));
 		}
 		
 		return allEventsByUser;
@@ -67,10 +68,22 @@ public class JdbcEventDao implements EventDao {
 				"FROM event " + 
 				"WHERE event_id = ?;";
 		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, id);
-		if(result.next()) {
+		while(result.next()) {
 			event = mapRowToEvent(result);
 		}
 		return event;
+	}
+	
+	public Event getEventIdByTitleDateLocationTime(Event event) {
+		String sql = "Select event_id from event Where title Like ? And location = ?;";
+		
+		SqlRowSet result = jdbcTemplate.queryForRowSet(sql, "%" + event.getTitle() + "%", event.getLocation());
+		
+		while(result.next()) {
+				event.setEventId(result.getLong("event_id"));
+		}
+		return event;
+	
 	}
 	
 	private Event mapRowToEvent(SqlRowSet results) {
@@ -82,6 +95,7 @@ public class JdbcEventDao implements EventDao {
 		event.setTitle(results.getString("title"));
 		event.setIsBlindTasting(results.getBoolean("is_blind"));
 		event.setIsPrivate(results.getBoolean("is_private"));
+		event.setEventDescription(results.getString("description"));
 		event.setEventId(results.getLong("event_id"));
 		
 		return event;

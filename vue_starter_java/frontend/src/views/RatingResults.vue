@@ -9,7 +9,7 @@ export default {
   components: {
     SingleWhiskeyRating
   },
-  name: "RatingResults",
+  name: "ratingResults",
   data() {
     return {
       API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys"

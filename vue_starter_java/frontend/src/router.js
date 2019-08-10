@@ -6,6 +6,7 @@ import Login from './views/Login.vue'
 import Register from './views/Register.vue'
 import CreateEvent from './views/CreateEvent.vue'
 import RatingResults from './views/RatingResults.vue'
+import EventResponse from './views/EventResponse.vue'
 
 Vue.use(Router)
 
@@ -56,8 +57,16 @@ const router = new Router({
     },
     {
       path: "/ratingResults",
-      name: "RatingResults",
+      name: "ratingResults",
       component: RatingResults,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      path: "/eventResponse",
+      name: "eventResponse",
+      component: EventResponse,
       meta: {
         requiresAuth: false
       }

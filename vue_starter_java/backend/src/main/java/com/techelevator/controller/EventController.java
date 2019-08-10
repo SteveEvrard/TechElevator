@@ -32,13 +32,14 @@ public class EventController {
 		}
 		
 		@GetMapping(path="/api/users/{id}/events")
-		public List<String> getAllEventsByUser(@PathVariable long id) {
+		public List<Event> getAllEventsByUser(@PathVariable long id) {
 			return eventDao.getEventsAttendedByUser(id);
 		}
 		
 		@PostMapping(path="/api/events")
 		public ResponseEntity<Event> createEvent(@RequestBody Event newEvent) {
 			eventDao.saveEvent(newEvent);
+			newEvent = eventDao.getEventIdByTitleDateLocationTime(newEvent);
 			
 			UriComponents uriComponent = ServletUriComponentsBuilder.fromCurrentRequestUri()
 			.path("/" + newEvent.getEventId()).build();

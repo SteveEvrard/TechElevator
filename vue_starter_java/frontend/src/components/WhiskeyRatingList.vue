@@ -40,13 +40,6 @@ export default {
     },
     data() {
       return {
-        sumTasteRating: "",
-        sumSmellRating: "",
-        sumColorRating: "",
-        sumBodyRating: "",
-        sumFinishRating: "",
-        sumPriceRating: "",
-        sumOverallRating: "",
         numOfWhiskeys: "",
         numOfReviewers: "",
         whiskeyList: [],
@@ -109,30 +102,5 @@ export default {
 }
 li {
   list-style: none;
-}
-
-.star {
-  width: 150px;
-  position: relative;
-  color: #75787b;
-}
-
-.rating {
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.rating span {
-  font-size: 30px;
-  white-space: nowrap;
-  overflow: hidden;
-  color: #787121;
-}
-
-.rating span:before {
-  content: "\2606\2606\2606\2606\2606";
-  position: absolute;
-  color: #75787b;
-  z-index: -1;
 }
 </style>

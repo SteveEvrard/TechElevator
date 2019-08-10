@@ -6,6 +6,7 @@ public interface EventDao {
 
 	List<Event> getAllEvents();
 	void saveEvent(Event event); 
-	List<String> getEventsAttendedByUser(Long id);
+	List<Event> getEventsAttendedByUser(Long id);
 	Event getEventDetailsByEventId(Long id);
+	public Event getEventIdByTitleDateLocationTime(Event event);
 }

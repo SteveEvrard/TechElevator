@@ -2,7 +2,7 @@
   <div class="single-rating">
     <h1>Whiskey Rating Results</h1>
     <div class="rating-averages">
-      <h2 v-if="!event.isBlindTasting">{{whiskey.name}}</h2>
+      <h2 v-if="!event.isBlindTasting">{{whiskey.brand}}</h2>
       <tile-format>
         <h3>Taste</h3>
         <div class="star">
@@ -84,7 +84,7 @@ export default {
       bodyRating: Number,
       finishRating: Number,
       priceRating: Number,
-      overalRating: Number
+      overallRating: Number
     }
   },
   data() {
@@ -93,7 +93,7 @@ export default {
         isBlindTasting: true
       },
       whiskey: {
-        name: "Jamison's Rye Whiskey"
+        brand: "Jamison's Rye Whiskey"
       },
       tasteRatingPercentage: 52.3,
       smellRatingPercentage: 33.777777,
@@ -146,13 +146,13 @@ export default {
       });
     },
     getAveragesOfAllRatings() {
-      this.aveTasteRating = this.sumTasteRating / numOfWhiskeys;
-      this.aveSmellRating = this.sumSmellRating / numOfWhiskeys;
-      this.aveColorRating = this.sumColorRating / numOfWhiskeys;
-      this.aveBodyRating = this.sumBodyRating / numOfWhiskeys;
-      this.aveFinishRating = this.sumFinishRating / numOfWhiskeys;
-      this.avePriceRating = this.sumPriceRating / numOfWhiskeys;
-      this.aveOverallRating = this.sumOverallRating / numOfWhiskeys;
+      this.aveTasteRating = this.sumTasteRating / this.numOfWhiskeys;
+      this.aveSmellRating = this.sumSmellRating / this.numOfWhiskeys;
+      this.aveColorRating = this.sumColorRating / this.numOfWhiskeys;
+      this.aveBodyRating = this.sumBodyRating / this.numOfWhiskeys;
+      this.aveFinishRating = this.sumFinishRating / this.numOfWhiskeys;
+      this.avePriceRating = this.sumPriceRating / this.numOfWhiskeys;
+      this.aveOverallRating = this.sumOverallRating / this.numOfWhiskeys;
     },
     getPercentagesOfAllRatings() {
       this.tasteRatingPercentage = this.aveTasteRating / 5;

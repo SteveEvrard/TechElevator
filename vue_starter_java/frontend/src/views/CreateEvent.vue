@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import { en } from "vuejs-datepicker/dist/locale";
 import FormFormat from "../components/FormFormat.vue";
 import WhiskeyBrandsToSelect from "../components/WhiskeyBrandsToSelect.vue";
 
@@ -63,7 +62,6 @@ export default {
 
   data() {
     return {
-      en: en,
       apiURLEvent: "http://localhost:8080/AuthenticationApplication/api/events",
       API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys",
       eventData: {
