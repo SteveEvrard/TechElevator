@@ -22,7 +22,7 @@ public class JdbcWhiskeyDao implements WhiskeyDao {
 	
 	public List<Whiskey> getAllBrandAndPriceWhiskey() {
 		List<Whiskey> allBrandAndPrice = new ArrayList<>();
-		String sql = "SELECT brand, price FROM whiskey;";
+		String sql = "SELECT brand, price, whiskey_id FROM whiskey;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		while (results.next()) {
 			allBrandAndPrice.add(mapRowToWhiskey(results));
@@ -39,6 +39,7 @@ public class JdbcWhiskeyDao implements WhiskeyDao {
 	private Whiskey mapRowToWhiskey(SqlRowSet results) {
 		Whiskey whiskey = new Whiskey();
 		
+		whiskey.setWhiskeyId(results.getLong("whiskey_id"));
 		whiskey.setBrand(results.getString("brand"));
 		whiskey.setPrice(results.getInt("price"));
 		

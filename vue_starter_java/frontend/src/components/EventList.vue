@@ -57,6 +57,7 @@ export default {
   justify-content: space-around;
   align-content: flex-start;
   margin: 15px 0px 15px 0px;
+  flex-wrap: wrap;
 }
 li {
   list-style: none;

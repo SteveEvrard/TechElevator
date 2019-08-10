@@ -1,63 +1,63 @@
 <template>
   <div>
-    <h1>Create a New Event</h1>
+    <form-format>
+      <h1>Create a New Event</h1>
 
-    <h4>Title:</h4>
-    <br>
-    <input type="text" v-model="eventData.title">
-    <br>
+      <h4>Title:</h4>
+      <br>
+      <input type="text" v-model="eventData.title">
+      <br>
 
-    <h4>
-      Is this a private event?
-      <input type="checkbox" v-model="eventData.isPrivate">
-      {{eventData.isPrivate ? "yes" : "no"}}
-    </h4>
-    <br>
-    <h4>Date of Event:</h4>
-    <br>
-    <input type="date" v-model="eventData.date">
-    <br>
+      <h4>
+        Is this a private event?
+        <input type="checkbox" v-model="eventData.isPrivate">
+        {{eventData.isPrivate ? "yes" : "no"}}
+      </h4>
+      <br>
+      <h4>Date of Event:</h4>
+      <br>
+      <input type="date" v-model="eventData.date">
+      <br>
 
-    <h4>Time of Event:</h4>
-    <br>
-    <input type="text" v-model="eventData.time">
-    <br>
+      <h4>Time of Event:</h4>
+      <br>
+      <input type="text" v-model="eventData.time">
+      <br>
 
-    <h4>Location:</h4>
-    <br>
-    <input type="text" v-model="eventData.location">
-    <br>
+      <h4>Location:</h4>
+      <br>
+      <input type="text" v-model="eventData.location">
+      <br>
 
-    <h4>Additional Information:</h4>
-    <br>
-    <textarea v-model="eventData.eventDescription"></textarea>
-    <br>
+      <h4>Additional Information:</h4>
+      <br>
+      <textarea v-model="eventData.eventDescription"></textarea>
+      <br>
 
-    <h4>Is this a blind tasting?</h4>
-    <input type="checkbox" v-model="eventData.isBlindTasting">
-    {{eventData.isBlindTasting ? "yes" : "no"}}
-    <br>
-    <h4>What whiskeys will be tasted?</h4>
-    <h4>
-      <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select>
-    </h4>
-    <br>
-    <h4>
-      <button type="submit" v-on:click.prevent="saveEvent">Create Event</button>
-    </h4>
+      <h4>Is this a blind tasting?</h4>
+      <input type="checkbox" v-model="eventData.isBlindTasting">
+      {{eventData.isBlindTasting ? "yes" : "no"}}
+      <br>
+      <h4>What whiskeys will be tasted?</h4>
+      <h4>
+        <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select>
+      </h4>
+      <br>
+      <h4>
+        <button type="submit" v-on:click.prevent="saveEvent">Create Event</button>
+      </h4>
+    </form-format>
   </div>
 </template>
 
 <script>
 import { en } from "vuejs-datepicker/dist/locale";
 import FormFormat from "../components/FormFormat.vue";
-import FormLine from "../components/FormLine.vue";
 import WhiskeyBrandsToSelect from "../components/WhiskeyBrandsToSelect.vue";
 
 export default {
   components: {
     FormFormat,
-    FormLine,
     WhiskeyBrandsToSelect
   },
 
@@ -99,30 +99,7 @@ export default {
 };
 </script>
 
-<style scoped>
-button {
-  text-align: center;
-  margin: 5%;
-}
-
-h1 {
-  text-align: center;
-  background: black;
-  color: white;
-}
-h4 {
-  font-size: 20px;
-  align-content: center;
-  text-align: center;
-  align-items: center;
-  align-self: center;
-}
-div {
-  text-align: center;
-  align-items: center;
-  align-self: center;
-  background: #f1f1f1;
-}
+<style>
 .create {
   text-align: center;
   align-items: center;
