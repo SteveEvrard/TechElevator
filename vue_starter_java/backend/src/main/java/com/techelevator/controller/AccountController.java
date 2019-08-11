@@ -7,6 +7,7 @@ import com.techelevator.authentication.JwtTokenHandler;
 import com.techelevator.authentication.UnauthorizedException;
 import com.techelevator.authentication.UserCreationException;
 import com.techelevator.model.User;
+import com.techelevator.model.UserDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -19,6 +20,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @RestController
 public class AccountController {
+	private UserDao userDao;
+	 public AccountController(UserDao userDao) {
+	 this.userDao=userDao;
+	 }
+	 
     @Autowired
     private AuthProvider auth;
 
@@ -44,8 +50,9 @@ public class AccountController {
             }
             throw new UserCreationException(errorMessages);
         }
+        else userDao.saveUser(null, null, null);
         auth.register(user.getUsername(), user.getPassword(), user.getRole());
         return "{\"success\":true}";
+        }
     }
 
-}
