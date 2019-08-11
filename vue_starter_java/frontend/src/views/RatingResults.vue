@@ -1,5 +1,5 @@
 <template>
-  <single-whiskey-rating :ratingApiURL="API_URL" :apiURLWhiskey="API_URL_Whiskey"></single-whiskey-rating>
+  <whiskey-rating-list :ratingApiURL="API_URL" :apiURLWhiskey="API_URL_Whiskey"></whiskey-rating-list>
 </template>
 
 <script>
