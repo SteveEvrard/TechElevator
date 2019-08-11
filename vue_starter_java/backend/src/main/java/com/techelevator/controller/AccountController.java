@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * AccountController
  */
 @RestController
+@CrossOrigin
 public class AccountController {
 	private UserDao userDao;
 	 public AccountController(UserDao userDao) {

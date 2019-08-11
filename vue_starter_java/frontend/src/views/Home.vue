@@ -2,7 +2,6 @@
   <div class="home">
     <div class="list-of-events">
       <event-list :isHOME="isHomePage" :apiURL="API_URL" :isLoggedIn="isLoggedIn"></event-list>
-      <check-in></check-in>
     </div>
   </div>
 </template>
@@ -21,7 +20,8 @@ export default {
       isLoggedIn: false,
       isHomePage: true
     };
-  }
+  },
+  method: {}
 };
 </script>
 

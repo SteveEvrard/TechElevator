@@ -7,6 +7,7 @@
 
 <script>
 export default {
+  name: "CheckIn",
   data() {
     return {
       isLoggedIn: false
