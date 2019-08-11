@@ -1,5 +1,5 @@
 <template>
-  <tile-format class="single-event" v-on:click="saveEvent">
+  <tile-format class="single-event" v-on:click="showdetail(event)">
     <h2>{{event.title}}</h2>
     <!-- <img src="{{event.imgUrl}}"> -->
 
@@ -17,7 +17,7 @@
         <h4>Location:</h4>
         <p>{{event.location}}</p>
       </li>
-      <li>
+      <li v-if(!isHome)>
         <p>{{event.eventDescription}}</p>
       </li>
     </ul>
@@ -32,6 +32,8 @@ export default {
     TileFormat
   },
   props: {
+    isLoggedIn: Boolean,
+    isHOME: Boolean,
     event: {
       title: String,
       imgUrl: String,
@@ -41,7 +43,10 @@ export default {
       info: String
     }
   },
-  name: "SingleEvent"
+  name: "SingleEvent",
+  method: {
+    showdetail(event) {}
+  }
 };
 </script>
 
