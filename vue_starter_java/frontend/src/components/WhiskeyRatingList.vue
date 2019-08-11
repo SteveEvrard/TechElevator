@@ -1,17 +1,23 @@
 <template>
-  <div class="whiskey-list"></div>
+  <div class="whiskey-list">
+    <div v-for="whiskeyR in whiskeyRatingList" v-bind:key="whiskeyR">
+      <single-whiskey-rating v-bind:whiskeyRating="whiskeyR"></single-whiskey-rating>
+    </div>
+  </div>
 </template>
 
 <script>
 import SingleEvent from "../components/SingleEvent.vue";
 import CheckIn from "../components/CheckIn.vue";
 import TileFormat from "../components/TileFormat.vue";
+import SingleWhiskeyRating from "../components/SingleWhiskeyRating.vue";
 
 export default {
   components: {
     SingleEvent,
     CheckIn,
-    TileFormat
+    TileFormat,
+    SingleWhiskeyRating
   },
   name: "WhiskeyRatingList",
   props: {
@@ -36,7 +42,8 @@ export default {
       time: String,
       location: String,
       eventDescription: "",
-      isBlindTasting: true
+      isBlindTasting: true,
+      eventId: 95
     },
     data() {
       return {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <form-format>
+    <form-format class="event-background">
       <h1>Create a New Event</h1>
 
       <h4>Title:</h4>
@@ -102,6 +102,11 @@ export default {
   text-align: center;
   align-items: center;
   align-self: center;
+}
+
+.event-background {
+  background: #f1f1f1;
+  margin: 0px;
 }
 </style>
 

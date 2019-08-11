@@ -25,21 +25,26 @@ public class WhiskeyRatingController {
 	public WhiskeyRatingController(WhiskeyRatingDao whiskeyRatingDao) {
 		this.whiskeyRatingDao = whiskeyRatingDao;
 	}
-
-	@GetMapping(path="/api/users/{userId}whiskeyRating")
+	
+	@GetMapping(path="/api/event/{eventId}/whiskeyRating")
 	public List<WhiskeyRating> getAllRatingsByEvent(long eventId) {
 		return whiskeyRatingDao.getRatingsByEvent(eventId);
 	}
+
+//	@GetMapping(path="/api/users/{userId}/whiskeyRating")
+//	public List<WhiskeyRating> getAllRatingsByEventAndUser(long eventId) {
+//		return whiskeyRatingDao.getRatingsByEvent(eventId);
+//	}
 	
-	@PostMapping(path="/api/users/{userId}{eventId}{whiskeyId}/whiskeyRating")
-	public ResponseEntity<WhiskeyRating> rateWhiskey(@RequestBody WhiskeyRating rating) {
-
-		whiskeyRatingDao.submitRating(rating);
-
-		UriComponents uriComponent = ServletUriComponentsBuilder.fromCurrentRequestUri()
-		.path("/" + rating.getUserId() + rating.getEventId() + rating.getWhiskeyId()).build();
-		
-		return ResponseEntity.created(uriComponent.toUri()).body(rating);
-	}
+//	@PostMapping(path="/api/users/{userId}{eventId}{whiskeyId}/whiskeyRating")
+//	public ResponseEntity<WhiskeyRating> rateWhiskey(@RequestBody WhiskeyRating rating) {
+//
+//		whiskeyRatingDao.submitRating(rating);
+//
+//		UriComponents uriComponent = ServletUriComponentsBuilder.fromCurrentRequestUri()
+//		.path("/" + rating.getUserId() + rating.getEventId() + rating.getWhiskeyId()).build();
+//		
+//		return ResponseEntity.created(uriComponent.toUri()).body(rating);
+//	}
 
 }

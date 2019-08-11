@@ -26,6 +26,7 @@ body {
   display: flex;
   align-content: center;
   justify-content: center;
+  background: transparent;
 }
 
 .main-logo img {

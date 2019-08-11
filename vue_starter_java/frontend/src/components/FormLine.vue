@@ -10,7 +10,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 .form-line {
   max-height: 5%;
   display: flex;

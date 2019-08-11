@@ -71,12 +71,14 @@
 import TileFormat from "../components/TileFormat.vue";
 import FormFormat from "../components/FormFormat.vue";
 import RatingButtons1Thru5 from "../components/RatingButtons1Thru5.vue";
+import SelectBox from "../components/SelectBox.vue";
 
 export default {
   components: {
     TileFormat,
     FormFormat,
-    RatingButtons1Thru5
+    RatingButtons1Thru5,
+    SelectBox
   },
   name: "RateSingleWhiskey",
   prop: {

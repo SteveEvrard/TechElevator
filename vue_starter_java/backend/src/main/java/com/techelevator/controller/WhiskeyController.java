@@ -17,7 +17,6 @@ import com.techelevator.model.Whiskey;
 import com.techelevator.model.WhiskeyDao;
 
 @RestController
-@RequestMapping("/api/whiskeys")
 @CrossOrigin
 public class WhiskeyController {
 
@@ -27,10 +26,10 @@ public class WhiskeyController {
 			this.whiskeyDao = whiskeyDao;
 		}
 
-		@GetMapping
+		@GetMapping(path="/api/whiskeys")
 		public List<Whiskey> getWhiskeyBrands() {
 			return whiskeyDao.getAllBrandAndPriceWhiskey();
-		}
+		}		
 		
 //		@PostMapping(path="/api/whiskeys")
 //		public ResponseEntity<Event> createEvent(@RequestBody List<Whiskey> whiskeyBrands) {

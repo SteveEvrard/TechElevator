@@ -59,15 +59,12 @@ export default {
   background-color: #f1f1f1;
   padding: 0px;
   text-align: center;
-  
+
   border-radius: 5px;
 }
-</style>
-
-<style scoped>
 li:nth-child(odd) {
   background-color: #598899;
-  
+
   padding: 0px;
   margin: 0px;
 }

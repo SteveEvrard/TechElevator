@@ -32,6 +32,5 @@ div {
   text-align: center;
   align-items: center;
   align-self: center;
-  background: #f1f1f1;
 }
 </style>

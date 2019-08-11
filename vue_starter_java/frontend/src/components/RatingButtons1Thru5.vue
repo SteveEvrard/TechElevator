@@ -24,7 +24,7 @@ export default {
     this.passValues();
   },
   methods: {
-    isRated() {
+    israted() {
       if (rating > 0) {
         return true;
       } else {
@@ -32,7 +32,7 @@ export default {
       }
     },
     passValues() {
-      this.$emit(isRated(), rating);
+      this.$emit(israted(), rating);
     }
   }
 };
