@@ -31,10 +31,10 @@
 						<value>/register</value>
 						<value>/api/events</value>
 						<value>/api/whiskeys</value>
-						<value>/api/users/{id}/events</value>
-						<value>/api/users/{userId}{eventId}{whiskeyId}/whiskeyRating</value>
-						<value>/api/users/{userId}/whiskeyRating</value>
-						<value>/api/event/{eventId}/whiskeyRating</value>
+						<value>/api/users/*/events</value>
+						<value>/api/users/*/whiskeyRating</value>
+						<value>/api/users/*/whiskeyRating</value>
+						<value>/api/event/*/whiskeyRating</value>
 					</list>
 				</property>
 			</bean>

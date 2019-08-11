@@ -1,12 +1,11 @@
 package com.techelevator.model;
 
 import java.time.LocalDate;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.util.List;
 
 public class Event {
 	
-	//private List<Whiskey> tastingWhiskeys;
+	private List<Whiskey> tastingWhiskeys;
 	private String time;
 	private LocalDate date;
 	private String location;
@@ -16,12 +15,12 @@ public class Event {
 	private Boolean isPrivate;
 	private Long eventId;
 	
-//	public List<Whiskey> getTastingWhiskeys() {
-//		return tastingWhiskeys;
-//	}
-//	public void setTastingWhiskeys(List<Whiskey> tastingWhiskeys) {
-//		this.tastingWhiskeys = tastingWhiskeys;
-//	}
+	public List<Whiskey> getTastingWhiskeys() {
+		return tastingWhiskeys;
+	}
+	public void setTastingWhiskeys(List<Whiskey> tastingWhiskeys) {
+		this.tastingWhiskeys = tastingWhiskeys;
+	}
 	public String getTime() {
 		return time;
 	}

@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <input type="checkbox" id="checkin" name="checkin" @click:="check()">
-    <label v-if(checkin) for="checkin">Check In</label>
+  <div class="check-in-div">
+    <label v-if(checkLoginAndCheckin()) for="checkin">Check In</label>
+    <input v-if(isLoggedIn) type="checkbox" id="checkin" name="checkin" @click:="checkUserIn()">
   </div>
 </template>
 
@@ -9,16 +9,37 @@
 export default {
   data() {
     return {
-      checkin: false
+      isLoggedIn: false
     };
   },
   methods: {
-    check() {
+    checkUserIn() {
       this.checkin = !this.checkin;
+      this.$emit(checked);
     }
   }
 };
 </script>
 
 <style>
+.check-in-div {
+  background-color: #2e4d58;
+  font-size: 1.5em;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  width: fit-content;
+  border-radius: 5px;
+  box-shadow: -2px 10px 18px -4px rgba(0, 0, 0, 0.75);
+  margin: 10px;
+}
+
+.check-in-div input {
+  width: 15px;
+  height: 15px;
+}
+
+.check-in-div label {
+  padding-right: 5px;
+}
 </style>

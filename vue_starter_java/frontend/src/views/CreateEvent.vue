@@ -87,7 +87,6 @@ export default {
       })
         .then(response => {
           if (response.ok) {
-            this.$emit("showReviews");
             this.$router.push("/");
           }
         })

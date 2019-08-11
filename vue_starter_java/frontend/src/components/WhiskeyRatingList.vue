@@ -43,7 +43,7 @@ export default {
       location: String,
       eventDescription: "",
       isBlindTasting: true,
-      eventId: 95
+      eventId: Number
     },
     data() {
       return {

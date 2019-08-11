@@ -1,5 +1,5 @@
 <template>
-  <tile-format class="single-event">
+  <tile-format class="single-event" v-on:click="saveEvent">
     <h2>{{event.title}}</h2>
     <!-- <img src="{{event.imgUrl}}"> -->
 

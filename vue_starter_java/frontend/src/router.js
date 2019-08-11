@@ -7,8 +7,16 @@ import Register from './views/Register.vue'
 import CreateEvent from './views/CreateEvent.vue'
 import RatingResults from './views/RatingResults.vue'
 import EventResponse from './views/EventResponse.vue'
+import EventPage from './views/EventPage.vue'
+
 
 Vue.use(Router)
+
+function routeEventPage(route) {
+  return {
+    name: (parseLong(route.params.eventId))
+  }
+}
 
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
@@ -67,6 +75,16 @@ const router = new Router({
       path: "/eventResponse",
       name: "eventResponse",
       component: EventResponse,
+      meta: {
+        requiresAuth: false
+      }
+    },
+    {
+      // path: "/eventPage/:eventId",
+      path: "/eventPage",
+      name: "eventPage",
+      component: EventPage,
+      // props: routeEventPage,
       meta: {
         requiresAuth: false
       }
