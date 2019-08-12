@@ -7,16 +7,16 @@
       <li>
         <h1>{{isHOME}}{{isHomePage}}</h1>
         <h4>Date:</h4>
-        <p>{{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}}</p>
+        <p> {{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}}</p>
       </li>
 
       <li>
         <h4>Time:</h4>
-        <p>{{event.time}}</p>
+        <p> {{event.time}}</p>
       </li>
       <li>
         <h4>Location:</h4>
-        <p>{{event.location}}</p>
+        <p> {{event.location}}</p>
       </li>
       <li v-if(isHomePage.equals(false))>
         <p>{{event.eventDescription}}</p>
