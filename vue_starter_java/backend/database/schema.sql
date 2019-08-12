@@ -84,7 +84,7 @@ Insert Into event Values (default, '10/31/2019', '1:00 PM', 'A soul-stirring tas
 Insert Into whiskey (brand, price) Values ('Jamisons 18 Year Limited reserve', 200);
 Insert Into whiskey (brand, price) Values ('Colonel Taylor Small Batch KY Bourbon', 40);
 
-insert into users (id, username, password, salt, role) values (2, 'test', 'test', 'test', 'test');
-
+insert into users (id, username, password, salt, role) values (2, 'test', 'test', 'test', 'user');
+insert into users (id, username, password, salt, role) values (3, 'testAdmin', 'test', 'test', 'admin');
 
 COMMIT;

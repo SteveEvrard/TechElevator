@@ -37,6 +37,23 @@ public class JdbcWhiskeyRatingDao implements WhiskeyRatingDao {
 		
 		return ratingsForEvent;
 	}
+	
+	@Override
+	public List<WhiskeyRating> getRatingsByUser(long userId) {
+		List<WhiskeyRating> ratingsForUser = new ArrayList<WhiskeyRating>();
+		
+		String sql = "SELECT whiskey_rating_id, whiskey_id, event_id, user_id, taste_rating, nose_rating, color_rating, " + 
+				"body_rating, finish_rating, price__rating, overall_rating " + 
+				"FROM whiskeyrating " + 
+				"WHERE user_id = ?;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+		
+		while(results.next()) {
+			ratingsForUser.add(mapRowToRating(results));
+		}
+		
+		return ratingsForUser;
+	}
 
 	@Override
 	public void submitRating(WhiskeyRating rating) {
