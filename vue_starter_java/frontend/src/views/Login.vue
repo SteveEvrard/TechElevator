@@ -8,12 +8,12 @@
       <div class="alert alert-success" role="alert" v-if="this.$route.query.registration">
         Thank you for registering, please sign in.
       </div>
-      <label for="username" class="sr-only">Username</label>
+      <label for="username" class="sr-only">Email</label>
       <input
         type="text"
         id="username"
         class="form-control"
-        placeholder="Username"
+        placeholder="Email"
         v-model="user.username"
         required
         autofocus

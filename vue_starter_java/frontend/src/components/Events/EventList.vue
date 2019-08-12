@@ -66,4 +66,7 @@ export default {
 li {
   list-style: none;
 }
+.event-list div:hover {
+  opacity: 0.8;
+}
 </style>
