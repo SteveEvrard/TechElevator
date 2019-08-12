@@ -65,13 +65,13 @@
 </template>
 
 <script>
-import TileFormat from "../components/TileFormat.vue";
+import TileFormat from "@/components/Formatting/TileFormat.vue";
 
 export default {
   components: {
     TileFormat
   },
-  name: "SingleEvent",
+  name: "SingleWhiskeyRating",
   props: {
     whiskeyRatingList: Array,
     whiskeyRating: {

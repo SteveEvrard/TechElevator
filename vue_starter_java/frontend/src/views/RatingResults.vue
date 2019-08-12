@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import WhiskeyRatingList from "../components/WhiskeyRatingList.vue";
+import WhiskeyRatingList from "@/components/Whiskey/WhiskeyRatingList.vue";
 
 export default {
   components: {

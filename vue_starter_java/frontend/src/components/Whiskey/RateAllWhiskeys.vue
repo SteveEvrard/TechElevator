@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import RateSingleWhiskey from "../components/RateSingleWhiskey.vue";
+import RateSingleWhiskey from "@/components/Whiskey/RateSingleWhiskey.vue";
 
 export default {
   components: {

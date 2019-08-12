@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import SingleEvent from "../components/SingleEvent.vue";
-import CheckIn from "../components/CheckIn.vue";
+import SingleEvent from "@/components/Events/SingleEvent.vue";
+import CheckIn from "@/components/CheckIn.vue";
 
 export default {
   components: {
