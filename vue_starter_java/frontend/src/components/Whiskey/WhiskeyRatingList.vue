@@ -7,10 +7,10 @@
 </template>
 
 <script>
-import SingleEvent from "../components/SingleEvent.vue";
-import CheckIn from "../components/CheckIn.vue";
-import TileFormat from "../components/TileFormat.vue";
-import SingleWhiskeyRating from "../components/SingleWhiskeyRating.vue";
+import SingleEvent from "@/components/Events/SingleEvent.vue";
+import CheckIn from "@/components/CheckIn.vue";
+import TileFormat from "@/components/Formatting/TileFormat.vue";
+import SingleWhiskeyRating from "@/components/Whiskey/SingleWhiskeyRating.vue";
 
 export default {
   components: {

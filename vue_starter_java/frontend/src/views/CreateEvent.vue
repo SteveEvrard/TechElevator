@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import FormFormat from "../components/FormFormat.vue";
-import WhiskeyBrandsToSelect from "../components/WhiskeyBrandsToSelect.vue";
+import FormFormat from "@/components/Formatting/FormFormat.vue";
+import WhiskeyBrandsToSelect from "@/components/Whiskey/WhiskeyBrandsToSelect.vue";
 
 export default {
   components: {
