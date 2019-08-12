@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="create-event">
     <form-format class="event-background">
       <h1>Create a New Event</h1>
 
@@ -34,9 +34,10 @@
       <textarea v-model="eventData.eventDescription"></textarea>
       <br>
 
-      <h4>Is this a blind tasting?</h4>
+      <h4>Is this a blind tasting?
       <input type="checkbox" v-model="eventData.isBlindTasting">
       {{eventData.isBlindTasting ? "yes" : "no"}}
+      </h4>
       <br>
       <h4>What whiskeys will be tasted?</h4>
       <h4>
@@ -107,7 +108,42 @@ export default {
 .event-background {
   background: #f1f1f1;
   margin: 0px;
+  border: 3px solid #f1f1f1;
+  width: 50%;
+  align-content: center;
 }
+
+#create-event {
+  display: flex;
+  justify-content: center;
+}
+
+/* Full-width inputs */
+.event-background > input[type=text], textarea, input{
+  width: 80%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+  background-color: rgb(44, 82, 52);
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+  opacity: 0.8;
+}
+
 </style>
 
 

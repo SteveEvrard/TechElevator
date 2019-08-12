@@ -109,7 +109,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #4CAF50;
+  background-color: rgb(44, 82, 52);
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -124,10 +124,10 @@ button:hover {
 }
 
 /* Extra style for the cancel button (red) */
-.cancelbtn {
+.alert-danger {
   width: auto;
   padding: 10px 18px;
-  background-color: #f44336;
+  color: #f44336;
 }
 
 /* Add padding to containers */
