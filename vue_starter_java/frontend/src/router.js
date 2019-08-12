@@ -80,11 +80,11 @@ const router = new Router({
       }
     },
     {
-      // path: "/eventPage/:eventId",
-      path: "/eventPage",
+      path: "/eventPage/:eventId",
+      // path: "/eventPage",
       name: "eventPage",
       component: EventPage,
-      // props: routeEventPage,
+      props: routeEventPage,
       meta: {
         requiresAuth: false
       }

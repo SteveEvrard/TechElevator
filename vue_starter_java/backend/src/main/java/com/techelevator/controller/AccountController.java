@@ -2,29 +2,27 @@ package com.techelevator.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import com.techelevator.authentication.AuthProvider;
 import com.techelevator.authentication.JwtTokenHandler;
 import com.techelevator.authentication.UnauthorizedException;
 import com.techelevator.authentication.UserCreationException;
 import com.techelevator.model.User;
-import com.techelevator.model.UserDao;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * AccountController
  */
 @RestController
 public class AccountController {
-	private UserDao userDao;
-	 public AccountController(UserDao userDao) {
-	 this.userDao=userDao;
-	 }
-	 
+     
     @Autowired
     private AuthProvider auth;
 
@@ -49,10 +47,11 @@ public class AccountController {
                 errorMessages += error.getDefaultMessage() + "\n";
             }
             throw new UserCreationException(errorMessages);
+        } else {
+            auth.register(user.getUsername(), user.getPassword(), user.getRole());
         }
-        else userDao.saveUser(null, null, null);
-        auth.register(user.getUsername(), user.getPassword(), user.getRole());
+        
         return "{\"success\":true}";
-        }
     }
 
+}

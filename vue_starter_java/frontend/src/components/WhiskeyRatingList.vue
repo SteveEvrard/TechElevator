@@ -21,7 +21,7 @@ export default {
   },
   name: "WhiskeyRatingList",
   props: {
-    ratingApiURL: String,
+    apiURLWhiskey: String,
     whiskeyApiURL: String,
     whiskeyRating: {
       whiskeyId: Number,
@@ -60,7 +60,7 @@ export default {
     },
     methods: {
       listWhiskeyRatings() {
-        fetch(this.ratingApiURL)
+        fetch(this.apiURLWhiskey)
           .then(response => {
             console.log(response);
             return response.json();

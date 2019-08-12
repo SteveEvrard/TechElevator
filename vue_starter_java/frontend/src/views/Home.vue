@@ -1,8 +1,7 @@
 <template>
   <div class="home">
     <div class="list-of-events">
-      <event-list :apiURL="API_URL"></event-list>
-      <check-in></check-in>
+      <event-list :isHOME="isHomePage" :apiURL="API_URL" :isLoggedIn="isLoggedIn"></event-list>
     </div>
   </div>
 </template>
@@ -17,9 +16,12 @@ export default {
   name: "home",
   data() {
     return {
-      API_URL: "http://localhost:8080/AuthenticationApplication/api/events"
+      API_URL: "http://localhost:8080/AuthenticationApplication/api/events",
+      isLoggedIn: false,
+      isHomePage: true
     };
-  }
+  },
+  method: {}
 };
 </script>
 

@@ -42,7 +42,7 @@
 	</mvc:interceptors>
 	
 	<mvc:cors>
-		<mvc:mapping path="/**" allowed-methods="*" />
+		<mvc:mapping path="/**" allowed-headers="Content-Type, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Authorization, X-Requested-With, requestId, Correlation-Id" allowed-methods="*" />
 	</mvc:cors>
 	
 	<!-- This view resolver contains logic for translating a logical view name
