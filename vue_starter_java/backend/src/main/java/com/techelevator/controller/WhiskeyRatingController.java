@@ -30,6 +30,11 @@ public class WhiskeyRatingController {
 	public List<WhiskeyRating> getAllRatingsByEvent(long eventId) {
 		return whiskeyRatingDao.getRatingsByEvent(eventId);
 	}
+	
+	@GetMapping(path="/api/event/{eventId}/whiskeyRating/{whiskeyId}")
+	public List<WhiskeyRating> getAllRatingsByEventAndWhiskey(long eventId, long whiskeyId) {
+		return whiskeyRatingDao.getRatingsByEventAndWhiskey(eventId, whiskeyId);
+	}
 
 //	@GetMapping(path="/api/users/{userId}/whiskeyRating")
 //	public List<WhiskeyRating> getAllRatingsByEventAndUser(long eventId) {

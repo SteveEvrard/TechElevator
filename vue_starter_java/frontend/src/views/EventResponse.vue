@@ -1,5 +1,7 @@
 <template>
-  <rate-all-whiskeys></rate-all-whiskeys>
+  <div class="event">
+    <rate-all-whiskeys v-bind:eventData="event"></rate-all-whiskeys>
+  </div>
 </template>
 
 <script>
@@ -9,11 +11,41 @@ export default {
   components: {
     RateAllWhiskeys
   },
-  name: "eventResponse",
   data() {
     return {
-      API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys"
+      hasCheckedIn: false,
+      API_URL: "http://localhost:8080/AuthenticationApplication/api/event/",
+      event: {
+        eventId: Number,
+        title: String,
+        imgUrl: String,
+        date: new Date(),
+        time: String,
+        location: String,
+        info: String,
+        tastingWhiskeys: Array
+      }
     };
+  },
+  created() {
+    this.event.eventId = this.$route.params.eventId;
+    this.getEventDetails();
+  },
+  methods: {
+    getEventDetails() {
+      fetch(this.API_URL + this.eventId)
+        .then(response => {
+          console.log(response);
+          return response.json();
+        })
+        .then(jsonEvent => {
+          this.event = jsonEvent;
+        })
+
+        .catch(err => console.error(err));
+    }
   }
 };
 </script>
+
+

@@ -1,8 +1,8 @@
 <template>
   <div>
     <h1>Rate the Whiskey!</h1>
-    <div v-for="whiskey in whiskeyList" v-bind:key="whiskey">
-      <rate-single-whiskey v-on:finished="isVisible=false" v-bind:whiskey="whiskey"></rate-single-whiskey>
+    <div v-for="item in tastingWhiskeys" v-bind:key="item">
+      <rate-single-whiskey v-bind:whiskey="item"></rate-single-whiskey>
     </div>
 
     <h4>
@@ -20,46 +20,29 @@ export default {
   },
   prop: {
     eventData: {
-      title: "",
+      title: String,
       // eventImageURL: "",
-      isPrivate: true,
+      eventId: Number,
+      title: String,
+      imgUrl: String,
       date: new Date(),
-      time: "",
-      location: "",
-      eventDescription: "",
-      isBlindTasting: true
+      time: String,
+      location: String,
+      info: String,
+      tastingWhiskeys: Array
     },
     whiskey: {
       brand: String,
       whiskeyId: Number
     }
   },
-  created() {
-    this.whiskeyList.push(this.whiskey1);
-    this.whiskeyList.push(this.whiskey2);
-    this.whiskeyList.push(this.whiskey3);
-  },
   data() {
     return {
-      whiskeyList: [],
-      whiskey1: {
-        brand: "Jamisons",
-        whiskeyId: 1
-      },
-      whiskey2: {
-        brand: "Three Gingers",
-        whiskeyId: 2
-      },
-      whiskey3: {
-        brand: "Writer's Tears",
-        whiskeyId: 3
-      },
-      apiURLEvent: "http://localhost:8080/AuthenticationApplication/api/events",
       API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys"
     };
   },
   methods: {
-    saveEvent() {
+    saveWhiskey() {
       fetch(this.apiURLEvent, {
         method: "POST",
         headers: {

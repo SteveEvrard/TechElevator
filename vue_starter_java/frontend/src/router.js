@@ -58,7 +58,7 @@ const router = new Router({
       }
     },
     {
-      path: "/ratingResults",
+      path: "/ratingResults:eventId",
       name: "ratingResults",
       component: RatingResults,
       meta: {
@@ -66,7 +66,7 @@ const router = new Router({
       }
     },
     {
-      path: "/eventResponse",
+      path: "/eventResponse/:eventId",
       name: "eventResponse",
       component: EventResponse,
       meta: {

@@ -21,7 +21,6 @@ export default {
     return {
       hasCheckedIn: false,
       API_URL: "http://localhost:8080/AuthenticationApplication/api/event/",
-      eventId: null,
       event: {
         eventId: Number,
         title: String,
@@ -35,7 +34,7 @@ export default {
     };
   },
   created() {
-    this.eventId = this.$route.params.eventId;
+    this.event.eventId = this.$route.params.eventId;
     this.getEventDetails();
   },
   methods: {

@@ -1,7 +1,7 @@
 <template>
   <form-format>
     <tile-format>
-      <h2 v-if="!event.isBlindTasting">{{whiskey.brand}}</h2>
+      <!-- <h2 v-if="!event.isBlindTasting">Rate This</h2> -->
 
       <h4>
         Rate the
@@ -9,7 +9,7 @@
       </h4>
       <VueSlideBar
         class="slider"
-        v-model="slider.value"
+        v-model="slider.tasteValue"
         :processStyle="slider.processStyle"
         :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
         :min="1"
@@ -23,52 +23,98 @@
         Rate the
         <h4 class="emphasis-word">smell</h4>of the whiskey:
       </h4>
-      <rating-buttons-1-thru-5
-        v-bind:variableData="whiskeyRating.smellRating"
-        v-on:israted="whiskeyRating.smellRating=rating"
-      ></rating-buttons-1-thru-5>
+      <VueSlideBar
+        class="slider"
+        v-model="slider.smellValue"
+        :processStyle="slider.processStyle"
+        :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
+        :min="1"
+        :max="5"
+        :lineHeight="20"
+        :tooltipStyles="{ backgroundColor: '#2E4D58', borderColor: '#2E4D58' }"
+        :draggable="true"
+      >></VueSlideBar>
+      <rating-buttons-1-thru-5></rating-buttons-1-thru-5>
 
       <h4>
         Rate the
         <h4 class="emphasis-word">color</h4>of the whiskey:
       </h4>
-      <rating-buttons-1-thru-5
-        v-bind:variableData="whiskeyRating.colorRating"
-        v-on:israted="whiskeyRating.colorRating=rating"
-      ></rating-buttons-1-thru-5>
+      <VueSlideBar
+        class="slider"
+        v-model="slider.colorValue"
+        :processStyle="slider.processStyle"
+        :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
+        :min="1"
+        :max="5"
+        :lineHeight="20"
+        :tooltipStyles="{ backgroundColor: '#2E4D58', borderColor: '#2E4D58' }"
+        :draggable="true"
+      >></VueSlideBar>
+      <rating-buttons-1-thru-5></rating-buttons-1-thru-5>
 
       <h4>
         Rate the
         <h4 class="emphasis-word">body</h4>of the whiskey:
       </h4>
-      <rating-buttons-1-thru-5
-        v-bind:variableData="whiskeyRating.bodyRating"
-        v-on:israted="whiskeyRating.bodyRating=rating"
-      ></rating-buttons-1-thru-5>
+      <VueSlideBar
+        class="slider"
+        v-model="slider.bodyValue"
+        :processStyle="slider.processStyle"
+        :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
+        :min="1"
+        :max="5"
+        :lineHeight="20"
+        :tooltipStyles="{ backgroundColor: '#2E4D58', borderColor: '#2E4D58' }"
+        :draggable="true"
+      >></VueSlideBar>
+      <rating-buttons-1-thru-5></rating-buttons-1-thru-5>
 
       <h4>
         Rate the
         <h4 class="emphasis-word">finish</h4>of the whiskey:
       </h4>
-      <rating-buttons-1-thru-5
-        v-bind:variableData="whiskeyRating.finishRating"
-        v-on:israted="whiskeyRating.finishRating=rating"
-      ></rating-buttons-1-thru-5>
+      <VueSlideBar
+        class="slider"
+        v-model="slider.finishValue"
+        :processStyle="slider.processStyle"
+        :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
+        :min="1"
+        :max="5"
+        :lineHeight="20"
+        :tooltipStyles="{ backgroundColor: '#2E4D58', borderColor: '#2E4D58' }"
+        :draggable="true"
+      >></VueSlideBar>
 
       <h4>
         Rate the
         <h4 class="emphasis-word">price</h4>of the whiskey:
       </h4>
-      <rating-buttons-1-thru-5
-        v-bind:variableData="whiskeyRating.priceRating"
-        v-on:israted="whiskeyRating.priceRating=rating"
-      ></rating-buttons-1-thru-5>
+      <VueSlideBar
+        class="slider"
+        v-model="slider.priceValue"
+        :processStyle="slider.processStyle"
+        :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
+        :min="1"
+        :max="5"
+        :lineHeight="20"
+        :tooltipStyles="{ backgroundColor: '#2E4D58', borderColor: '#2E4D58' }"
+        :draggable="true"
+      >></VueSlideBar>
 
       <h4 class="emphasis-word">What did you think of the whiskey overall?</h4>
-      <rating-buttons-1-thru-5
-        v-bind:variableData="whiskeyRating.overallRating"
-        v-on:israted="whiskeyRating.overallRating=rating, saveWhiskeyRating(), isFinished()"
-      ></rating-buttons-1-thru-5>
+      <VueSlideBar
+        class="slider"
+        v-model="slider.overallValue"
+        :processStyle="slider.processStyle"
+        :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
+        :min="1"
+        :max="5"
+        :lineHeight="20"
+        :tooltipStyles="{ backgroundColor: '#2E4D58', borderColor: '#2E4D58' }"
+        :draggable="true"
+        v-on:israted="saveWhiskeyRating()"
+      >></VueSlideBar>
     </tile-format>
   </form-format>
 </template>
@@ -106,22 +152,28 @@ export default {
         brand: String,
         whiskeyId: Number
       },
-      apiURLEvent: "http://localhost:8080/AuthenticationApplication/api/events",
+      apiURLEvent: "http://localhost:8080/AuthenticationApplication/api/users/",
       API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys",
       whiskeyRating: {
         whiskeyId: Number,
         userId: Number,
         eventId: Number,
-        tasteRating: 0,
-        smellRating: 0,
-        colorRating: 0,
-        bodyRating: 0,
-        finishRating: 0,
-        priceRating: 0,
-        overallRating: 0
+        tasteRating: this.slider.tasteValue,
+        smellRating: this.slider.smellValue,
+        colorRating: this.slider.colorValue,
+        bodyRating: this.slider.bodyValue,
+        finishRating: this.slider.finishValue,
+        priceRating: this.slider.priceValue,
+        overallRating: this.slider.overallValue
       },
       slider: {
-        value: 3,
+        tasteValue: 3,
+        smellValue: 3,
+        colorValue: 3,
+        bodyValue: 3,
+        finishValue: 3,
+        priceValue: 3,
+        overallValue: 3,
         draggable: true,
         processStyle: {
           backgroundColor: "#2E4D58"
@@ -130,7 +182,7 @@ export default {
     };
   },
   created() {
-    this.updateWhiskeyRating(event);
+    this.saveWhiskeyRating(event);
   },
   methods: {
     saveWhiskeyRating() {
@@ -149,14 +201,10 @@ export default {
         })
         .catch(err => console.error(err));
     }
-  },
-  rateTaste(value) {},
-  updateWhiskeyRating(event) {
-    this.whiskeyRating.eventId = this.event.eventId;
-  },
-  isFinished() {
-    this.$emit("finished");
   }
+  // isFinished() {
+  //   this.$emit("finished");
+  // }
 };
 </script>
 
