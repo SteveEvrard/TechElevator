@@ -11,8 +11,7 @@ import EventList from "../components/Events/EventList.vue";
 
 export default {
   components: {
-    EventList,
-    VueSlideBar
+    EventList
   },
   name: "home",
   data() {

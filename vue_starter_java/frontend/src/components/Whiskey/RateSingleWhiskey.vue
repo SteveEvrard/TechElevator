@@ -18,7 +18,6 @@
         :tooltipStyles="{ backgroundColor: '#2E4D58', borderColor: '#2E4D58' }"
         :draggable="true"
       >></VueSlideBar>
-      <rating-buttons-1-thru-5 v-bind:variableData="whiskeyRating.tasteRating"></rating-buttons-1-thru-5>
 
       <h4>
         Rate the

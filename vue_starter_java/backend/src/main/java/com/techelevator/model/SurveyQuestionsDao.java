@@ -8,6 +8,8 @@ List<SurveyQuestions> getAllQuestions();
 
 List<SurveyQuestions> getQuestionsByEvent(Integer id);
 
+void saveQuestions(SurveyQuestions surveyQuestions);
+
 
 
 }

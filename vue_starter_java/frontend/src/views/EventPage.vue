@@ -20,7 +20,7 @@ export default {
   data() {
     return {
       hasCheckedIn: false,
-      API_URL: "http://localhost:8080/AuthenticationApplication//api/event/",
+      API_URL: "http://localhost:8080/AuthenticationApplication/api/event/",
       eventId: null,
       event: {
         eventId: Number,
