@@ -84,8 +84,15 @@ export default {
 
 <style>
 /* Bordered form */
-form {
+.form-register {
   border: 3px solid #f1f1f1;
+  width: 50%;
+  align-content: center;
+}
+
+#register {
+  display: flex;
+  justify-content: center;
 }
 
 /* Full-width inputs */
