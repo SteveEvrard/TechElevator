@@ -11,12 +11,12 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JdbcSurveyQuestions implements SurveyQuestionsDao {
+public class JdbcSurveyQuestionsDao implements SurveyQuestionsDao {
 	
 	private JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	public JdbcSurveyQuestions(DataSource datasource) {
+	public JdbcSurveyQuestionsDao(DataSource datasource) {
 		this.jdbcTemplate = new JdbcTemplate(datasource);
 	}
 
@@ -24,7 +24,7 @@ public class JdbcSurveyQuestions implements SurveyQuestionsDao {
 	public List<SurveyQuestions> getAllQuestions() {
 		List<SurveyQuestions> allQuestions = new ArrayList<SurveyQuestions>();
 		
-		String sql = "SELECT question_id, question, question_type"
+		String sql = "SELECT question_id, question, question_type "
 				+ "FROM SurveyQuestions";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		while(results.next()) {
@@ -36,8 +36,15 @@ public class JdbcSurveyQuestions implements SurveyQuestionsDao {
 
 	@Override
 	public List<SurveyQuestions> getQuestionsByEvent(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	List<SurveyQuestions> eventQuestions = new ArrayList<>();
+	
+	String sql = "SELECT question_id, question, question_type "
+			+ "FROM SurveyQuestions WHERE event_id equals ?";
+	SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
+	while(results.next()) {
+		eventQuestions.add(mapRowToSurveyQuestions(results));
+	}
+		return eventQuestions;
 	}
 	private SurveyQuestions mapRowToSurveyQuestions(SqlRowSet results) {
 		SurveyQuestions surveyQuestions =new SurveyQuestions();
