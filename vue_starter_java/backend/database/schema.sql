@@ -2,7 +2,7 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users;
 
-CREATE TABLE users (
+CREATE TABLE users(
   id serial PRIMARY KEY,
   username varchar(255) NOT NULL UNIQUE,     -- Username
   password varchar(32) NOT NULL,      -- Password
@@ -75,8 +75,31 @@ DROP TABLE IF EXISTS surveyQuestions;
 CREATE TABLE surveyQuestions
 (
 question_id SERIAL PRIMARY KEY,
-question VARCHAR (255)
+question VARCHAR (255),
+question_type VARCHAR (255)
 );
+
+DROP TABLE IF EXISTS surveyAnswers;
+
+CREATE TABLE surveyAnswers
+(
+answer_id SERIAL PRIMARY KEY,
+question_id SERIAL REFERENCES surveyQuestions(question_id),
+event_id SERIAL REFERENCES event(event_id),
+id SERIAL REFERENCES users(id),
+answer VARCHAR (255)
+);
+
+DROP TABLE IF EXISTS surveyAnswersToSurveyQuestions;
+
+CREATE TABLE surveyAnwersToSurveyQuestions
+(
+question_id SERIAL REFERENCES surveyQuestions(question_id),
+answer_id SERIAL REFERENCES surveyAnswers(answer_id)
+
+);
+
+
 Insert Into event Values (default, '08/08/2019', '7:00 PM', 'All-you-can-taste!', '104 Farrow Ave Suite 7', 'Blue Blind Paralytic Drunk', true, false);
 
 Insert Into event Values (default, '10/31/2019', '1:00 PM', 'A soul-stirring taste of whiskey that will haunt you.', '31 All Hallows Blvd', 'Terrifying Tastes', true, false);
@@ -84,7 +107,7 @@ Insert Into event Values (default, '10/31/2019', '1:00 PM', 'A soul-stirring tas
 Insert Into whiskey (brand, price) Values ('Jamisons 18 Year Limited reserve', 200);
 Insert Into whiskey (brand, price) Values ('Colonel Taylor Small Batch KY Bourbon', 40);
 
-insert into users (id, username, password, salt, role) values (2, 'test', 'test', 'test', 'test');
-
+insert into users (id, username, password, salt, role) values (2, 'test', 'test', 'test', 'user');
+insert into users (id, username, password, salt, role) values (3, 'testAdmin', 'test', 'test', 'admin');
 
 COMMIT;

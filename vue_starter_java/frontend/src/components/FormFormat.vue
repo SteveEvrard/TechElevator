@@ -1,5 +1,5 @@
 <template>
-  <form class="form">
+  <form class="form-register">
     <slot></slot>
   </form>
 </template>
@@ -33,4 +33,6 @@ div {
   align-items: center;
   align-self: center;
 }
+
+
 </style>
