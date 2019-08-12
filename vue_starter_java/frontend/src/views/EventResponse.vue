@@ -23,7 +23,9 @@ export default {
         time: String,
         location: String,
         info: String,
-        tastingWhiskeys: Array
+        // tastingWhiskeys: Array,
+        isPrivate: Boolean,
+        isBlindTasting: Boolean
       }
     };
   },

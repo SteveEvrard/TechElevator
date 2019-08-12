@@ -2,12 +2,8 @@
   <div>
     <h1>Rate the Whiskey!</h1>
     <div v-for="item in tastingWhiskeys" v-bind:key="item">
-      <rate-single-whiskey v-bind:whiskey="item"></rate-single-whiskey>
+      <rate-single-whiskey v-bind:rswEventData="rawEventData" v-bind:whiskey="item"></rate-single-whiskey>
     </div>
-
-    <h4>
-      <button type="submit">Submit your ratings!</button>
-    </h4>
   </div>
 </template>
 
@@ -29,7 +25,9 @@ export default {
       time: String,
       location: String,
       info: String,
-      tastingWhiskeys: Array
+      // tastingWhiskeys: Array,
+      isPrivate: Boolean,
+      isBlindTasting: Boolean
     },
     whiskey: {
       brand: String,
@@ -38,8 +36,35 @@ export default {
   },
   data() {
     return {
-      API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys"
+      jamison: {
+        brand: "Jamison 18 Year Select",
+        price: 40
+      },
+      writer: {
+        brand: "Writer's Tears",
+        price: 45
+      },
+      tastingWhiskeys: [this.jamison, this.writer],
+      API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys",
+      rawEventId: this.eventData.eventId,
+      eventData: {
+        title: String,
+        // eventImageURL: "",
+        eventId: Number,
+        title: String,
+        imgUrl: String,
+        date: new Date(),
+        time: String,
+        location: String,
+        info: String,
+        // tastingWhiskeys: Array,
+        isPrivate: Boolean,
+        isBlindTasting: Boolean
+      }
     };
+  },
+  created() {
+    this.eventData = eventData;
   },
   methods: {
     saveWhiskey() {
@@ -53,7 +78,6 @@ export default {
         .then(response => {
           if (response.ok) {
             this.$emit("showReviews");
-            this.$router.push("/");
           }
         })
         .catch(err => console.error(err));
