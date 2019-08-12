@@ -53,11 +53,29 @@ public class JDBCWhiskeyRatingDAOIntegrationTest extends DAOIntegrationTesting{
 		jdbcTemplate.update(sql);
 		
 		String sql2 = "insert into whiskeyrating (whiskey_rating_id, whiskey_id, event_id, user_id, taste_rating, nose_rating, color_rating,\n" + 
-				"body_rating, finish_rating, price__rating, overall_rating)\n" + 
+				"body_rating, finish_rating, price__rating, overall_rating) " + 
 				"values (default, 2, 1, 1, 3, 3, 3, 3, 3, 3, 3);";
 		jdbcTemplate.update(sql2);
 		
 		List<WhiskeyRating> ratingsForEvent = dao.getRatingsByUser((long) 1);
+		
+		Assert.assertEquals(2, ratingsForEvent.size());
+	}
+	
+	@Test
+	public void get_ratings_by_whiskey_and_event_gets_all_ratings_from_event() {
+		
+		String sql = "insert into whiskeyrating (whiskey_rating_id, whiskey_id, event_id, user_id, taste_rating, nose_rating, color_rating, " + 
+				"body_rating, finish_rating, price__rating, overall_rating) " + 
+				"values (default, 1, 1, 2, 3, 3, 3, 3, 3, 3, 3);";
+		jdbcTemplate.update(sql);
+		
+		String sql2 = "insert into whiskeyrating (whiskey_rating_id, whiskey_id, event_id, user_id, taste_rating, nose_rating, color_rating,\n" + 
+				"body_rating, finish_rating, price__rating, overall_rating) " + 
+				"values (default, 1, 1, 1, 3, 3, 3, 3, 3, 3, 3);";
+		jdbcTemplate.update(sql2);
+		
+		List<WhiskeyRating> ratingsForEvent = dao.getRatingsByEventAndWhiskey((long) 1, (long) 1);
 		
 		Assert.assertEquals(2, ratingsForEvent.size());
 	}

@@ -19,7 +19,7 @@
           <h4>Location:</h4>
           <p>{{event.location}}</p>
         </li>
-        <li v-if(isHomePage.equals(false))>
+        <li v-if="!isHomePage">
           <p>{{event.eventDescription}}</p>
         </li>
       </ul>

@@ -95,36 +95,13 @@ export default {
       whiskey: {
         brand: "Jamison's Rye Whiskey"
       },
-      tasteRatingPercentage: 52.3,
-      smellRatingPercentage: 33.777777,
-      colorRatingPercentage: 88,
-      bodyRatingPercentage: 84.8,
-      finishRatingPercentage: 60.2,
-      priceRatingPercentage: 9.9,
-      overallRatingPercentage: 99.9,
       tasteRatingWidth: "",
       smellRatingWidth: "",
       colorRatingWidth: "",
       bodyRatingWidth: "",
       finishRatingWidth: "",
       priceRatingWidth: "",
-      overallRatingWidth: "",
-      sumTasteRating: "",
-      sumSmellRating: "",
-      sumColorRating: "",
-      sumBodyRating: "",
-      sumFinishRating: "",
-      sumPriceRating: "",
-      sumOverallRating: "",
-      aveWhiskeyRating: {
-        aveTasteRating: "",
-        aveSmellRating: "",
-        aveColorRating: "",
-        aveBodyRating: "",
-        aveFinishRating: "",
-        avePriceRating: "",
-        aveOverallRating: ""
-      }
+      overallRatingWidth: ""
     };
   },
   created() {
@@ -132,58 +109,6 @@ export default {
     console.log(this.tasteRatingWidth);
   },
   methods: {
-    getCountsForAverages() {
-      this.whiskeyRatingList.forEach(whiskeyRating => {
-        addTasteRating(whiskeyRating.tasteRating);
-        addSmellRating(whiskeyRating.smellRating);
-        addColorRating(whiskeyRating.colorRating);
-        addBodyRating(whiskeyRating.bodyRating);
-        addFinishRating(whiskeyRating.finishRating);
-        addPriceRating(whiskeyRating.priceRating);
-        addOverallRating(whiskeyRating.overallRating);
-        getAveragesOfAllRatings();
-        getPercentagesOfAllRatings();
-      });
-    },
-    getAveragesOfAllRatings() {
-      this.aveTasteRating = this.sumTasteRating / this.numOfWhiskeys;
-      this.aveSmellRating = this.sumSmellRating / this.numOfWhiskeys;
-      this.aveColorRating = this.sumColorRating / this.numOfWhiskeys;
-      this.aveBodyRating = this.sumBodyRating / this.numOfWhiskeys;
-      this.aveFinishRating = this.sumFinishRating / this.numOfWhiskeys;
-      this.avePriceRating = this.sumPriceRating / this.numOfWhiskeys;
-      this.aveOverallRating = this.sumOverallRating / this.numOfWhiskeys;
-    },
-    getPercentagesOfAllRatings() {
-      this.tasteRatingPercentage = this.aveTasteRating / 5;
-      this.smellRatingPercentage = this.aveSmellRating / 5;
-      this.colorRatingPercentage = this.aveColorRating / 5;
-      this.bodyRatingPercentage = this.aveBodyRating / 5;
-      this.finishRatingPercentage = this.aveFinishRating / 5;
-      this.priceRatingPercentage = this.avePriceRating / 5;
-      this.overallRatingPercentage = this.aveOverallRating / 5;
-    },
-    addTasteRating(tasteRating) {
-      this.sumTasteRating += tasteRating;
-    },
-    addSmellRating(smellRating) {
-      this.sumSmellRating += smellRating;
-    },
-    addColorRating(colorRating) {
-      this.sumColorRating += colorRating;
-    },
-    addBodyRating(bodyRating) {
-      this.sumBodyRating += bodyRating;
-    },
-    addFinishRating(finishRating) {
-      this.sumFinishRating += finishRating;
-    },
-    addPriceRating(priceRating) {
-      this.sumPriceRating += priceRating;
-    },
-    addOverallRating(overallRating) {
-      this.sumOverallRating += overallRating;
-    },
     getRatingWidths() {
       this.tasteRatingWidth = "width: " + this.tasteRatingPercentage + "%";
       this.smellRatingWidth = "width: " + this.smellRatingPercentage + "%";
