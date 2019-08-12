@@ -1,27 +1,28 @@
 <template>
-  <tile-format class="single-event" v-on:click="showdetail(event)">
-    <h2>{{event.title}}</h2>
-    <!-- <img src="{{event.imgUrl}}"> -->
+  <tile-format class="single-event">
+    <div v-on:click="showdetail(event)">
+      <h2>{{event.title}}</h2>
+      <!-- <img src="{{event.imgUrl}}"> -->
 
-    <ul>
-      <li>
-        <h1>{{isHOME}}{{isHomePage}}</h1>
-        <h4>Date:</h4>
-        <p>{{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}}</p>
-      </li>
+      <ul>
+        <li>
+          <h4>Date:</h4>
+          <p>{{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}}</p>
+        </li>
 
-      <li>
-        <h4>Time:</h4>
-        <p>{{event.time}}</p>
-      </li>
-      <li>
-        <h4>Location:</h4>
-        <p>{{event.location}}</p>
-      </li>
-      <li v-if(isHomePage.equals(false))>
-        <p>{{event.eventDescription}}</p>
-      </li>
-    </ul>
+        <li>
+          <h4>Time:</h4>
+          <p>{{event.time}}</p>
+        </li>
+        <li>
+          <h4>Location:</h4>
+          <p>{{event.location}}</p>
+        </li>
+        <li v-if="!isHomePage">
+          <p>{{event.eventDescription}}</p>
+        </li>
+      </ul>
+    </div>
   </tile-format>
 </template>
 
@@ -53,7 +54,7 @@ export default {
     };
   },
   name: "SingleEvent",
-  method: {
+  methods: {
     showdetail(event) {
       let eventId = this.event.eventId;
       this.$router.push({ name: "eventPage", params: { eventId } });

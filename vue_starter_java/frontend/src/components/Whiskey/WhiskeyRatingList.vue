@@ -1,7 +1,7 @@
 <template>
   <div class="whiskey-list">
     <div v-for="whiskeyR in whiskeyRatingList" v-bind:key="whiskeyR">
-      <single-whiskey-rating v-bind:whiskeyRating="whiskeyR"></single-whiskey-rating>
+      <single-whiskey-rating v-bind:whiskey="whiskeyR"></single-whiskey-rating>
     </div>
   </div>
 </template>
@@ -21,8 +21,9 @@ export default {
   },
   name: "WhiskeyRatingList",
   props: {
+    eventId: Number,
     apiURLWhiskey: String,
-    whiskeyApiURL: String,
+    whiskeyRatingList: Array,
     whiskeyRating: {
       whiskeyId: Number,
       userId: Number,
@@ -52,7 +53,11 @@ export default {
         whiskeyList: [],
         whiskeyRatingList: [],
         whiskeyBrandList: [],
-        whiskeyReviewerList: []
+        whiskeyReviewerList: [],
+        whiskeyApiURL:
+          "http://localhost:8080/AuthenticationApplication/api/event/" +
+          this.eventId +
+          "/whiskeyRating"
       };
     },
     created() {

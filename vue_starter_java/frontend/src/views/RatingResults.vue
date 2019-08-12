@@ -1,5 +1,5 @@
 <template>
-  <whiskey-rating-list :ratingApiURL="API_URL" :apiURLWhiskey="API_URL_Whiskey"></whiskey-rating-list>
+  <whiskey-rating-list :eventId="eventID"></whiskey-rating-list>
 </template>
 
 <script>
@@ -10,10 +10,12 @@ export default {
     WhiskeyRatingList
   },
   name: "ratingResults",
+  prop: {
+    eventId: Number
+  },
   data() {
     return {
-      API_URL:
-        "http://localhost:8080/AuthenticationApplication/api/event/{eventId}/whiskeyRating"
+      eventID: this.eventId
     };
   }
 };
