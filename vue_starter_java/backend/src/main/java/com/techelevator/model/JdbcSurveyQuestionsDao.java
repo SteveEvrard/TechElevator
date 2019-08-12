@@ -24,7 +24,7 @@ public class JdbcSurveyQuestionsDao implements SurveyQuestionsDao {
 	public List<SurveyQuestions> getAllQuestions() {
 		List<SurveyQuestions> allQuestions = new ArrayList<SurveyQuestions>();
 		
-		String sql = "SELECT question_id, question, question_type "
+		String sql = "SELECT question_id, question, question_type, event_id "
 				+ "FROM SurveyQuestions";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
 		while(results.next()) {
@@ -38,21 +38,34 @@ public class JdbcSurveyQuestionsDao implements SurveyQuestionsDao {
 	public List<SurveyQuestions> getQuestionsByEvent(Integer id) {
 	List<SurveyQuestions> eventQuestions = new ArrayList<>();
 	
-	String sql = "SELECT question_id, question, question_type "
-			+ "FROM SurveyQuestions WHERE event_id equals ?";
+	String sql = "SELECT question_id, question, question_type, event_id "
+			+ "FROM SurveyQuestions WHERE event_id = ?";
 	SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
 	while(results.next()) {
 		eventQuestions.add(mapRowToSurveyQuestions(results));
 	}
 		return eventQuestions;
 	}
+	
+	
 	private SurveyQuestions mapRowToSurveyQuestions(SqlRowSet results) {
 		SurveyQuestions surveyQuestions =new SurveyQuestions();
-		surveyQuestions.setQuestionId(results.getInt("question_Id"));
+		surveyQuestions.setQuestionId(results.getInt("question_id"));
 		surveyQuestions.setQuestion(results.getString("question"));
 		surveyQuestions.setQuestionType(results.getString("question_type"));
+		surveyQuestions.setEventId(results.getInt("event_id"));
 		
 		return surveyQuestions;
+	}
+
+	@Override
+	public void saveQuestions(SurveyQuestions surveyQuestions) {
+		String sql = "INSERT INTO SurveyQuestions(question, event_id, question_type, question_id) "+
+					"VALUES (?, ?, ?, ?)";
+		
+		jdbcTemplate.update(sql, surveyQuestions.getQuestion(), surveyQuestions.getEventId(), surveyQuestions.getQuestionType(), 
+				surveyQuestions.getQuestionId());
+		
 	}
 
 }

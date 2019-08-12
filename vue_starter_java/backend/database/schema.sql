@@ -75,6 +75,7 @@ DROP TABLE IF EXISTS surveyQuestions;
 CREATE TABLE surveyQuestions
 (
 question_id SERIAL PRIMARY KEY,
+event_id SERIAL REFERENCES event(event_id),
 question VARCHAR (255),
 question_type VARCHAR (255)
 );
