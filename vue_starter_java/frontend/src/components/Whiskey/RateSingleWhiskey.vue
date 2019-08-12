@@ -2,16 +2,23 @@
   <form-format>
     <tile-format>
       <h2 v-if="!event.isBlindTasting">{{whiskey.brand}}</h2>
-      <h2 v-if="event.isBlindTasting">{{whiskey.whiskeyId}}</h2>
 
       <h4>
         Rate the
         <h4 class="emphasis-word">taste</h4>of the whiskey:
       </h4>
-      <rating-buttons-1-thru-5
-        v-bind:variableData="whiskeyRating.tasteRating"
-        v-on:israted="whiskeyRating.tasteRating=rating"
-      ></rating-buttons-1-thru-5>
+      <VueSlideBar
+        class="slider"
+        v-model="slider.value"
+        :processStyle="slider.processStyle"
+        :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
+        :min="1"
+        :max="5"
+        :lineHeight="20"
+        :tooltipStyles="{ backgroundColor: '#2E4D58', borderColor: '#2E4D58' }"
+        :draggable="true"
+      >></VueSlideBar>
+      <rating-buttons-1-thru-5 v-bind:variableData="whiskeyRating.tasteRating"></rating-buttons-1-thru-5>
 
       <h4>
         Rate the
@@ -70,15 +77,13 @@
 <script>
 import TileFormat from "@/components/Formatting/TileFormat.vue";
 import FormFormat from "@/components/Formatting/FormFormat.vue";
-import RatingButtons1Thru5 from "@/components/Formatting/RatingButtons1Thru5.vue";
-import SelectBox from "@/components/Formatting/SelectBox.vue";
+import VueSlideBar from "vue-slide-bar";
 
 export default {
   components: {
     TileFormat,
     FormFormat,
-    RatingButtons1Thru5,
-    SelectBox
+    VueSlideBar
   },
   name: "RateSingleWhiskey",
   prop: {
@@ -115,6 +120,13 @@ export default {
         finishRating: 0,
         priceRating: 0,
         overallRating: 0
+      },
+      slider: {
+        value: 3,
+        draggable: true,
+        processStyle: {
+          backgroundColor: "#2E4D58"
+        }
       }
     };
   },

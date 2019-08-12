@@ -11,7 +11,8 @@ import EventList from "../components/Events/EventList.vue";
 
 export default {
   components: {
-    EventList
+    EventList,
+    VueSlideBar
   },
   name: "home",
   data() {
@@ -38,5 +39,12 @@ export default {
   border-radius: 10px;
   margin: 5%;
   box-shadow: -2px 10px 18px -4px rgba(0, 0, 0, 0.75);
+}
+.slider {
+  height: 20px;
+  width: 300px;
+  padding: 5%;
+  margin: 5%;
+  color: white;
 }
 </style>
