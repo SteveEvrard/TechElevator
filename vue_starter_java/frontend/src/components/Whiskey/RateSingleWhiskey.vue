@@ -55,13 +55,13 @@
       </h4>
       <rating-buttons-1-thru-5
         v-bind:variableData="whiskeyRating.priceRating"
-        v-on:israted="whiskeyRating.priceRating=rating, saveWhiskeyRating()"
+        v-on:israted="whiskeyRating.priceRating=rating"
       ></rating-buttons-1-thru-5>
 
       <h4 class="emphasis-word">What did you think of the whiskey overall?</h4>
       <rating-buttons-1-thru-5
         v-bind:variableData="whiskeyRating.overallRating"
-        v-on:israted="whiskeyRating.overallRating=rating"
+        v-on:israted="whiskeyRating.overallRating=rating, saveWhiskeyRating(), isFinished()"
       ></rating-buttons-1-thru-5>
     </tile-format>
   </form-format>
@@ -108,13 +108,13 @@ export default {
         whiskeyId: Number,
         userId: Number,
         eventId: Number,
-        tasteRating: Number,
-        smellRating: Number,
-        colorRating: Number,
-        bodyRating: Number,
-        finishRating: Number,
-        priceRating: Number,
-        overallRating: Number
+        tasteRating: 0,
+        smellRating: 0,
+        colorRating: 0,
+        bodyRating: 0,
+        finishRating: 0,
+        priceRating: 0,
+        overallRating: 0
       }
     };
   },
@@ -142,6 +142,9 @@ export default {
   rateTaste(value) {},
   updateWhiskeyRating(event) {
     this.whiskeyRating.eventId = this.event.eventId;
+  },
+  isFinished() {
+    this.$emit("finished");
   }
 };
 </script>

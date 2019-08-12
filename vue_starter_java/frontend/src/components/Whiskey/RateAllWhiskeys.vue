@@ -2,7 +2,7 @@
   <div>
     <h1>Rate the Whiskey!</h1>
     <div v-for="whiskey in whiskeyList" v-bind:key="whiskey">
-      <rate-single-whiskey v-bind:whiskey="whiskey"></rate-single-whiskey>
+      <rate-single-whiskey v-on:finished="isVisible=false" v-bind:whiskey="whiskey"></rate-single-whiskey>
     </div>
 
     <h4>

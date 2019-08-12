@@ -4,29 +4,9 @@
       <h2>{{event.title}}</h2>
       <!-- <img src="{{event.imgUrl}}"> -->
 
-<<<<<<< HEAD
-    <ul>
-      <li>
-        <h1>{{isHOME}}{{isHomePage}}</h1>
-        <h4>Date:</h4>
-        <p> {{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}}</p>
-      </li>
-
-      <li>
-        <h4>Time:</h4>
-        <p> {{event.time}}</p>
-      </li>
-      <li>
-        <h4>Location:</h4>
-        <p> {{event.location}}</p>
-      </li>
-      <li v-if(isHomePage.equals(false))>
-        <p>{{event.eventDescription}}</p>
-      </li>
-    </ul>
-=======
       <ul>
         <li>
+          <h1></h1>
           <h4>Date:</h4>
           <p>{{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}}</p>
         </li>
@@ -39,12 +19,11 @@
           <h4>Location:</h4>
           <p>{{event.location}}</p>
         </li>
-        <li v-if="!isHomePage">
+        <li v-if(isHomePage.equals(false))>
           <p>{{event.eventDescription}}</p>
         </li>
       </ul>
     </div>
->>>>>>> 31d5924ddf16805514055554455a0cb7a6c7605e
   </tile-format>
 </template>
 
