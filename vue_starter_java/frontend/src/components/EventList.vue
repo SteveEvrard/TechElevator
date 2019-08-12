@@ -1,7 +1,7 @@
 <template>
   <div class="event-list">
-    <div v-for="event in publicEvents" v-bind:key="event">
-      <single-event v-bind:event="event"></single-event>
+    <div v-for="event in publicEvents" :key="event">
+      <single-event :isLoggedIn="loggedIn" :isHOME="isHome" :event="event"></single-event>
     </div>
   </div>
 </template>
@@ -17,13 +17,17 @@ export default {
   },
   name: "EventList",
   props: {
-    apiURL: String
+    apiURL: String,
+    isLoggedIn: Boolean,
+    isHOME: Boolean
   },
   data() {
     return {
       events: [],
       publicEvents: [],
-      attendedEvents: []
+      attendedEvents: [],
+      loggedIn: Boolean(this.isLoggedIn),
+      isHome: Boolean(this.isHOME)
     };
   },
   created() {
@@ -57,6 +61,7 @@ export default {
   justify-content: space-around;
   align-content: flex-start;
   margin: 15px 0px 15px 0px;
+  flex-wrap: wrap;
 }
 li {
   list-style: none;

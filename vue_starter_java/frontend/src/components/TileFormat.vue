@@ -11,7 +11,7 @@ export default {
 </script>
 
 
-<style>
+<style scoped>
 .tile {
   border-radius: 5px;
   border: 1px solid #f1f1f1;

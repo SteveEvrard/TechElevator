@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <div class="main-logo">
       <img src="@/assets/img/TKWS_Black Logo.png">
@@ -25,11 +26,15 @@ body {
   display: flex;
   align-content: center;
   justify-content: center;
+  background: transparent;
 }
 
 .main-logo img {
   max-width: 600px;
+  min-width: 40px;
+  min-height: 40px;
   padding: 5%;
+  object-fit: contain;
 }
 .nav {
   background-color: #75787b;
