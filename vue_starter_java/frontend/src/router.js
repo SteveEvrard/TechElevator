@@ -12,12 +12,6 @@ import EventPage from './views/EventPage.vue'
 
 Vue.use(Router)
 
-function routeEventPage(route) {
-  return {
-    name: (parseLong(route.params.eventId))
-  }
-}
-
 /**
  * The Vue Router is used to "direct" the browser to render a specific view component
  * inside of App.vue depending on the URL.
@@ -81,10 +75,8 @@ const router = new Router({
     },
     {
       path: "/eventPage/:eventId",
-      // path: "/eventPage",
       name: "eventPage",
       component: EventPage,
-      props: routeEventPage,
       meta: {
         requiresAuth: false
       }
