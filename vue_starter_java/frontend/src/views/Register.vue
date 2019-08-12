@@ -1,16 +1,17 @@
 <template>
+<form-format>
   <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
       <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         There were problems registering this user.
       </div>
-      <label for="username" class="sr-only">Username</label>
+      <label for="username" class="sr-only">Email</label>
       <input
         type="text"
         id="username"
         class="form-control"
-        placeholder="Username"
+        placeholder="Email"
         v-model="user.username"
         required
         autofocus
@@ -42,10 +43,16 @@
       </button>
     </form>
   </div>
+  </form-format>
 </template>
 
 <script>
+import FormFormat from "../components/Formatting/FormFormat.vue";
+
 export default {
+  components: {
+    FormFormat
+  },
   name: 'register',
   data() {
     return {
