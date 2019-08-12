@@ -36,6 +36,11 @@ public class EventController {
 			return eventDao.getEventsAttendedByUser(id);
 		}
 		
+		@GetMapping(path="/api/event/{id}")
+		public Event getEventDetail(@PathVariable long id) {
+			return eventDao.getEventDetailsByEventId(id);
+		}
+		
 		@PostMapping(path="/api/events")
 		public ResponseEntity<Event> createEvent(@RequestBody Event newEvent) {
 			eventDao.saveEvent(newEvent);
