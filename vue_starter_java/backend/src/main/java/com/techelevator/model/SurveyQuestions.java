@@ -4,8 +4,15 @@ public class SurveyQuestions {
 	private Integer questionId;
 	private String question;
 	private String questionType;
+	private Integer eventId;
 	
 	
+	public Integer getEventId() {
+		return eventId;
+	}
+	public void setEventId(Integer eventId) {
+		this.eventId = eventId;
+	}
 	public Integer getQuestionId() {
 		return questionId;
 	}
