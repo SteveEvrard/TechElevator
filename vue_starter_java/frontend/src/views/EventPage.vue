@@ -2,8 +2,8 @@
   <div class="event">
     <single-event v-bind:event="event"></single-event>
     <!-- <check-in v-if(!hasCheckedIn) @checked="saveUserAndEvent"></check-in> -->
-    <select-box v-on:click="passEventToRate(event.eventId)">Rate Event</select-box>
-    <select-box v-on:click="passEventToDisplay(event.eventId)">Display Ratings</select-box>
+    <div class="select-box" v-on:click="passEventToRate(event.eventId)">Rate Event</div>
+    <div class="select-box" v-on:click="passEventToDisplay(event.eventId)">Display Ratings</div>
   </div>
 </template>
 
@@ -53,10 +53,12 @@ export default {
     },
     passEventToRate(eventId) {
       this.$router.push({ name: "eventResponse", params: { eventId } });
+    },
+    passEventToDisplay(eventId) {
+      this.$router.push({ name: "ratingResults", params: { eventId } });
     }
   }
 };
 </script>
 
-<style>
-</style>
+
