@@ -31,6 +31,8 @@ public class WhiskeyController {
 			return whiskeyDao.getAllBrandAndPriceWhiskey();
 		}
 		
+		
+		
 //		@PostMapping(path="/api/whiskeys")
 //		public ResponseEntity<Event> createEvent(@RequestBody List<Whiskey> whiskeyBrands) {
 //			for(Whiskey placeholder : whiskeyBrands) {

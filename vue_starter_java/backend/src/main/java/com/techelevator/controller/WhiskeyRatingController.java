@@ -41,15 +41,15 @@ public class WhiskeyRatingController {
 //		return whiskeyRatingDao.getRatingsByEvent(eventId);
 //	}
 	
-//	@PostMapping(path="/api/users/{userId}{eventId}{whiskeyId}/whiskeyRating")
-//	public ResponseEntity<WhiskeyRating> rateWhiskey(@RequestBody WhiskeyRating rating) {
-//
-//		whiskeyRatingDao.submitRating(rating);
-//
-//		UriComponents uriComponent = ServletUriComponentsBuilder.fromCurrentRequestUri()
-//		.path("/" + rating.getUserId() + rating.getEventId() + rating.getWhiskeyId()).build();
-//		
-//		return ResponseEntity.created(uriComponent.toUri()).body(rating);
-//	}
+	@PostMapping(path="/api/users/{userId}/{eventId}/{whiskeyId}/whiskeyRating")
+	public ResponseEntity<WhiskeyRating> rateWhiskey(@RequestBody WhiskeyRating rating) {
+
+		whiskeyRatingDao.submitRating(rating);
+
+		UriComponents uriComponent = ServletUriComponentsBuilder.fromCurrentRequestUri()
+		.path("/" + rating.getUserId() + rating.getEventId() + rating.getWhiskeyId()).build();
+		
+		return ResponseEntity.created(uriComponent.toUri()).body(rating);
+	}
 
 }

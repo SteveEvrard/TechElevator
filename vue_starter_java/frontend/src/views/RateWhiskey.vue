@@ -1,15 +1,19 @@
 <template>
   <div class="event">
-    <rate-all-whiskeys v-bind:eventData="event"></rate-all-whiskeys>
+    <div v-for="item in tastingWhiskeys" v-bind:key="item">
+      <h1 v-if="!event.isBlindTasting">{{item.brand}}</h1>
+      <h1 v-if="event.isBlindTasting">Whiskey #{{getWhiskeyCount()}}</h1>
+      <rate-single-whiskey v-bind:rswEvent="event" v-bind:whiskey="item"></rate-single-whiskey>
+    </div>
   </div>
 </template>
 
 <script>
-import RateAllWhiskeys from "@/components/Whiskey/RateAllWhiskeys.vue";
+import RateSingleWhiskey from "@/components/Whiskey/RateSingleWhiskey.vue";
 
 export default {
   components: {
-    RateAllWhiskeys
+    RateSingleWhiskey
   },
   data() {
     return {
@@ -26,11 +30,22 @@ export default {
         // tastingWhiskeys: Array,
         isPrivate: Boolean,
         isBlindTasting: Boolean
-      }
+      },
+      whiskeyCount: 0,
+      eventId: null,
+      jamison: {
+        brand: "Jamison 18 Year Select",
+        price: 40
+      },
+      writer: {
+        brand: "Writer's Tears",
+        price: 45
+      },
+      tastingWhiskeys: [this.jamison, this.writer]
     };
   },
   created() {
-    this.event.eventId = this.$route.params.eventId;
+    this.eventId = this.$route.params.eventId;
     this.getEventDetails();
   },
   methods: {
@@ -45,6 +60,10 @@ export default {
         })
 
         .catch(err => console.error(err));
+    },
+    getWhiskeyCount() {
+      this.whiskeyCount += 1;
+      return this.whiskeyCount;
     }
   }
 };

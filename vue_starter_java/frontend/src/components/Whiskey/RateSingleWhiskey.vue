@@ -2,7 +2,6 @@
   <form-format>
     <tile-format>
       <div class="rating-questions-and-sliders">
-        <!-- <h2 v-if="!rswEventData.isBlindTasting">{{whiskey.brand}}</h2> -->
         <h4>
           Rate the
           <h4 class="emphasis-word">taste</h4>of the whiskey:
@@ -34,7 +33,6 @@
           :tooltipStyles="{ backgroundColor: '#2E4D58', borderColor: '#2E4D58' }"
           :draggable="true"
         ></VueSlideBar>
-        <rating-buttons-1-thru-5></rating-buttons-1-thru-5>
 
         <h4>
           Rate the
@@ -51,7 +49,6 @@
           :tooltipStyles="{ backgroundColor: '#2E4D58', borderColor: '#2E4D58' }"
           :draggable="true"
         ></VueSlideBar>
-        <rating-buttons-1-thru-5></rating-buttons-1-thru-5>
 
         <h4>
           Rate the
@@ -68,7 +65,6 @@
           :tooltipStyles="{ backgroundColor: '#2E4D58', borderColor: '#2E4D58' }"
           :draggable="true"
         ></VueSlideBar>
-        <rating-buttons-1-thru-5></rating-buttons-1-thru-5>
 
         <h4>
           Rate the
@@ -113,8 +109,8 @@
           :lineHeight="20"
           :tooltipStyles="{ backgroundColor: '#2E4D58', borderColor: '#2E4D58' }"
           :draggable="true"
-          v-on:israted="saveWhiskeyRating()"
         ></VueSlideBar>
+        <button type="submit" v-on:click.prevent="saveWhiskeyRating">{{submitMessage()}}</button>
       </div>
     </tile-format>
   </form-format>
@@ -132,10 +128,8 @@ export default {
     VueSlideBar
   },
   name: "RateSingleWhiskey",
-  prop: {
-    rswEventData: {
-      title: String,
-      // eventImageURL: "",
+  props: {
+    rswEvent: {
       eventId: Number,
       title: String,
       imgUrl: String,
@@ -146,33 +140,33 @@ export default {
       // tastingWhiskeys: Array,
       isPrivate: Boolean,
       isBlindTasting: Boolean
-    },
-    rswEventId: Number
+    }
   },
   data() {
     return {
       event: {
         isBlindTasting: false
       },
+      isSubmitted: false,
       whiskey: {
         brand: String,
         whiskeyId: Number
       },
+      whiskeyRating: {
+        whiskeyId: 9,
+        userId: 1,
+        eventId: Number,
+        tasteRating: Number,
+        smellRating: Number,
+        colorRating: Number,
+        bodyRating: Number,
+        finishRating: Number,
+        priceRating: Number,
+        overallRating: Number
+      },
       whiskeyRatingAPI:
         "http://localhost:8080/AuthenticationApplication/api/users/",
       API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys",
-      whiskeyRating: {
-        whiskeyId: Number,
-        userId: Number,
-        eventId: Number,
-        tasteRating: "",
-        smellRating: "",
-        colorRating: "",
-        bodyRating: "",
-        finishRating: "",
-        priceRating: "",
-        overallRating: ""
-      },
       slider: {
         tasteValue: 3,
         smellValue: 3,
@@ -190,24 +184,43 @@ export default {
   },
   methods: {
     saveWhiskeyRating() {
-      fetch(this.whiskeyRatingAPI + 1 + childEventId + 9 + "/whiskeyRating", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(this.eventData)
-      })
-        .then(response => {
-          if (response.ok) {
-            this.$emit("israted");
-          }
-        })
-        .catch(err => console.error(err));
+      this.isSubmitted = true;
+      this.assignData();
+      fetch(
+        this.whiskeyRatingAPI +
+          1 +
+          "/" +
+          this.eventId +
+          "/" +
+          9 +
+          "/whiskeyRating",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(this.whiskeyRating)
+        }
+      ).catch(err => console.error(err));
+    },
+    assignData() {
+      this.whiskeyRating.tasteRating = this.slider.tasteValue;
+      this.whiskeyRating.smellRating = this.slider.smellValue;
+      this.whiskeyRating.colorRating = this.slider.colorValue;
+      this.whiskeyRating.bodyRating = this.slider.bodyValue;
+      this.whiskeyRating.finishRating = this.slider.finishValue;
+      this.whiskeyRating.priceRating = this.slider.priceValue;
+      this.whiskeyRating.overallRating = this.slider.overallValue;
+      this.whiskeyRating.eventId = this.rswEvent.eventId;
+    },
+    submitMessage() {
+      if (this.isSubmitted) {
+        return "SUBMITTED";
+      } else {
+        return "SUBMIT  REVIEW";
+      }
     }
   }
-  // isFinished() {
-  //   this.$emit("finished");
-  // }
 };
 </script>
 

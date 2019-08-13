@@ -27,14 +27,16 @@ export default {
         imgUrl: String,
         date: new Date(),
         time: String,
-        location: String,
-        info: String,
-        tastingWhiskeys: Array
-      }
+        eventDescription: String,
+        isPrivate: Boolean,
+        isBlindTasting: Boolean
+        // tastingWhiskeys: Array
+      },
+      eventId: null
     };
   },
   created() {
-    this.event.eventId = this.$route.params.eventId;
+    this.eventId = this.$route.params.eventId;
     this.getEventDetails();
   },
   methods: {
@@ -51,7 +53,7 @@ export default {
         .catch(err => console.error(err));
     },
     passEventToRate(eventId) {
-      this.$router.push({ name: "eventResponse", params: { eventId } });
+      this.$router.push({ name: "rateWhiskey", params: { eventId } });
     },
     passEventToDisplay(eventId) {
       this.$router.push({ name: "ratingResults", params: { eventId } });
