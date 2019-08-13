@@ -10,13 +10,14 @@ export default {
     WhiskeyRatingList
   },
   name: "ratingResults",
-  prop: {
-    eventId: Number
-  },
+
   data() {
     return {
-      eventID: this.eventId
+      eventID: Number
     };
+  },
+  created() {
+    this.eventID = this.$route.params.eventId;
   }
 };
 </script>
