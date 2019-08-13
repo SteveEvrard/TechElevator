@@ -2,64 +2,63 @@
   <div class="single-rating">
     <h1>Whiskey Rating Results</h1>
     <div class="rating-averages">
-      <h2 v-if="!event.isBlindTasting">{{whiskey.brand}}</h2>
-      <tile-format>
+      <tile-format class="individual-rating">
         <h3>Taste</h3>
         <div class="star">
-          <div class="rating" :style="tasteRatingWidth">
+          <div class="rating" :style="percents.tasteRatingWidth">
             <span>&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</span>
           </div>
         </div>
       </tile-format>
-      <tile-format>
+      <tile-format class="individual-rating">
         <h3>Smell</h3>
         <div class="star">
-          <div class="rating" :style="smellRatingWidth">
+          <div class="rating" :style="percents.smellRatingWidth">
             <span>&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</span>
           </div>
         </div>
       </tile-format>
-      <tile-format>
+      <tile-format class="individual-rating">
         <h3>Color</h3>
         <div class="star">
-          <div class="rating" :style="colorRatingWidth">
+          <div class="rating" :style="percents.colorRatingWidth">
             <span>&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</span>
           </div>
         </div>
       </tile-format>
-      <tile-format>
+      <tile-format class="individual-rating">
         <h3>Body</h3>
         <div class="star">
-          <div class="rating" :style="bodyRatingWidth">
+          <div class="rating" :style="percents.bodyRatingWidth">
             <span>&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</span>
           </div>
         </div>
       </tile-format>
-      <tile-format>
+      <tile-format class="individual-rating">
         <h3>Finish</h3>
         <div class="star">
-          <div class="rating" :style="finishRatingWidth">
+          <div class="rating" :style="percents.finishRatingWidth">
             <span>&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</span>
           </div>
         </div>
       </tile-format>
-      <tile-format>
+      <tile-format class="individual-rating">
         <h3>Price</h3>
         <div class="star">
-          <div class="rating" :style="priceRatingWidth">
+          <div class="rating" :style="percents.priceRatingWidth">
             <span>&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</span>
           </div>
         </div>
       </tile-format>
-      <tile-format>
+      <tile-format class="individual-rating">
         <h3>Overall Rating</h3>
         <div class="star">
-          <div class="rating" :style="overallRatingWidth">
+          <div class="rating" :style="percents.overallRatingWidth">
             <span>&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</span>
           </div>
         </div>
       </tile-format>
-      <button v-if="event.isBlindTasting">What whiskey was it?</button>
+      <!-- <button v-if="event.isBlindTasting">What whiskey was it?</button> -->
     </div>
   </div>
 </template>
@@ -74,17 +73,14 @@ export default {
   name: "SingleWhiskeyRating",
   props: {
     whiskeyRatingList: Array,
-    whiskeyRating: {
-      whiskeyId: Number,
-      userId: Number,
-      eventId: Number,
-      tasteRating: Number,
-      smellRating: Number,
-      colorRating: Number,
-      bodyRating: Number,
-      finishRating: Number,
-      priceRating: Number,
-      overallRating: Number
+    percents: {
+      tasteRatingWidth: Number,
+      smellRatingWidth: Number,
+      colorRatingWidth: Number,
+      bodyRatingWidth: Number,
+      finishRatingWidth: Number,
+      priceRatingWidth: Number,
+      overallRatingWidth: Number
     }
   },
   data() {
@@ -94,35 +90,17 @@ export default {
       },
       whiskey: {
         brand: "Jamison's Rye Whiskey"
-      },
-      tasteRatingWidth: "",
-      smellRatingWidth: "",
-      colorRatingWidth: "",
-      bodyRatingWidth: "",
-      finishRatingWidth: "",
-      priceRatingWidth: "",
-      overallRatingWidth: ""
+      }
     };
-  },
-  created() {
-    this.getRatingWidths();
-    console.log(this.tasteRatingWidth);
-  },
-  methods: {
-    getRatingWidths() {
-      this.tasteRatingWidth = "width: " + this.tasteRatingPercentage + "%";
-      this.smellRatingWidth = "width: " + this.smellRatingPercentage + "%";
-      this.colorRatingWidth = "width: " + this.colorRatingPercentage + "%";
-      this.bodyRatingWidth = "width: " + this.bodyRatingPercentage + "%";
-      this.finishRatingWidth = "width: " + this.finishRatingPercentage + "%";
-      this.priceRatingWidth = "width: " + this.priceRatingPercentage + "%";
-      this.overallRatingWidth = "width: " + this.overallRatingPercentage + "%";
-    }
   }
 };
 </script>
 
 <style scoped>
+h3 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
 .star {
   width: 150px;
   position: relative;
@@ -135,7 +113,7 @@ export default {
 }
 
 .rating span {
-  font-size: 40px;
+  font-size: 60px;
   white-space: nowrap;
   overflow: hidden;
   color: #787121;
@@ -146,5 +124,15 @@ export default {
   position: absolute;
   color: #f1f1f1;
   z-index: -1;
+}
+.individual-rating {
+  padding: 20px 0px 30px 40px;
+}
+.rating-averages {
+  min-width: 200px;
+  max-width: 1200px;
+  display: block;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 </style>
