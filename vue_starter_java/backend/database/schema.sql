@@ -109,6 +109,6 @@ Insert Into whiskey (brand, price) Values ('Jamisons 18 Year Limited reserve', 2
 Insert Into whiskey (brand, price) Values ('Colonel Taylor Small Batch KY Bourbon', 40);
 
 insert into users (id, username, password, salt, role) values (2, 'test', 'test', 'test', 'user');
-insert into users (id, username, password, salt, role) values (3, 'testAdmin', 'test', 'test', 'admin');
+insert into users (id, username, password, salt, role) values (3, 'Admin', 'KWS2019$', 'test', 'admin');
 
 COMMIT;
