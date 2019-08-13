@@ -1,9 +1,20 @@
 <template>
   <div class="event">
-    <single-event v-bind:event="event"></single-event>
-    <!-- <check-in v-if(!hasCheckedIn) @checked="saveUserAndEvent"></check-in> -->
-    <div class="select-box" v-on:click="passEventToRate(event.eventId)">Rate Event</div>
-    <div class="select-box" v-on:click="passEventToDisplay(event.eventId)">Display Ratings</div>
+    <div class="flex-box">
+      <single-event id="this-event" v-bind:event="event"></single-event>
+      <check-in v-if="!hasCheckedIn" @checked="saveUserAndEvent"></check-in>
+    </div>
+    <div
+      v-if="hasCheckedIn"
+      id="to-next-page"
+      class="select-box"
+      v-on:click="passEventToRate(event.eventId)"
+    >Rate Event</div>
+    <div
+      class="select-box"
+      id="to-next-page"
+      v-on:click="passEventToDisplay(event.eventId)"
+    >View Ratings</div>
   </div>
 </template>
 
@@ -52,6 +63,21 @@ export default {
 
         .catch(err => console.error(err));
     },
+    saveUserAndEvent() {
+      fetch(this.apiURLEvent, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.eventData)
+      })
+        .then(response => {
+          if (response.ok) {
+            hasCheckedIn = true;
+          }
+        })
+        .catch(err => console.error(err));
+    },
     passEventToRate(eventId) {
       this.$router.push({ name: "rateWhiskey", params: { eventId } });
     },
@@ -61,5 +87,19 @@ export default {
   }
 };
 </script>
+
+<style>
+.flex-box {
+  display: flex;
+  justify-content: flex-start;
+}
+#this-event {
+  width: 50%;
+  height: 50%;
+}
+#to-next-page {
+  display: block;
+}
+</style>
 
 
