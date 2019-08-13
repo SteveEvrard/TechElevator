@@ -9,5 +9,5 @@ public interface EventDao {
 	List<Event> getEventsAttendedByUser(Long id);
 	Event getEventDetailsByEventId(Long id);
 	Event getEventIdByTitleDateLocationTime(Event event);
-	
+	void checkInUserToEvent(Long id, Long eventId);
 }

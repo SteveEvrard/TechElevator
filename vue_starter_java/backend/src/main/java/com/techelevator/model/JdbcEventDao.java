@@ -82,6 +82,12 @@ public class JdbcEventDao implements EventDao {
 	
 	}
 	
+	public void checkInUserToEvent(Long id, Long eventId) {
+		String sql = "INSERT INTO userstoevent(id, event_id) VALUES (?, ?);";
+		
+		jdbcTemplate.update(sql, id, eventId);
+	}
+	
 	private Event mapRowToEvent(SqlRowSet results) {
 		Event event = new Event();
 		
