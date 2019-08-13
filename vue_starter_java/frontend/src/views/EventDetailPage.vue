@@ -21,17 +21,18 @@ export default {
     return {
       hasCheckedIn: false,
       API_URL: "http://localhost:8080/AuthenticationApplication/api/event/",
-      eventId: null,
       event: {
         eventId: Number,
         title: String,
         imgUrl: String,
         date: new Date(),
         time: String,
-        location: String,
-        info: String,
-        tastingWhiskeys: Array
-      }
+        eventDescription: String,
+        isPrivate: Boolean,
+        isBlindTasting: Boolean
+        // tastingWhiskeys: Array
+      },
+      eventId: null
     };
   },
   created() {
@@ -52,7 +53,7 @@ export default {
         .catch(err => console.error(err));
     },
     passEventToRate(eventId) {
-      this.$router.push({ name: "eventResponse", params: { eventId } });
+      this.$router.push({ name: "rateWhiskey", params: { eventId } });
     },
     passEventToDisplay(eventId) {
       this.$router.push({ name: "ratingResults", params: { eventId } });
