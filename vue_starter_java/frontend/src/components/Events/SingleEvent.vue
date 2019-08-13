@@ -6,7 +6,6 @@
 
       <ul>
         <li>
-          <h1></h1>
           <h4>Date:</h4>
           <p>{{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}}</p>
         </li>
@@ -40,11 +39,11 @@ export default {
     event: {
       eventId: Number,
       title: String,
-      imgUrl: String,
+      // imgUrl: String,
       date: new Date(),
       time: String,
       location: String,
-      info: String,
+      eventDescription: String,
       isPrivate: Boolean,
       isBlindTasting: Boolean
     }
@@ -58,7 +57,7 @@ export default {
   methods: {
     showdetail(event) {
       let eventId = this.event.eventId;
-      this.$router.push({ name: "eventPage", params: { eventId } });
+      this.$router.push({ name: "eventDetailPage", params: { eventId } });
     }
   }
 };

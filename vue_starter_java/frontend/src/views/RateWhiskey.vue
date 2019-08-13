@@ -1,27 +1,24 @@
 <template>
   <div class="event">
-    <single-event v-bind:event="event"></single-event>
-    <!-- <check-in v-if(!hasCheckedIn) @checked="saveUserAndEvent"></check-in> -->
-    <div class="select-box" v-on:click="passEventToRate(event.eventId)">Rate Event</div>
-    <div class="select-box" v-on:click="passEventToDisplay(event.eventId)">Display Ratings</div>
+    <div v-for="item in tastingWhiskeys" v-bind:key="item">
+      <h1 v-if="!event.isBlindTasting">{{item.brand}}</h1>
+      <h1 v-if="event.isBlindTasting">Whiskey #{{getWhiskeyCount()}}</h1>
+      <rate-single-whiskey v-bind:rswEvent="event" v-bind:whiskey="item"></rate-single-whiskey>
+    </div>
   </div>
 </template>
 
 <script>
-import SingleEvent from "@/components/Events/SingleEvent.vue";
-import CheckIn from "../components/CheckIn.vue";
-import SelectBox from "@/components/Formatting/SelectBox.vue";
+import RateSingleWhiskey from "@/components/Whiskey/RateSingleWhiskey.vue";
 
 export default {
   components: {
-    SingleEvent,
-    CheckIn
+    RateSingleWhiskey
   },
   data() {
     return {
       hasCheckedIn: false,
       API_URL: "http://localhost:8080/AuthenticationApplication/api/event/",
-      eventId: null,
       event: {
         eventId: Number,
         title: String,
@@ -30,8 +27,21 @@ export default {
         time: String,
         location: String,
         info: String,
-        tastingWhiskeys: Array
-      }
+        // tastingWhiskeys: Array,
+        isPrivate: Boolean,
+        isBlindTasting: Boolean
+      },
+      whiskeyCount: 0,
+      eventId: null,
+      jamison: {
+        brand: "Jamison 18 Year Select",
+        price: 40
+      },
+      writer: {
+        brand: "Writer's Tears",
+        price: 45
+      },
+      tastingWhiskeys: [this.jamison, this.writer]
     };
   },
   created() {
@@ -51,11 +61,9 @@ export default {
 
         .catch(err => console.error(err));
     },
-    passEventToRate(eventId) {
-      this.$router.push({ name: "eventResponse", params: { eventId } });
-    },
-    passEventToDisplay(eventId) {
-      this.$router.push({ name: "ratingResults", params: { eventId } });
+    getWhiskeyCount() {
+      this.whiskeyCount += 1;
+      return this.whiskeyCount;
     }
   }
 };

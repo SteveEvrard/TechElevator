@@ -35,7 +35,7 @@ public class JDBCWhiskeyRatingDAOIntegrationTest extends DAOIntegrationTesting{
 		jdbcTemplate.update(sql);
 		
 		String sql2 = "insert into whiskeyrating (whiskey_rating_id, whiskey_id, event_id, user_id, taste_rating, nose_rating, color_rating,\n" + 
-				"body_rating, finish_rating, price__rating, overall_rating)\n" + 
+				"body_rating, finish_rating, price__rating, overall_rating) " + 
 				"values (default, 2, 1, 2, 3, 3, 3, 3, 3, 3, 3);";
 		jdbcTemplate.update(sql2);
 		

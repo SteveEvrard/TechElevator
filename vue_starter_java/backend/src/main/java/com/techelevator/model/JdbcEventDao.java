@@ -82,9 +82,17 @@ public class JdbcEventDao implements EventDao {
 	
 	}
 	
+	public void checkInUserToEvent(Long id, Long eventId) {
+		String sql = "INSERT INTO userstoevent(id, event_id) VALUES (?, ?);";
+		
+		jdbcTemplate.update(sql, id, eventId);
+	}
+	
 	private Event mapRowToEvent(SqlRowSet results) {
 		Event event = new Event();
 		
+		event.setEventId(results.getLong("event_id"));
+		event.setTastingWhiskeys(getWhiskeyListByEventId(results.getLong("event_id")));
 		event.setTime(results.getString("event_time"));
 		event.setDate(results.getDate("event_date").toLocalDate());
 		event.setLocation(results.getString("location"));
@@ -95,6 +103,28 @@ public class JdbcEventDao implements EventDao {
 		event.setEventId(results.getLong("event_id"));
 		
 		return event;
+	}
+	
+	private List<Whiskey> getWhiskeyListByEventId(long eventId){
+		List<Whiskey> whiskeys = new ArrayList<>();
+		
+		String sql = "SELECT w.whiskey_id, brand, price " + 
+				"FROM whiskey w " + 
+				"JOIN whiskeytoevent we ON w.whiskey_id = we.whiskey_id " + 
+				"WHERE event_id = ? " + 
+				"GROUP BY event_id, w.whiskey_id;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, eventId);
+		while(results.next()) {
+			Whiskey whiskey = new Whiskey();
+			
+			whiskey.setWhiskeyId(results.getLong("whiskey_id"));
+			whiskey.setBrand(results.getString("brand"));
+			whiskey.setPrice(results.getInt("price"));
+			
+			whiskeys.add(whiskey);
+		}
+		
+		return whiskeys;
 	}
 
 }

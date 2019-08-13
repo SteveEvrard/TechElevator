@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,8 +28,13 @@ public class WhiskeyRatingController {
 	}
 	
 	@GetMapping(path="/api/event/{eventId}/whiskeyRating")
-	public List<WhiskeyRating> getAllRatingsByEvent(long eventId) {
+	public List<WhiskeyRating> getAllRatingsByEvent(@PathVariable long eventId) {
 		return whiskeyRatingDao.getRatingsByEvent(eventId);
+	}
+	
+	@GetMapping(path="/api/event/{eventId}/whiskeyRating/{whiskeyId}")
+	public List<WhiskeyRating> getAllRatingsByEventAndWhiskey(@PathVariable Long eventId, @PathVariable Long whiskeyId) {
+		return whiskeyRatingDao.getRatingsByEventAndWhiskey(eventId, whiskeyId);
 	}
 
 //	@GetMapping(path="/api/users/{userId}/whiskeyRating")
@@ -36,15 +42,15 @@ public class WhiskeyRatingController {
 //		return whiskeyRatingDao.getRatingsByEvent(eventId);
 //	}
 	
-//	@PostMapping(path="/api/users/{userId}{eventId}{whiskeyId}/whiskeyRating")
-//	public ResponseEntity<WhiskeyRating> rateWhiskey(@RequestBody WhiskeyRating rating) {
-//
-//		whiskeyRatingDao.submitRating(rating);
-//
-//		UriComponents uriComponent = ServletUriComponentsBuilder.fromCurrentRequestUri()
-//		.path("/" + rating.getUserId() + rating.getEventId() + rating.getWhiskeyId()).build();
-//		
-//		return ResponseEntity.created(uriComponent.toUri()).body(rating);
-//	}
+	@PostMapping(path="/api/users/{userId}/{eventId}/{whiskeyId}/whiskeyRating")
+	public ResponseEntity<WhiskeyRating> rateWhiskey(@RequestBody WhiskeyRating rating) {
+
+		whiskeyRatingDao.submitRating(rating);
+
+		UriComponents uriComponent = ServletUriComponentsBuilder.fromCurrentRequestUri()
+		.path("/" + rating.getUserId() + rating.getEventId() + rating.getWhiskeyId()).build();
+		
+		return ResponseEntity.created(uriComponent.toUri()).body(rating);
+	}
 
 }

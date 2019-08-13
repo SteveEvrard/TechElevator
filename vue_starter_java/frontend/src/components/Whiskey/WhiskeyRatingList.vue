@@ -1,8 +1,6 @@
 <template>
   <div class="whiskey-list">
-    <div v-for="whiskeyR in whiskeyRatingList" v-bind:key="whiskeyR">
-      <single-whiskey-rating v-bind:whiskey="whiskeyR"></single-whiskey-rating>
-    </div>
+    <single-whiskey-rating v-bind:percents="widths"></single-whiskey-rating>
   </div>
 </template>
 
@@ -21,9 +19,7 @@ export default {
   },
   name: "WhiskeyRatingList",
   props: {
-    eventId: Number,
-    apiURLWhiskey: String,
-    whiskeyRatingList: Array,
+    eventId: null,
     whiskeyRating: {
       whiskeyId: Number,
       userId: Number,
@@ -35,149 +31,150 @@ export default {
       finishRating: Number,
       priceRating: Number,
       overallRating: Number
+    }
+  },
+  event: {
+    title: String,
+    imgUrl: String,
+    date: new Date(),
+    time: String,
+    location: String,
+    eventDescription: "",
+    isBlindTasting: true
+    // eventId: Number
+  },
+  created() {
+    this.listWhiskeyRatings();
+  },
+  data() {
+    return {
+      numOfWhiskeys: "",
+      numOfReviewers: "",
+      whiskeyList: [],
+      whiskeyRatingList: [],
+      whiskeyBrandList: [],
+      whiskeyReviewerList: [],
+      whiskeyApiURL:
+        "http://localhost:8080/AuthenticationApplication/api/event/",
+      whiskeyRatingApiUrl:
+        "http://localhost:8080/AuthenticationApplication/api/event/",
+      tasteRatingPercentage: "",
+      smellRatingPercentage: "",
+      colorRatingPercentage: "",
+      bodyRatingPercentage: "",
+      finishRatingPercentage: "",
+      priceRatingPercentage: "",
+      overallRatingPercentage: "",
+      widths: {
+        tasteRatingWidth: "",
+        smellRatingWidth: "",
+        colorRatingWidth: "",
+        bodyRatingWidth: "",
+        finishRatingWidth: "",
+        priceRatingWidth: "",
+        overallRatingWidth: ""
+      },
+      sumTasteRating: "",
+      sumSmellRating: "",
+      sumColorRating: "",
+      sumBodyRating: "",
+      sumFinishRating: "",
+      sumPriceRating: "",
+      sumOverallRating: "",
+      aveWhiskeyRating: {
+        aveTasteRating: "",
+        aveSmellRating: "",
+        aveColorRating: "",
+        aveBodyRating: "",
+        aveFinishRating: "",
+        avePriceRating: "",
+        aveOverallRating: ""
+      },
+      whiskeyId: 9
+    };
+  },
+  methods: {
+    listWhiskeyRatings() {
+      fetch(
+        this.whiskeyRatingApiUrl +
+          this.eventId +
+          "/whiskeyRating/" +
+          this.whiskeyId
+      )
+        .then(response => {
+          console.log(response);
+          return response.json();
+        })
+        .then(jsonList => {
+          this.whiskeyRatingList = jsonList;
+          this.doAllCalculations();
+        })
+        .catch(err => console.error(err));
     },
-    event: {
-      title: String,
-      imgUrl: String,
-      date: new Date(),
-      time: String,
-      location: String,
-      eventDescription: "",
-      isBlindTasting: true,
-      eventId: Number
+    countReviews() {
+      this.numOfReviewers = this.whiskeyRatingList.length;
     },
-    data() {
-      return {
-        numOfWhiskeys: "",
-        numOfReviewers: "",
-        whiskeyList: [],
-        whiskeyRatingList: [],
-        whiskeyBrandList: [],
-        whiskeyReviewerList: [],
-        whiskeyApiURL:
-          "http://localhost:8080/AuthenticationApplication/api/event/",
-        eventId: null,
-        tasteRatingPercentage: "",
-        smellRatingPercentage: "",
-        colorRatingPercentage: "",
-        bodyRatingPercentage: "",
-        finishRatingPercentage: "",
-        priceRatingPercentage: "",
-        overallRatingPercentage: "",
-        sumTasteRating: "",
-        sumSmellRating: "",
-        sumColorRating: "",
-        sumBodyRating: "",
-        sumFinishRating: "",
-        sumPriceRating: "",
-        sumOverallRating: "",
-        aveWhiskeyRating: {
-          aveTasteRating: "",
-          aveSmellRating: "",
-          aveColorRating: "",
-          aveBodyRating: "",
-          aveFinishRating: "",
-          avePriceRating: "",
-          aveOverallRating: ""
-        }
-      };
+    getAveragesOfAllRatings() {
+      this.aveWhiskeyRating.aveTasteRating =
+        this.sumTasteRating / this.numOfReviewers;
+      this.aveWhiskeyRating.aveSmellRating =
+        this.sumSmellRating / this.numOfReviewers;
+      this.aveWhiskeyRating.aveColorRating =
+        this.sumColorRating / this.numOfReviewers;
+      this.aveWhiskeyRating.aveBodyRating =
+        this.sumBodyRating / this.numOfReviewers;
+      this.aveWhiskeyRating.aveFinishRating =
+        this.sumFinishRating / this.numOfReviewers;
+      this.aveWhiskeyRating.avePriceRating =
+        this.sumPriceRating / this.numOfReviewers;
+      this.aveWhiskeyRating.aveOverallRating =
+        this.sumOverallRating / this.numOfReviewers;
     },
-    created() {
-      this.eventId = this.$route.params.eventId;
-      this.listWhiskeyRatings();
+    getPercentagesOfAllRatings() {
+      this.tasteRatingPercentage =
+        (this.aveWhiskeyRating.aveTasteRating / 5) * 10;
+      this.smellRatingPercentage =
+        (this.aveWhiskeyRating.aveSmellRating / 5) * 10;
+      this.colorRatingPercentage =
+        (this.aveWhiskeyRating.aveColorRating / 5) * 10;
+      this.bodyRatingPercentage =
+        (this.aveWhiskeyRating.aveBodyRating / 5) * 10;
+      this.finishRatingPercentage =
+        (this.aveWhiskeyRating.aveFinishRating / 5) * 10;
+      this.priceRatingPercentage =
+        (this.aveWhiskeyRating.avePriceRating / 5) * 10;
+      this.overallRatingPercentage =
+        (this.aveWhiskeyRating.aveOverallRating / 5) * 10;
     },
-    methods: {
-      listWhiskeyRatings() {
-        fetch(this.apiURLWhiskey + this.eventId + "/whiskeyRating")
-          .then(response => {
-            console.log(response);
-            return response.json();
-          })
-          .then(jsonList => {
-            this.whiskeyRatingList = jsonList;
-            this.doAllCalculations();
-          })
-          .catch(err => console.error(err));
-      },
-      getExistingWhiskeys() {
-        fetch(this.apiURL)
-          .then(response => {
-            return response.json();
-          })
-          .then(jsonWhiskeys => {
-            this.whiskeyList = jsonWhiskeys;
-          })
-          .catch(err => console.error(err));
-      },
-      countWhiskey(whiskeyRating) {
-        if (!whiskeyBrandList.contains(whiskeyRating.whiskeyId)) {
-          this.numOfWhiskeys += 1;
-          whiskeyBrandList.push(whiskeyRating.whiskeyId);
-        }
-      },
-      countReviews(whiskeyRating) {
-        if (!whiskeyReviewerList.contains(whiskeyRating.userId)) {
-          this.numOfReviewers += 1;
-          whiskeyReviewerList.push(whiskeyRating.userId);
-        }
-      },
-      getAveragesOfAllRatings() {
-        this.aveTasteRating = this.sumTasteRating / this.numOfWhiskeys;
-        this.aveSmellRating = this.sumSmellRating / this.numOfWhiskeys;
-        this.aveColorRating = this.sumColorRating / this.numOfWhiskeys;
-        this.aveBodyRating = this.sumBodyRating / this.numOfWhiskeys;
-        this.aveFinishRating = this.sumFinishRating / this.numOfWhiskeys;
-        this.avePriceRating = this.sumPriceRating / this.numOfWhiskeys;
-        this.aveOverallRating = this.sumOverallRating / this.numOfWhiskeys;
-      },
-      getPercentagesOfAllRatings() {
-        this.tasteRatingPercentage = this.aveTasteRating / 5;
-        this.smellRatingPercentage = this.aveSmellRating / 5;
-        this.colorRatingPercentage = this.aveColorRating / 5;
-        this.bodyRatingPercentage = this.aveBodyRating / 5;
-        this.finishRatingPercentage = this.aveFinishRating / 5;
-        this.priceRatingPercentage = this.avePriceRating / 5;
-        this.overallRatingPercentage = this.aveOverallRating / 5;
-      },
-      getCountsForAverages(whiskeyRating) {
-        addTasteRating(whiskeyRating.tasteRating);
-        addSmellRating(whiskeyRating.smellRating);
-        addColorRating(whiskeyRating.colorRating);
-        addBodyRating(whiskeyRating.bodyRating);
-        addFinishRating(whiskeyRating.finishRating);
-        addPriceRating(whiskeyRating.priceRating);
-        addOverallRating(whiskeyRating.overallRating);
-      },
-      doAllCalculations() {
-        this.whiskeyRatingList.forEach(whiskeyRating => {
-          this.countWhiskey(whiskeyRating);
-          this.getCountsForAverages(whiskeyRating);
-          this.getAveragesOfAllRatings();
-          this.getPercentagesOfAllRatings();
-        });
-      },
-
-      addTasteRating(tasteRating) {
-        this.sumTasteRating += tasteRating;
-      },
-      addSmellRating(smellRating) {
-        this.sumSmellRating += smellRating;
-      },
-      addColorRating(colorRating) {
-        this.sumColorRating += colorRating;
-      },
-      addBodyRating(bodyRating) {
-        this.sumBodyRating += bodyRating;
-      },
-      addFinishRating(finishRating) {
-        this.sumFinishRating += finishRating;
-      },
-      addPriceRating(priceRating) {
-        this.sumPriceRating += priceRating;
-      },
-      addOverallRating(overallRating) {
-        this.sumOverallRating += overallRating;
-      }
+    getRatingWidths() {
+      this.widths.tasteRatingWidth =
+        "width: " + this.tasteRatingPercentage + "%";
+      this.widths.smellRatingWidth =
+        "width: " + this.smellRatingPercentage + "%";
+      this.widths.colorRatingWidth =
+        "width: " + this.colorRatingPercentage + "%";
+      this.widths.bodyRatingWidth = "width: " + this.bodyRatingPercentage + "%";
+      this.widths.finishRatingWidth =
+        "width: " + this.finishRatingPercentage + "%";
+      this.widths.priceRatingWidth =
+        "width: " + this.priceRatingPercentage + "%";
+      this.widths.overallRatingWidth =
+        "width: " + this.overallRatingPercentage + "%";
+    },
+    doAllCalculations() {
+      this.whiskeyRatingList.forEach(whiskeyRating => {
+        this.sumTasteRating += whiskeyRating.tasteRating;
+        this.sumSmellRating += whiskeyRating.smellRating;
+        this.sumColorRating += whiskeyRating.colorRating;
+        this.sumBodyRating += whiskeyRating.bodyRating;
+        this.sumFinishRating += whiskeyRating.finishRating;
+        this.sumPriceRating += whiskeyRating.priceRating;
+        this.sumOverallRating += whiskeyRating.overallRating;
+        this.countReviews(whiskeyRating);
+        this.getAveragesOfAllRatings();
+        this.getPercentagesOfAllRatings();
+        this.getRatingWidths();
+      });
     }
   }
 };
