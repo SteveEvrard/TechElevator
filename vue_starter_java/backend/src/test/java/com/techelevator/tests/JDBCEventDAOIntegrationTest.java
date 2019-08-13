@@ -3,6 +3,7 @@ package com.techelevator.tests;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
@@ -14,6 +15,7 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import com.techelevator.model.Event;
 import com.techelevator.model.EventDao;
 import com.techelevator.model.JdbcEventDao;
+import com.techelevator.model.User;
 
 
 public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
@@ -114,6 +116,25 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 		System.out.println(newEvent.getEventId());
 		
 		Assert.assertTrue(resultsBeforeSql != newEvent.getEventId());
+	}
+	
+	@Test
+	public void checkin_to_event_adds_user_and_event_id_to_jointable() {
+		List<SqlRowSet> checkins = new ArrayList<>();
+		Event event = createEventWithId();
+		event.setEventId((long) 1);
+		User user = new User();
+		user.setId((long) 1);
+		
+		dao.checkInUserToEvent(user.getId(), event.getEventId());
+		
+		String sql = "SELECT id, event_id FROM userstoevent;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+		while(results.next()) {
+			checkins.add(results);
+		}
+		
+		Assert.assertEquals(1, checkins.size());
 	}
 	
 	private Long generateId() {
