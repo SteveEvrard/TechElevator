@@ -56,6 +56,7 @@ export default {
         whiskeyReviewerList: [],
         whiskeyApiURL:
           "http://localhost:8080/AuthenticationApplication/api/event/",
+        whiskeyRatingApiUrl: "/api/event/{eventId}/whiskeyRating/{whiskeyId}",
         eventId: null,
         tasteRatingPercentage: "",
         smellRatingPercentage: "",
@@ -79,7 +80,9 @@ export default {
           aveFinishRating: "",
           avePriceRating: "",
           aveOverallRating: ""
-        }
+        },
+        whiskeyId: 9,
+        eventId: 95
       };
     },
     created() {
@@ -88,7 +91,12 @@ export default {
     },
     methods: {
       listWhiskeyRatings() {
-        fetch(this.apiURLWhiskey + this.eventId + "/whiskeyRating")
+        fetch(
+          this.WhiskeyRatingApiUrl +
+            this.eventId +
+            "/whiskeyRating/" +
+            this.whiskeyId
+        )
           .then(response => {
             console.log(response);
             return response.json();
@@ -98,22 +106,6 @@ export default {
             this.doAllCalculations();
           })
           .catch(err => console.error(err));
-      },
-      getExistingWhiskeys() {
-        fetch(this.apiURL)
-          .then(response => {
-            return response.json();
-          })
-          .then(jsonWhiskeys => {
-            this.whiskeyList = jsonWhiskeys;
-          })
-          .catch(err => console.error(err));
-      },
-      countWhiskey(whiskeyRating) {
-        if (!whiskeyBrandList.contains(whiskeyRating.whiskeyId)) {
-          this.numOfWhiskeys += 1;
-          whiskeyBrandList.push(whiskeyRating.whiskeyId);
-        }
       },
       countReviews(whiskeyRating) {
         if (!whiskeyReviewerList.contains(whiskeyRating.userId)) {

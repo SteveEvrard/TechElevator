@@ -25,24 +25,23 @@ public class JdbcSurveyAnswersDao implements SurveyAnswersDao {
 	
 	@Override
 	public List<SurveyAnswers> getAnswersByEventAndUserId(Integer id, Integer eventId) {
-		List<SurveyAnswers> userAnswers = new ArrayList<SurveyAnswers>();
+		List<SurveyAnswers> surveyAnswers = new ArrayList<SurveyAnswers>();
 		
-		String sql = "SELECT answer FROM surveyAnswers"
+		String sql = "SELECT answer, answer_id, question_id, id, event_id FROM surveyAnswers "
 				+ "WHERE event_id = ? AND id = ?;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id, eventId);
 		while(results.next()) {
-			userAnswers.add(mapRowToSurveyAnswers(results));
+			surveyAnswers.add(mapRowToSurveyAnswers(results));
 		}
-		return userAnswers;
+		return surveyAnswers;
 	}
 
 	@Override
 	public void saveAnswer(SurveyAnswers surveyAnswers){
 		
-		String sql ="INSERT INTO SurveyAnswers (answer, answer_id, event_id, id, question_id)"
-				+ "VALUES (?, ?, ?, ?, ?);";
-		jdbcTemplate.update(sql, surveyAnswers.getAnswer(), surveyAnswers.getAnswerId(), 
-			surveyAnswers.getEventId(), surveyAnswers.getUserId(), surveyAnswers.getQuestionId());
+		String sql ="INSERT INTO SurveyAnswers (answer, event_id, id, question_id) "
+				+ "VALUES (?, ?, ?, ?)";
+		jdbcTemplate.update(sql, surveyAnswers.getAnswer(), surveyAnswers.getEventId(), surveyAnswers.getUserId(), surveyAnswers.getQuestionId());
 		
 	}
 	
