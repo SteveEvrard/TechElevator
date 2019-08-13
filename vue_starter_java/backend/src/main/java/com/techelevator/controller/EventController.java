@@ -52,5 +52,16 @@ public class EventController {
 			return ResponseEntity.created(uriComponent.toUri()).body(newEvent);
 		}
 		
+//		@PostMapping(path="/api/event/{eventId}/{userId}")
+//		public ResponseEntity<Event> checkInUserAtEvent(@RequestBody Long id, @RequestBody Long eventId) {
+//			eventDao.checkInUserToEvent(id, eventId);
+//			newEvent = eventDao.getEventIdByTitleDateLocationTime(newEvent);
+//			
+//			UriComponents uriComponent = ServletUriComponentsBuilder.fromCurrentRequestUri()
+//			.path("/" + newEvent.getEventId()).build();
+//			
+//			return ResponseEntity.created(uriComponent.toUri()).body(newEvent);
+//		}
+		
 
 }
