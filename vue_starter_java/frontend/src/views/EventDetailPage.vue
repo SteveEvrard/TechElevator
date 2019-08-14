@@ -91,7 +91,6 @@ export default {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
         },
         body: JSON.stringify(this.eventData)

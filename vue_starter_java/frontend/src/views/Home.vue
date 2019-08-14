@@ -28,7 +28,8 @@ export default {
 .home {
   background-image: url("../assets/img/whiskey-glasses.jpg");
   background-repeat: no-repeat;
-  background-size: 100%;
+  background-size: 120%;
+  background-attachment: fixed;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;

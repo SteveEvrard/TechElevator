@@ -16,7 +16,6 @@
     <router-view/>
     <br>
   </div>
-  
 </template>
 
 
@@ -52,7 +51,7 @@ body {
   text-decoration: none;
   font-weight: bold;
   padding: 5%;
-  font-size: 24px;
+  font-size: 28px;
 }
 
 .nav-link:hover {

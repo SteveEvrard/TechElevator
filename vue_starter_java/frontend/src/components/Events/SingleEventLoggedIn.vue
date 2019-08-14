@@ -16,8 +16,8 @@
           <h4>About the Event</h4>
           <p>{{event.eventDescription}}</p>
         </div>
-        <!-- <h4 id="table-label">Your Ratings:</h4>
-        <table class="table" v-if="!isHomePage">
+        <h4 id="table-label">Your Ratings:</h4>
+        <!-- <table class="table" v-if="!isHomePage">
           <tr>
             <th>Whiskey</th>
             <th>Taste</th>
@@ -109,32 +109,34 @@ th {
 }
 th {
   background-color: rgba(120, 113, 33, 0.5);
-  font-size: 1.1em;
+  font-size: 1.3em;
 }
 
 .single-event h4 {
   margin: 10px 0px 5px 0px;
-  font-size: 1.2em;
+  font-size: 1.5em;
   font-weight: 500px;
   padding-right: 10px;
   display: inline-block;
+  color: black;
 }
 .single-event p {
   margin: 0px;
   display: inline-block;
+  font-size: 1.2em;
 }
 .single-event h2 {
   text-align: center;
   margin: 10px;
   font-family: "Great Vibes", sans-serif;
-  font-size: 2em;
+  font-size: 2.5em;
   font-weight: 300px;
 }
 .single-event {
   padding: 5px;
   background-color: white;
-  width: 300px;
-  height: 200px;
+  width: 350px;
+  height: 250px;
 }
 
 #line-div {
