@@ -118,7 +118,7 @@ input[type="password"] {
 
 /* Set a style for all buttons */
 button {
-  background-color: rgb(44, 82, 52);
+  background-color: #9B5A1A;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -158,6 +158,7 @@ span.psw {
   justify-content: center;
 }
 #thisbtn{
+  
   width: 95%;
   padding: 12px 20px;
   margin: 8px 0;
