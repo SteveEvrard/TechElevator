@@ -4,6 +4,7 @@
 
 <script>
 import WhiskeyRatingList from "@/components/Whiskey/WhiskeyRatingList.vue";
+import auth from "../auth";
 
 export default {
   components: {

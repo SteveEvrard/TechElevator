@@ -1,6 +1,85 @@
 <template>
   <div class="whiskey-list">
-    <single-whiskey-rating v-bind:percents="widths"></single-whiskey-rating>
+    <div v-if="event.tastingWhiskeys[0] != undefined">
+      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[0].brand}}</h1>
+      <h1 v-if="event.isBlindTasting">1st Whiskey</h1>
+      <single-whiskey-rating
+        v-bind:whiskey="tastingWhiskeys[0]"
+        v-bind:blind="event.isBlindTasting"
+      ></single-whiskey-rating>
+    </div>
+    <div v-if="event.tastingWhiskeys[1] != undefined">
+      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[1].brand}}</h1>
+      <h1 v-if="event.isBlindTasting">2nd Whiskey</h1>
+      <single-whiskey-rating
+        v-bind:whiskey="event.tastingWhiskeys[1]"
+        v-bind:blind="event.isBlindTasting"
+      ></single-whiskey-rating>
+    </div>
+    <div v-if="event.tastingWhiskeys[2] != undefined">
+      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[2].brand}}</h1>
+      <h1 v-if="event.isBlindTasting">3rd Whiskey</h1>
+      <single-whiskey-rating
+        v-bind:whiskey="event.tastingWhiskeys[2]"
+        v-bind:blind="event.isBlindTasting"
+      ></single-whiskey-rating>
+    </div>
+    <div v-if="event.tastingWhiskeys[3] != undefined">
+      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[3].brand}}</h1>
+      <h1 v-if="event.isBlindTasting">4th Whiskey</h1>
+      <single-whiskey-rating
+        v-bind:whiskey="event.tastingWhiskeys[3]"
+        v-bind:blind="event.isBlindTasting"
+      ></single-whiskey-rating>
+    </div>
+    <div v-if="event.tastingWhiskeys[4] != undefined">
+      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[4].brand}}</h1>
+      <h1 v-if="event.isBlindTasting">5th Whiskey</h1>
+      <single-whiskey-rating
+        v-bind:whiskey="event.tastingWhiskeys[4]"
+        v-bind:blind="event.isBlindTasting"
+      ></single-whiskey-rating>
+    </div>
+    <div v-if="event.tastingWhiskeys[5] != undefined">
+      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[5].brand}}</h1>
+      <h1 v-if="event.isBlindTasting">6th Whiskey</h1>
+      <single-whiskey-rating
+        v-bind:whiskey="event.tastingWhiskeys[5]"
+        v-bind:blind="event.isBlindTasting"
+      ></single-whiskey-rating>
+    </div>
+    <div v-if="event.tastingWhiskeys[6] != undefined">
+      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[6].brand}}</h1>
+      <h1 v-if="event.isBlindTasting">7th Whiskey</h1>
+      <single-whiskey-rating
+        v-bind:whiskey="event.tastingWhiskeys[6]"
+        v-bind:blind="event.isBlindTasting"
+      ></single-whiskey-rating>
+    </div>
+    <div v-if="event.tastingWhiskeys[7] != undefined">
+      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[7].brand}}</h1>
+      <h1 v-if="event.isBlindTasting">8th Whiskey</h1>
+      <single-whiskey-rating
+        v-bind:whiskey="event.tastingWhiskeys[7]"
+        v-bind:blind="event.isBlindTasting"
+      ></single-whiskey-rating>
+    </div>
+    <div v-if="event.tastingWhiskeys[8] != undefined">
+      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[8].brand}}</h1>
+      <h1 v-if="event.isBlindTasting">9th Whiskey</h1>
+      <single-whiskey-rating
+        v-bind:whiskey="event.tastingWhiskeys[8]"
+        v-bind:blind="event.isBlindTasting"
+      ></single-whiskey-rating>
+    </div>
+    <div v-if="event.tastingWhiskeys[9] != undefined">
+      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[9].brand}}</h1>
+      <h1 v-if="event.isBlindTasting">10th Whiskey</h1>
+      <single-whiskey-rating
+        v-bind:whiskey="event.tastingWhiskeys[9]"
+        v-bind:blind="event.isBlindTasting"
+      ></single-whiskey-rating>
+    </div>
   </div>
 </template>
 
@@ -9,6 +88,7 @@ import SingleEvent from "@/components/Events/SingleEvent.vue";
 import CheckIn from "@/components/CheckIn.vue";
 import TileFormat from "@/components/Formatting/TileFormat.vue";
 import SingleWhiskeyRating from "@/components/Whiskey/SingleWhiskeyRating.vue";
+import auth from "@/auth";
 
 export default {
   components: {
@@ -20,161 +100,57 @@ export default {
   name: "WhiskeyRatingList",
   props: {
     eventId: null,
-    whiskeyRating: {
-      whiskeyId: Number,
-      userId: Number,
-      eventId: Number,
-      tasteRating: Number,
-      smellRating: Number,
-      colorRating: Number,
-      bodyRating: Number,
-      finishRating: Number,
-      priceRating: Number,
-      overallRating: Number
+    whiskeys: Array,
+    singleWhiskey: {
+      brand: String,
+      price: Number,
+      whiskeyId: Number
     }
-  },
-  event: {
-    title: String,
-    imgUrl: String,
-    date: new Date(),
-    time: String,
-    location: String,
-    eventDescription: "",
-    isBlindTasting: true
-    // eventId: Number
-  },
-  created() {
-    this.listWhiskeyRatings();
   },
   data() {
     return {
-      numOfWhiskeys: "",
-      numOfReviewers: "",
-      whiskeyList: [],
-      whiskeyRatingList: [],
-      whiskeyBrandList: [],
-      whiskeyReviewerList: [],
+      API_URL: "http://localhost:8080/AuthenticationApplication/api/event/",
       whiskeyApiURL:
         "http://localhost:8080/AuthenticationApplication/api/event/",
-      whiskeyRatingApiUrl:
-        "http://localhost:8080/AuthenticationApplication/api/event/",
-      tasteRatingPercentage: "",
-      smellRatingPercentage: "",
-      colorRatingPercentage: "",
-      bodyRatingPercentage: "",
-      finishRatingPercentage: "",
-      priceRatingPercentage: "",
-      overallRatingPercentage: "",
-      widths: {
-        tasteRatingWidth: "",
-        smellRatingWidth: "",
-        colorRatingWidth: "",
-        bodyRatingWidth: "",
-        finishRatingWidth: "",
-        priceRatingWidth: "",
-        overallRatingWidth: ""
+      event: {
+        eventId: Number,
+        title: String,
+        imgUrl: String,
+        date: new Date(),
+        time: String,
+        eventDescription: String,
+        isPrivate: Boolean,
+        isBlindTasting: Boolean
+        // tastingWhiskeys: Array
       },
-      sumTasteRating: "",
-      sumSmellRating: "",
-      sumColorRating: "",
-      sumBodyRating: "",
-      sumFinishRating: "",
-      sumPriceRating: "",
-      sumOverallRating: "",
-      aveWhiskeyRating: {
-        aveTasteRating: "",
-        aveSmellRating: "",
-        aveColorRating: "",
-        aveBodyRating: "",
-        aveFinishRating: "",
-        avePriceRating: "",
-        aveOverallRating: ""
-      },
-      whiskeyId: 9
+      whiskey: {
+        brand: String,
+        price: String,
+        whiskeyId: Number
+      }
     };
   },
+  created() {
+    this.getEventDetails();
+  },
   methods: {
-    listWhiskeyRatings() {
-      fetch(
-        this.whiskeyRatingApiUrl +
-          this.eventId +
-          "/whiskeyRating/" +
-          this.whiskeyId
-      )
+    getEventDetails() {
+      fetch(this.API_URL + this.eventId, {
+        method: "GET",
+        headers: {
+          "Access-Control-Allow-Origin": "application/json",
+          Authorization: "Bearer " + auth.getToken()
+        },
+        body: JSON.stringify(this.eventData)
+      })
         .then(response => {
           console.log(response);
           return response.json();
         })
-        .then(jsonList => {
-          this.whiskeyRatingList = jsonList;
-          this.doAllCalculations();
+        .then(jsonEvent => {
+          this.event = jsonEvent;
         })
         .catch(err => console.error(err));
-    },
-    countReviews() {
-      this.numOfReviewers = this.whiskeyRatingList.length;
-    },
-    getAveragesOfAllRatings() {
-      this.aveWhiskeyRating.aveTasteRating =
-        this.sumTasteRating / this.numOfReviewers;
-      this.aveWhiskeyRating.aveSmellRating =
-        this.sumSmellRating / this.numOfReviewers;
-      this.aveWhiskeyRating.aveColorRating =
-        this.sumColorRating / this.numOfReviewers;
-      this.aveWhiskeyRating.aveBodyRating =
-        this.sumBodyRating / this.numOfReviewers;
-      this.aveWhiskeyRating.aveFinishRating =
-        this.sumFinishRating / this.numOfReviewers;
-      this.aveWhiskeyRating.avePriceRating =
-        this.sumPriceRating / this.numOfReviewers;
-      this.aveWhiskeyRating.aveOverallRating =
-        this.sumOverallRating / this.numOfReviewers;
-    },
-    getPercentagesOfAllRatings() {
-      this.tasteRatingPercentage =
-        (this.aveWhiskeyRating.aveTasteRating / 5) * 10;
-      this.smellRatingPercentage =
-        (this.aveWhiskeyRating.aveSmellRating / 5) * 10;
-      this.colorRatingPercentage =
-        (this.aveWhiskeyRating.aveColorRating / 5) * 10;
-      this.bodyRatingPercentage =
-        (this.aveWhiskeyRating.aveBodyRating / 5) * 10;
-      this.finishRatingPercentage =
-        (this.aveWhiskeyRating.aveFinishRating / 5) * 10;
-      this.priceRatingPercentage =
-        (this.aveWhiskeyRating.avePriceRating / 5) * 10;
-      this.overallRatingPercentage =
-        (this.aveWhiskeyRating.aveOverallRating / 5) * 10;
-    },
-    getRatingWidths() {
-      this.widths.tasteRatingWidth =
-        "width: " + this.tasteRatingPercentage + "%";
-      this.widths.smellRatingWidth =
-        "width: " + this.smellRatingPercentage + "%";
-      this.widths.colorRatingWidth =
-        "width: " + this.colorRatingPercentage + "%";
-      this.widths.bodyRatingWidth = "width: " + this.bodyRatingPercentage + "%";
-      this.widths.finishRatingWidth =
-        "width: " + this.finishRatingPercentage + "%";
-      this.widths.priceRatingWidth =
-        "width: " + this.priceRatingPercentage + "%";
-      this.widths.overallRatingWidth =
-        "width: " + this.overallRatingPercentage + "%";
-    },
-    doAllCalculations() {
-      this.whiskeyRatingList.forEach(whiskeyRating => {
-        this.sumTasteRating += whiskeyRating.tasteRating;
-        this.sumSmellRating += whiskeyRating.smellRating;
-        this.sumColorRating += whiskeyRating.colorRating;
-        this.sumBodyRating += whiskeyRating.bodyRating;
-        this.sumFinishRating += whiskeyRating.finishRating;
-        this.sumPriceRating += whiskeyRating.priceRating;
-        this.sumOverallRating += whiskeyRating.overallRating;
-        this.countReviews(whiskeyRating);
-        this.getAveragesOfAllRatings();
-        this.getPercentagesOfAllRatings();
-        this.getRatingWidths();
-      });
     }
   }
 };

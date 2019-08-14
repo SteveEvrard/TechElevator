@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <div class="main-logo">
@@ -20,6 +21,7 @@
 <style>
 body {
   font-family: "Open Sans", sans-serif;
+  background-color: black;
 }
 
 .main-logo {
@@ -30,14 +32,15 @@ body {
 }
 
 .main-logo img {
-  max-width: 600px;
+  max-width: 300px;
   min-width: 40px;
   min-height: 40px;
   padding: 5%;
   object-fit: contain;
+  filter: invert(100%);
 }
 .nav {
-  background-color: #75787b;
+  background-color: #2e4d58;
   text-align: center;
   padding: 30px 0px 30px 0px;
 }
