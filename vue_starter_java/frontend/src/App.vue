@@ -14,7 +14,9 @@
       <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
     </div>
     <router-view/>
+    <br>
   </div>
+  
 </template>
 
 

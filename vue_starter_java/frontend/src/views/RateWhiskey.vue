@@ -1,6 +1,6 @@
 <template>
   <div class="event">
-    <div v-if="submitted == 0" v-on:submit="submitted += 1">
+    <div v-if="submitted == 0" v-on:submitrating="submitted += 1">
       <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[0].brand}}</h1>
       <h1 v-if="event.isBlindTasting">Whiskey #1</h1>
       <rate-single-whiskey
@@ -9,7 +9,7 @@
         v-bind:whiskey="event.tastingWhiskeys[0]"
       ></rate-single-whiskey>
     </div>
-    <div v-if="submitted == 1" v-on:submit="submitted += 1">
+    <div v-if="submitted == 1" v-on:submitrating="submitted += 1">
       <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[1].brand}}</h1>
       <h1 v-if="event.isBlindTasting">Whiskey #2</h1>
       <rate-single-whiskey
@@ -18,7 +18,7 @@
         v-bind:whiskey="event.tastingWhiskeys[1]"
       ></rate-single-whiskey>
     </div>
-    <div v-if="submitted == 2" v-on:submit="submitted += 1">
+    <div v-if="submitted == 2" v-on:submitrating="submitted += 1">
       <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[2].brand}}</h1>
       <h1 v-if="event.isBlindTasting">Whiskey #3</h1>
       <rate-single-whiskey
@@ -27,7 +27,7 @@
         v-bind:whiskey="event.tastingWhiskeys[2]"
       ></rate-single-whiskey>
     </div>
-    <div v-if="submitted == 3" v-on:submit="submitted += 1">
+    <div v-if="submitted == 3" v-on:submitrating="submitted += 1">
       <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[3].brand}}</h1>
       <h1 v-if="event.isBlindTasting">Whiskey #4</h1>
       <rate-single-whiskey
@@ -36,7 +36,7 @@
         v-bind:whiskey="event.tastingWhiskeys[3]"
       ></rate-single-whiskey>
     </div>
-    <div v-if="submitted == 4" v-on:submit="submitted += 1">
+    <div v-if="submitted == 4" v-on:submitrating="submitted += 1">
       <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[4].brand}}</h1>
       <h1 v-if="event.isBlindTasting">Whiskey #5</h1>
       <rate-single-whiskey
@@ -45,7 +45,7 @@
         v-bind:whiskey="event.tastingWhiskeys[4]"
       ></rate-single-whiskey>
     </div>
-    <div v-if="submitted == 5" v-on:submit="submitted += 1">
+    <div v-if="submitted == 5" v-on:submitrating="submitted += 1">
       <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[5].brand}}</h1>
       <h1 v-if="event.isBlindTasting">Whiskey #6</h1>
       <rate-single-whiskey
@@ -54,7 +54,7 @@
         v-bind:whiskey="event.tastingWhiskeys[5]"
       ></rate-single-whiskey>
     </div>
-    <div v-if="submitted == 6" v-on:submit="submitted += 1">
+    <div v-if="submitted == 6" v-on:submitrating="submitted += 1">
       <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[6].brand}}</h1>
       <h1 v-if="event.isBlindTasting">Whiskey #7</h1>
       <rate-single-whiskey
@@ -63,7 +63,7 @@
         v-bind:whiskey="event.tastingWhiskeys[6]"
       ></rate-single-whiskey>
     </div>
-    <div v-if="submitted == 7" v-on:submit="submitted += 1">
+    <div v-if="submitted == 7" v-on:submitrating="submitted += 1">
       <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[7].brand}}</h1>
       <h1 v-if="event.isBlindTasting">Whiskey #8</h1>
       <rate-single-whiskey
@@ -72,7 +72,7 @@
         v-bind:whiskey="event.tastingWhiskeys[7]"
       ></rate-single-whiskey>
     </div>
-    <div v-if="submitted == 8" v-on:submit="submitted += 1">
+    <div v-if="submitted == 8" v-on:submitrating="submitted += 1">
       <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[8].brand}}</h1>
       <h1 v-if="event.isBlindTasting">Whiskey #9</h1>
       <rate-single-whiskey
@@ -81,7 +81,7 @@
         v-bind:whiskey="event.tastingWhiskeys[8]"
       ></rate-single-whiskey>
     </div>
-    <div v-if="submitted == 9" v-on:submit="submitted += 1">
+    <div v-if="submitted == 9" v-on:submitrating="submitted += 1">
       <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[9].brand}}</h1>
       <h1 v-if="event.isBlindTasting">Whiskey #10</h1>
       <rate-single-whiskey
@@ -106,16 +106,16 @@ export default {
       hasCheckedIn: false,
       API_URL: "http://localhost:8080/AuthenticationApplication/api/event/",
       event: {
-        eventId: Number,
-        title: String,
-        imgUrl: String,
+        eventId: 0,
+        title: "",
+        // imgUrl: "",
         date: new Date(),
-        time: String,
-        location: String,
-        info: String,
-        tastingWhiskeys: Array,
-        isPrivate: Boolean,
-        isBlindTasting: Boolean
+        time: "",
+        location: "",
+        info: "",
+        tastingWhiskeys: [],
+        isPrivate: true,
+        isBlindTasting: true
       },
       submitted: 0,
       whiskeyCount: 0,
@@ -131,8 +131,6 @@ export default {
       fetch(this.API_URL + this.eventId, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
         }
       })
@@ -153,5 +151,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+h1 {
+  color: white;
+}
+</style>
 
 
