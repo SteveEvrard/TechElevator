@@ -16,6 +16,7 @@ import com.techelevator.model.Event;
 import com.techelevator.model.EventDao;
 import com.techelevator.model.JdbcEventDao;
 import com.techelevator.model.User;
+import com.techelevator.model.Whiskey;
 
 
 public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
@@ -53,6 +54,9 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 	public void save_event_adds_event() {
 		
 		Event event = createEventWithId();
+		
+		String sql2 = "INSERT INTO event (event_id) VALUES (?);";
+		jdbcTemplate.update(sql2, event.getEventId());
 		
 		dao.saveEvent(event);
 		
@@ -146,6 +150,7 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 
 		Event event = new Event();
 		event.setEventId(generateId());
+		event.setTastingWhiskeys(createWhiskeysForEvent());
 		event.setDate(LocalDate.of(2019,9,9));
 		event.setTime("12:00:00");
 		event.setLocation("test");
@@ -159,6 +164,8 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 	
 	private Event createEventWithoutId() {
 		Event event = new Event();
+		
+		event.setTastingWhiskeys(createWhiskeysForEvent());
 		event.setDate(LocalDate.of(2019,9,9));
 		event.setTime("12:00:00");
 		event.setLocation("test");
@@ -167,5 +174,24 @@ public class JDBCEventDAOIntegrationTest extends DAOIntegrationTesting{
 		event.setIsPrivate(true);
 		
 		return event;
+	}
+	
+	private List<Whiskey> createWhiskeysForEvent() {
+		List<Whiskey> whiskeys = new ArrayList<>();
+		Whiskey whiskey1 = new Whiskey();
+		Whiskey whiskey2 = new Whiskey();
+		
+		whiskey1.setWhiskeyId(1);
+		whiskey1.setBrand("test1");
+		whiskey1.setPrice(25);
+		
+		whiskey2.setWhiskeyId(2);
+		whiskey2.setBrand("test2");
+		whiskey2.setPrice(85);
+		
+		whiskeys.add(whiskey1);
+		whiskeys.add(whiskey2);
+		
+		return whiskeys;
 	}
 }
