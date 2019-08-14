@@ -39,6 +39,11 @@ public class JdbcEventDao implements EventDao {
 				"VALUES (?, ?, ?, ?, ?, ?, ?);";
 		jdbcTemplate.update(sql, event.getDate(), event.getTime(), event.getEventDescription(), event.getLocation(), event.getTitle(), 
 				event.getIsBlindTasting(), event.getIsPrivate());
+		
+		for(Whiskey whiskey : event.getTastingWhiskeys()) {
+			String sql2 = "INSERT INTO whiskeytoevent(whiskey_id, event_id) VALUES (?, ?);";
+			jdbcTemplate.update(sql2, whiskey.getWhiskeyId(), event.getEventId());
+		}
 	}
 	
 	public List<Event> getEventsAttendedByUser(Long id){
@@ -112,7 +117,8 @@ public class JdbcEventDao implements EventDao {
 				"FROM whiskey w " + 
 				"JOIN whiskeytoevent we ON w.whiskey_id = we.whiskey_id " + 
 				"WHERE event_id = ? " + 
-				"GROUP BY event_id, w.whiskey_id;";
+				"GROUP BY event_id, w.whiskey_id " + 
+				"ORDER BY brand;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, eventId);
 		while(results.next()) {
 			Whiskey whiskey = new Whiskey();

@@ -55,7 +55,7 @@ const router = new Router({
       name: "createEvent",
       component: CreateEvent,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
