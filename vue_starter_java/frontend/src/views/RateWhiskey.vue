@@ -131,8 +131,6 @@ export default {
       fetch(this.API_URL + this.eventId, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
         }
       })

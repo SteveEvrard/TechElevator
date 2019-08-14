@@ -13,6 +13,7 @@ export default {
 
 <style scoped>
 .tile {
+  background: white;
   border-radius: 5px;
   border: 1px solid #f1f1f1;
   padding: 2%;

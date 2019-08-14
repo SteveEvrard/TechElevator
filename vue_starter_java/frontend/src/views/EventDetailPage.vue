@@ -1,20 +1,15 @@
 <template>
   <div class="event">
     <div class="flex-box">
-      <single-event id="this-event" v-bind:event="event"></single-event>
+      <single-event-logged-in id="this-event" v-bind:event="event"></single-event-logged-in>
       <check-in v-if="adminCheckInCheck()" @checked="saveUserAndEvent"></check-in>
       <check-in v-if="userCanCheckIn()" @checked="saveUserAndEvent"></check-in>
       {{user.username}}{{user.role}}
     </div>
+    <!-- v-if="hasCheckedIn" -->
+    <div id="to-next-page" class="select-box" v-on:click="passEventToRate(event.eventId)">Rate Event</div>
+    <!-- v-if="isAdmin" -->
     <div
-      v-if="hasCheckedIn"
-      id="to-next-page"
-      class="select-box"
-      v-on:click="passEventToRate(event.eventId)"
-    >Rate Event</div>
-
-    <div
-      v-if="isAdmin"
       class="select-box"
       id="to-next-page"
       v-on:click="passEventToDisplay(event.eventId)"
@@ -23,14 +18,14 @@
 </template>
 
 <script>
-import SingleEvent from "@/components/Events/SingleEvent.vue";
+import SingleEventLoggedIn from "@/components/Events/SingleEventLoggedIn.vue";
 import CheckIn from "../components/CheckIn.vue";
 import SelectBox from "@/components/Formatting/SelectBox.vue";
 import auth from "../auth";
 
 export default {
   components: {
-    SingleEvent,
+    SingleEventLoggedIn,
     CheckIn
   },
   data() {
@@ -116,7 +111,6 @@ export default {
       fetch(this.userDetailURL + this.userId, {
         method: "GET",
         headers: {
-          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
         },
         body: JSON.stringify(this.eventData)
@@ -166,6 +160,10 @@ export default {
 .flex-box {
   display: flex;
   justify-content: flex-start;
+}
+.select-box {
+  margin: 5px;
+  width: fit-content;
 }
 #this-event {
   width: 50%;

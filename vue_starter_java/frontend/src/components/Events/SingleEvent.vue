@@ -9,7 +9,6 @@
     <div id="line-div">
       <h4>Where:</h4>
       <p>{{event.location}}</p>
-      <p v-if="!isHomePage">{{event.eventDescription}}</p>
     </div>
   </tile-format>
 </template>
