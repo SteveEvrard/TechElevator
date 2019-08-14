@@ -102,6 +102,7 @@ export default {
 #register {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 
 /* Full-width inputs */
