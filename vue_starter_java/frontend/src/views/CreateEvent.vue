@@ -102,7 +102,7 @@ export default {
       })
         .then(response => {
           if (response.ok) {
-            let eventId = this.event.eventId;
+            let eventId = this.eventData.eventId;
             this.$router.push({ name: "eventPage", params: { eventId } });
           }
         })

@@ -1,18 +1,24 @@
 <template>
   <div class="event">
     <div class="flex-box">
-      <single-event-logged-in id="this-event" v-bind:event="event"></single-event-logged-in>
+      <keep-alive>
+        <single-event-logged-in id="this-event" v-bind:event="eventForDetail"></single-event-logged-in>
+      </keep-alive>
       <check-in v-if="adminCheckInCheck()" @checked="saveUserAndEvent"></check-in>
       <check-in v-if="userCanCheckIn()" @checked="saveUserAndEvent"></check-in>
       {{user.username}}{{user.role}}
     </div>
     <!-- v-if="hasCheckedIn" -->
-    <div id="to-next-page" class="select-box" v-on:click="passEventToRate(event.eventId)">Rate Event</div>
+    <div
+      id="to-next-page"
+      class="select-box"
+      v-on:click="passEventToRate(eventForDetail.eventId)"
+    >Rate Event</div>
     <!-- v-if="isAdmin" -->
     <div
       class="select-box"
       id="to-next-page"
-      v-on:click="passEventToDisplay(event.eventId)"
+      v-on:click="passEventToDisplay(eventForDetail.eventId)"
     >View Ratings</div>
   </div>
 </template>
@@ -40,16 +46,16 @@ export default {
       API_URL: "http://localhost:8080/AuthenticationApplication/api/event/",
       Checkin_API_URL:
         "http://localhost:8080/AuthenticationApplication/api/event/",
-      event: {
-        eventId: Number,
-        title: String,
-        imgUrl: String,
+      eventForDetail: {
+        eventId: 0,
+        title: "",
+        // imgUrl: "",
         date: new Date(),
-        time: String,
-        eventDescription: String,
-        isPrivate: Boolean,
-        isBlindTasting: Boolean
-        // tastingWhiskeys: Array
+        time: "",
+        eventDescription: "",
+        isPrivate: true,
+        isBlindTasting: false,
+        tastingWhiskeys: []
       },
       isAdmin: false,
       eventId: null,
@@ -81,20 +87,23 @@ export default {
           return response.json();
         })
         .then(jsonEvent => {
-          this.event = jsonEvent;
+          this.eventForDetail = jsonEvent;
         })
 
         .catch(err => console.error(err));
     },
     saveUserAndEvent() {
-      fetch(this.Checkin_API_URL + this.event.eventId + "/" + user.userId, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + auth.getToken()
-        },
-        body: JSON.stringify(this.eventData)
-      })
+      fetch(
+        this.Checkin_API_URL + this.eventForDetail.eventId + "/" + user.userId,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + auth.getToken()
+          },
+          body: JSON.stringify(this.eventForDetail)
+        }
+      )
         .then(response => {
           if (response.ok) {
             if (this.isAdmin) {
@@ -112,7 +121,7 @@ export default {
         headers: {
           Authorization: "Bearer " + auth.getToken()
         },
-        body: JSON.stringify(this.eventData)
+        body: JSON.stringify(this.eventForDetail)
       })
         .then(response => {
           console.log(response);
