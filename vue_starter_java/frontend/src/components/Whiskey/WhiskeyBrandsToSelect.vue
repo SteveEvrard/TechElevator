@@ -59,10 +59,10 @@ export default {
 
 <style scoped>
 .whiskey-selection {
-  background-color:white;
+  background-color:#75787b;
   padding: 10px;
   text-align: center;
-  
+  border-radius: 5px;
 }
 
 .whiskey-selection:hover {
