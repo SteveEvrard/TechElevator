@@ -16,7 +16,7 @@
           <h4>About the Event</h4>
           <p>{{event.eventDescription}}</p>
         </div>
-        <h4 id="table-label">Your Ratings:</h4>
+        <!-- <h4 id="table-label">Your Ratings:</h4>
         <table class="table" v-if="!isHomePage">
           <tr>
             <th>Whiskey</th>
@@ -36,7 +36,7 @@
             <td>{{rating.priceRating}}</td>
             <td>{{rating.overallRating}}</td>
           </tr>
-        </table>
+        </table>-->
       </div>
     </div>
   </tile-format>
