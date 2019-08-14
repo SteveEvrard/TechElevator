@@ -1,27 +1,15 @@
 <template>
   <tile-format class="single-event">
-    <div>
-      <h2>{{event.title}}</h2>
-      <!-- <img src="{{event.imgUrl}}"> -->
-
-      <ul>
-        <li>
-          <h4>Date:</h4>
-          <p>{{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}}</p>
-        </li>
-
-        <li>
-          <h4>Time:</h4>
-          <p>{{event.time}}</p>
-        </li>
-        <li>
-          <h4>Location:</h4>
-          <p>{{event.location}}</p>
-        </li>
-        <li v-if="!isHomePage">
-          <p>{{event.eventDescription}}</p>
-        </li>
-      </ul>
+    <h2>{{event.title}}</h2>
+    <!-- <img src="{{event.imgUrl}}"> -->
+    <div id="line-div">
+      <h4>When:</h4>
+      <p>{{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}} at {{event.time}}</p>
+    </div>
+    <div id="line-div">
+      <h4>Where:</h4>
+      <p>{{event.location}}</p>
+      <p v-if="!isHomePage">{{event.eventDescription}}</p>
     </div>
   </tile-format>
 </template>

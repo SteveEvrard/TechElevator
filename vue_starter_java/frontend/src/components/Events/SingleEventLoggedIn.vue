@@ -3,15 +3,15 @@
     <div v-on:click="showdetail(event)">
       <h2>{{event.title}}</h2>
       <!-- <img src="{{event.imgUrl}}"> -->
-      <div id="left-aligned">
-        <h4>Date:</h4>
-        <p>{{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}}</p>
-
-        <h4>Time:</h4>
-        <p>{{event.time}}</p>
-        <h4>Location:</h4>
+      <div id="line-div">
+        <h4>When:</h4>
+        <p>{{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}} at {{event.time}}</p>
+      </div>
+      <div id="line-div">
+        <h4>Where:</h4>
         <p>{{event.location}}</p>
-
+      </div>
+      <div id="line-div">
         <p v-if="!isHomePage">{{event.eventDescription}}</p>
       </div>
     </div>
@@ -61,24 +61,29 @@ export default {
   font-size: 1.2em;
   font-weight: 500px;
   padding-right: 10px;
+  display: inline-block;
 }
 .single-event p {
   margin: 0px;
+  display: inline-block;
 }
 .single-event h2 {
   text-align: center;
   margin: 10px;
+  font-family: "Great Vibes", sans-serif;
+  font-size: 2em;
+  font-weight: 300px;
 }
 .single-event {
   padding: 5px;
   background-color: white;
   width: 300px;
-  height: 300px;
+  height: 200px;
 }
-#left-aligned {
-  display: flex;
-  justify-content: flex-start;
-  align-content: flex-start;
-  text-align: left;
+
+#line-div {
+  width: 100%;
+  display: block;
+  padding: 5px 20px 5px 20px;
 }
 </style>
