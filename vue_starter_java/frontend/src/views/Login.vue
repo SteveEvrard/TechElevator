@@ -1,4 +1,5 @@
 <template>
+
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
       <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
@@ -12,7 +13,7 @@
         role="alert"
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div>
-      <label for="username" class="sr-only">Email</label>
+      <label for="username" class = "sr-only">Email</label>
       <input
         type="text"
         id="username"
@@ -32,9 +33,9 @@
         required
       >
 
-      <button type="submit">Sign in</button>
+      <button id="thisbtn" type="submit">Sign in</button>
       <router-link :to="{ name: 'register' }">
-        <button>Need an account?</button>
+        <button id="thisbtn">Need an account?</button>
       </router-link>
     </form>
   </div>
@@ -103,6 +104,7 @@ export default {
 #login {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 }
 
 /* Full-width inputs */
@@ -118,7 +120,7 @@ input[type="password"] {
 
 /* Set a style for all buttons */
 button {
-  background-color: rgb(44, 82, 52);
+  background-color:#9B5A1A;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;

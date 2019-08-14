@@ -22,8 +22,11 @@ public class JdbcSurveyAnswersDoaIntegrationtesting extends DAOIntegrationTestin
 		jdbcTemplate = new JdbcTemplate(dataSource);
 		dao = new JdbcSurveyAnswersDao(dataSource);
 		
-		String sql = "INSERT INTO SurveyAnswers (answer_id, answer, event_id, id, question_id) "+
-		"VALUES (2, 'first answer', 1, 1, 1), (1, 'second answer', 1, 1, 1);";
+		String sql = "INSERT INTO SurveyQuestions(question, question_id, event_id) " +
+				"VALUES ('Tech Elevator Whiskey',1 , 1), ('Does this', 2, 1); "+
+				"INSERT INTO SurveyAnswers (answer_id, answer, event_id, id, question_id) "+
+		"VALUES (4, 'first answer', 1, 1, 1), (5, 'second answer', 1, 1, 1);";
+		
 	
 		
 		

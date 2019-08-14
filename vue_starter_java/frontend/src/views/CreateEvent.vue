@@ -145,7 +145,7 @@ input {
 
 /* Set a style for all buttons */
 button {
-  background-color: rgb(44, 82, 52);
+  background-color: #2E4D58;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
