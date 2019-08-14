@@ -20,8 +20,7 @@ export default {
       isLoggedIn: false,
       isHomePage: true
     };
-  },
-  method: {}
+  }
 };
 </script>
 
@@ -38,12 +37,5 @@ export default {
   border-radius: 10px;
   margin: 5%;
   box-shadow: -2px 10px 18px -4px rgba(0, 0, 0, 0.75);
-}
-.slider {
-  height: 20px;
-  width: 300px;
-  padding: 5%;
-  margin: 5%;
-  color: white;
 }
 </style>

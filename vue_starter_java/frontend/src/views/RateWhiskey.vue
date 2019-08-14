@@ -10,6 +10,7 @@
 
 <script>
 import RateSingleWhiskey from "@/components/Whiskey/RateSingleWhiskey.vue";
+import auth from "../auth";
 
 export default {
   components: {
@@ -50,7 +51,13 @@ export default {
   },
   methods: {
     getEventDetails() {
-      fetch(this.API_URL + this.eventId)
+      fetch(this.API_URL + this.eventId, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.getToken()
+        }
+      })
         .then(response => {
           console.log(response);
           return response.json();

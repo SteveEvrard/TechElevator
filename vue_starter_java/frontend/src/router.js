@@ -8,6 +8,7 @@ import CreateEvent from './views/CreateEvent.vue'
 import RatingResults from './views/RatingResults.vue'
 import RateWhiskey from './views/RateWhiskey.vue'
 import EventDetailPage from './views/EventDetailPage.vue'
+import HomeLoggedIn from './views/HomeLoggedIn.vue'
 
 
 Vue.use(Router)
@@ -54,7 +55,7 @@ const router = new Router({
       name: "createEvent",
       component: CreateEvent,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -62,7 +63,7 @@ const router = new Router({
       name: "ratingResults",
       component: RatingResults,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -70,7 +71,7 @@ const router = new Router({
       name: "rateWhiskey",
       component: RateWhiskey,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
@@ -78,7 +79,15 @@ const router = new Router({
       name: "eventDetailPage",
       component: EventDetailPage,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/:userId",
+      name: "homeLoggedIn",
+      component: HomeLoggedIn,
+      meta: {
+        requiresAuth: true
       }
     }
   ]

@@ -1,6 +1,6 @@
 <template>
   <tile-format class="single-event">
-    <div v-on:click="showdetail(event)">
+    <div>
       <h2>{{event.title}}</h2>
       <!-- <img src="{{event.imgUrl}}"> -->
 
@@ -34,7 +34,6 @@ export default {
     TileFormat
   },
   props: {
-    isLoggedIn: Boolean,
     isHOME: Boolean,
     event: {
       eventId: Number,
@@ -53,13 +52,7 @@ export default {
       isHomePage: Boolean(this.isHOME)
     };
   },
-  name: "SingleEvent",
-  methods: {
-    showdetail(event) {
-      let eventId = this.event.eventId;
-      this.$router.push({ name: "eventDetailPage", params: { eventId } });
-    }
-  }
+  name: "SingleEvent"
 };
 </script>
 

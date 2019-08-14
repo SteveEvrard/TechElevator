@@ -5,6 +5,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,7 +17,9 @@ import com.techelevator.authentication.AuthProvider;
 import com.techelevator.authentication.JwtTokenHandler;
 import com.techelevator.authentication.UnauthorizedException;
 import com.techelevator.authentication.UserCreationException;
+import com.techelevator.model.Event;
 import com.techelevator.model.User;
+import com.techelevator.model.UserDao;
 
 /**
  * AccountController
@@ -28,6 +32,13 @@ public class AccountController {
 
     @Autowired
     private JwtTokenHandler tokenHandler;
+    
+	private final UserDao userDao;
+
+	public AccountController(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public String login(@RequestBody User user, RedirectAttributes flash) throws UnauthorizedException {
@@ -54,4 +65,9 @@ public class AccountController {
         return "{\"success\":true}";
     }
 
+	@GetMapping(path="/user/{id}")
+	public User getUserDetails(@PathVariable long id) {
+		return userDao.getUserById(id);
+	}
+    
 }

@@ -36,5 +36,6 @@ public interface UserDao {
     public List<User> getAllUsers();
 
     public User getUserByUsername(String username);
+    public User getUserById(Long id);
 
 }

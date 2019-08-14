@@ -4,6 +4,7 @@
       <single-event id="this-event" v-bind:event="event"></single-event>
       <check-in v-if="adminCheckInCheck()" @checked="saveUserAndEvent"></check-in>
       <check-in v-if="userCanCheckIn()" @checked="saveUserAndEvent"></check-in>
+      {{user.username}}{{user.role}}
     </div>
     <div
       v-if="hasCheckedIn"
@@ -56,12 +57,19 @@ export default {
         // tastingWhiskeys: Array
       },
       isAdmin: false,
-      eventId: null
+      eventId: null,
+      user: {
+        username: "",
+        password: "",
+        role: "",
+        id: null
+      }
     };
   },
   created() {
     this.eventId = this.$route.params.eventId;
     this.getEventDetails();
+    this.getUser;
   },
   methods: {
     getEventDetails() {
@@ -80,7 +88,8 @@ export default {
       fetch(this.Checkin_API_URL + this.event.eventId + "/" + user.userId, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.getToken()
         },
         body: JSON.stringify(this.eventData)
       })
@@ -91,6 +100,27 @@ export default {
             } else {
               this.hasCheckedIn = true;
             }
+          }
+        })
+        .catch(err => console.error(err));
+    },
+    getUser() {
+      fetch(this.userDetailURL + this.userId, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.getToken()
+        },
+        body: JSON.stringify(this.eventData)
+      })
+        .then(response => {
+          console.log(response);
+          return response.json();
+        })
+        .then(jsonUser => {
+          this.user = jsonUser;
+          if (this.user.role == "admin") {
+            this.isAdmin = true;
           }
         })
         .catch(err => console.error(err));
