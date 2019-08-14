@@ -12,7 +12,14 @@ public class WhiskeyRating {
 	private int finishRating;
 	private int priceRating;
 	private int overallRating;
+	private Whiskey whiskey;
 	
+	public Whiskey getWhiskey() {
+		return whiskey;
+	}
+	public void setWhiskey(Whiskey whiskey) {
+		this.whiskey = whiskey;
+	}
 	public int getBodyRating() {
 		return bodyRating;
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
+import javax.swing.text.rtf.RTFEditorKit;
 
 import com.techelevator.authentication.PasswordHasher;
 
@@ -112,6 +113,21 @@ public class JdbcUserDao implements UserDao {
         }
 
         return users;
+    }
+    
+    @Override
+    public boolean isUserCheckedIn(long id, long eventId) {
+    	boolean checkedIn = false;
+    	
+    	String sql = "SELECT id from userstoevent " + 
+    				"WHERE event_id = ? AND id = ?;";
+    	SqlRowSet result = jdbcTemplate.queryForRowSet(sql, eventId, id);
+    	
+    	if(result != null) {
+    		checkedIn = true;
+    	}
+    	
+    	return checkedIn;
     }
 
     private User mapResultToUser(SqlRowSet results) {
