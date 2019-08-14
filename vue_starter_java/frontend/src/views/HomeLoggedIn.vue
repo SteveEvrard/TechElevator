@@ -1,19 +1,12 @@
 <template>
   <div class="home">
     <div class="list-of-events">
-      <event-list-logged-in
-        :childUserId="userId"
-        :isHOME="isHomePage"
-        :apiURL="API_URL"
-        :isLoggedInBool="isLoggedIn"
-      ></event-list-logged-in>
+      <h2>All Events</h2>
+      <event-list-logged-in :childUserId="userId" :isHOME="isHomePage" :isLoggedInBool="isLoggedIn"></event-list-logged-in>
     </div>
     <div class="list-of-events">
-      <event-list-logged-in
-        :childUserId="userId"
-        :isHOME="isHomePage"
-        :apiUrlByUser="byUserAPI_URL"
-      ></event-list-logged-in>
+      <h2>My Past Events</h2>
+      <event-list-logged-in :childUserId="userId" :isHOME="isHomePage"></event-list-logged-in>
     </div>
   </div>
 </template>
@@ -29,11 +22,7 @@ export default {
   name: "home",
   data() {
     return {
-      API_URL: "http://localhost:8080/AuthenticationApplication/api/events",
-      byUserAPI_URL:
-        "http://localhost:8080/AuthenticationApplication/api/users/",
-      userDetailURL:
-        "http://localhost:8080/AuthenticationApplication/api/user/",
+      userDetailURL: "http://localhost:8080/AuthenticationApplication/user/",
       isLoggedIn: true,
       isHomePage: true,
       isAdmin: false,
@@ -48,6 +37,7 @@ export default {
   },
   created() {
     this.userId = this.$route.params.userId;
+    console.log("HomeLoggedIn.vue, created", this.userId);
     this.getUser();
   },
   methods: {
@@ -55,7 +45,6 @@ export default {
       fetch(this.userDetailURL + this.userId, {
         method: "GET",
         headers: {
-          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
         },
         body: JSON.stringify(this.eventData)
@@ -75,3 +64,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.list-of-events h2 {
+  color: white;
+  text-align: center;
+}
+</style>
