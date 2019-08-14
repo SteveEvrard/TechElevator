@@ -9,10 +9,11 @@
       <br>
 
       <h4>
-        Is this a private event?   
+        Is this a private event?
         <input type="checkbox" v-model="eventData.isPrivate">
-       {{eventData.isPrivate ? "yes" : "no"}}</h4>
-   
+        {{eventData.isPrivate ? "yes" : "no"}}
+      </h4>
+
       <br>
       <h4>Date of Event:</h4>
       <br>
@@ -40,7 +41,8 @@
         {{eventData.isBlindTasting ? "yes" : "no"}}
       </h4>
       <br>
-      <h4>What whiskeys will be tasted?</h4><br>
+      <h4>What whiskeys will be tasted?</h4>
+      <br>
       <h4>
         <whiskey-brands-to-select :apiURL="API_URL" v-model="selectedWhiskeyBrands"></whiskey-brands-to-select>
       </h4>
@@ -94,7 +96,6 @@ export default {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
         },
         body: JSON.stringify(this.eventData)
@@ -132,7 +133,6 @@ export default {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-
 }
 
 /* Full-width inputs */
@@ -149,7 +149,7 @@ input {
 
 /* Set a style for all buttons */
 button {
-  background-color: #2E4D58;
+  background-color: #2e4d58;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;

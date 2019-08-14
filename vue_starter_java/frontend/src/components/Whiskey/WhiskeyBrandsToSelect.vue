@@ -9,7 +9,7 @@
         :options="listOfBrands"
         :multiple="true"
         :close-on-select="false"
-        placeholder= "Click Here To Pick Whiskeys"
+        placeholder="Click Here To Pick Whiskeys"
       />
     </div>
   </div>
@@ -19,6 +19,7 @@
 
 <script>
 import Multiselect from "vue-multiselect";
+import auth from "@/auth";
 
 export default {
   name: "WhiskeyBrandsToSelect",
@@ -41,7 +42,13 @@ export default {
   },
   methods: {
     existingWhiskeys() {
-      fetch(this.apiURL)
+      fetch(this.apiURL, {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + auth.getToken()
+        },
+        body: JSON.stringify(this.eventData)
+      })
         .then(response => {
           return response.json();
         })
@@ -59,10 +66,16 @@ export default {
 
 <style scoped>
 .whiskey-selection {
+<<<<<<< HEAD
   background-color:#75787b;
   padding: 10px;
   text-align: center;
   border-radius: 5px;
+=======
+  background-color: white;
+  padding: 10px;
+  text-align: center;
+>>>>>>> 6a464df4ac9a62079dc05ab8e6e22b0dac792e4c
 }
 
 .whiskey-selection:hover {
@@ -72,5 +85,4 @@ export default {
 
   border-radius: 5px;
 }
-
 </style>
