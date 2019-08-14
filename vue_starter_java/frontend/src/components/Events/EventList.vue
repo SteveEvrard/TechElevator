@@ -21,7 +21,6 @@ export default {
     apiUrlByUser: String,
     isLoggedInBool: Boolean,
     isHOME: Boolean,
-    childUserId: Number,
     isAdminUser: Boolean
   },
   data() {

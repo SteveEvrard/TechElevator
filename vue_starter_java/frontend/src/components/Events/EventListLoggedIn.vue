@@ -21,7 +21,7 @@ export default {
     apiURL: String,
     apiUrlByUser: String,
     isHOME: Boolean,
-    childUserId: Number
+    childUserId: null
   },
   data() {
     return {
@@ -68,7 +68,7 @@ export default {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "application/json",
-          Authorization: "Bearer " + Auth.getToken()
+          Authorization: "Bearer " + auth.getToken()
         },
         body: JSON.stringify(this.eventData)
       })

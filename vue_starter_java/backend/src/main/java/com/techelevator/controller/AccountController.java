@@ -69,5 +69,7 @@ public class AccountController {
 	public User getUserDetails(@PathVariable long id) {
 		return userDao.getUserById(id);
 	}
+	
+	
     
 }

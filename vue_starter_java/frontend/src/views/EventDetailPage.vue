@@ -73,7 +73,14 @@ export default {
   },
   methods: {
     getEventDetails() {
-      fetch(this.API_URL + this.eventId)
+      fetch(this.API_URL + this.eventId, {
+        method: "GET",
+        headers: {
+          "Access-Control-Allow-Origin": "application/json",
+          Authorization: "Bearer " + auth.getToken()
+        },
+        body: JSON.stringify(this.eventData)
+      })
         .then(response => {
           console.log(response);
           return response.json();
@@ -89,6 +96,7 @@ export default {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
         },
         body: JSON.stringify(this.eventData)
@@ -108,7 +116,7 @@ export default {
       fetch(this.userDetailURL + this.userId, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
         },
         body: JSON.stringify(this.eventData)

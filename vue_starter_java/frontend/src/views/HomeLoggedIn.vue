@@ -9,7 +9,11 @@
       ></event-list-logged-in>
     </div>
     <div class="list-of-events">
-      <event-list :childUserId="userId" :isHOME="isHomePage" :apiUrlByUser="byUserAPI_URL"></event-list>
+      <event-list-logged-in
+        :childUserId="userId"
+        :isHOME="isHomePage"
+        :apiUrlByUser="byUserAPI_URL"
+      ></event-list-logged-in>
     </div>
   </div>
 </template>
@@ -51,7 +55,6 @@ export default {
       fetch(this.userDetailURL + this.userId, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
         },
