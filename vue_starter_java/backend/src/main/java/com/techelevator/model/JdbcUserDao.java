@@ -123,7 +123,7 @@ public class JdbcUserDao implements UserDao {
     				"WHERE event_id = ? AND id = ?;";
     	SqlRowSet result = jdbcTemplate.queryForRowSet(sql, eventId, id);
     	
-    	if(result != null) {
+    	if(result.next()) {
     		checkedIn = true;
     	}
     	

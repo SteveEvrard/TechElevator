@@ -39,14 +39,14 @@ public class JdbcWhiskeyRatingDao implements WhiskeyRatingDao {
 	}
 	
 	@Override
-	public List<WhiskeyRating> getRatingsByUser(long userId) {
+	public List<WhiskeyRating> getRatingsByUserAndEvent(long userId, long eventId) {
 		List<WhiskeyRating> ratingsForUser = new ArrayList<WhiskeyRating>();
 		
 		String sql = "SELECT whiskey_rating_id, whiskey_id, event_id, user_id, taste_rating, nose_rating, color_rating, " + 
 				"body_rating, finish_rating, price__rating, overall_rating " + 
 				"FROM whiskeyrating " + 
-				"WHERE user_id = ?;";
-		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+				"WHERE user_id = ? AND event_id = ?;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId, eventId);
 		
 		while(results.next()) {
 			ratingsForUser.add(mapRowToRating(results));
@@ -88,6 +88,7 @@ public class JdbcWhiskeyRatingDao implements WhiskeyRatingDao {
 		WhiskeyRating rating = new WhiskeyRating();
 		
 		rating.setWhiskeyId(results.getLong("whiskey_id"));
+		rating.setWhiskey(getWhiskeyByWhiskeyId(results.getLong("whiskey_id")));
 		rating.setEventId(results.getLong("event_id"));
 		rating.setUserId(results.getLong("user_id"));
 		rating.setTasteRating(results.getInt("taste_rating"));
@@ -99,6 +100,27 @@ public class JdbcWhiskeyRatingDao implements WhiskeyRatingDao {
 		rating.setOverallRating(results.getInt("overall_rating"));
 		
 		return rating;
+	}
+	
+	private Whiskey getWhiskeyByWhiskeyId(long whiskeyId) {
+		Whiskey whiskey = new Whiskey();
+		
+		String sql = "SELECT w.whiskey_id, brand, price " + 
+				"FROM whiskey w " + 
+				"JOIN whiskeyrating wr ON w.whiskey_id = wr.whiskey_id " + 
+				"WHERE w.whiskey_id = ? " + 
+				"GROUP BY w.whiskey_id;";
+		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, whiskeyId);
+		
+		if(results.next()) {
+			
+			whiskey.setWhiskeyId(results.getLong("whiskey_id"));
+			whiskey.setBrand(results.getString("brand"));
+			whiskey.setPrice(results.getInt("price"));
+			
+		}
+		
+		return whiskey;
 	}
 
 }
