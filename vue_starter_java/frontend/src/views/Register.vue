@@ -69,7 +69,8 @@ export default {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "application/json"
         },
         body: JSON.stringify(this.user)
       })

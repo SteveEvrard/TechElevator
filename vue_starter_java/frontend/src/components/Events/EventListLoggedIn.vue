@@ -43,6 +43,7 @@ export default {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
         },
         body: JSON.stringify(this.eventData)
@@ -66,6 +67,7 @@ export default {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + Auth.getToken()
         },
         body: JSON.stringify(this.eventData)
