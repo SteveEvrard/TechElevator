@@ -18,10 +18,8 @@ export default {
   },
   name: "EventList",
   props: {
-    apiURL: String,
-    apiUrlByUser: String,
     isHOME: Boolean,
-    childUserId: null
+    childUserId: String
   },
   data() {
     return {
@@ -30,7 +28,9 @@ export default {
       publicEvents: [],
       attendedEvents: [],
       loggedIn: Boolean(this.isLoggedIn),
-      isHome: Boolean(this.isHOME)
+      isHome: Boolean(this.isHOME),
+      apiURL: "http://localhost:8080/AuthenticationApplication/api/events",
+      apiUrlByUser: "http://localhost:8080/AuthenticationApplication/api/users/"
     };
   },
   created() {
@@ -42,8 +42,6 @@ export default {
       fetch(this.apiURL, {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
         },
         body: JSON.stringify(this.eventData)
@@ -63,11 +61,14 @@ export default {
         .catch(err => console.error(err));
     },
     createdEventsByUser() {
+      console.log(
+        "EventListLoggedIn.vue, createdEventsByUser",
+        this.childUserId,
+        this.apiUrlByUser
+      );
       fetch(this.apiUrlByUser + this.childUserId + "/events", {
         method: "GET",
         headers: {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
         },
         body: JSON.stringify(this.eventData)
