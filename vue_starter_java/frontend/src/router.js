@@ -55,7 +55,7 @@ const router = new Router({
       name: "createEvent",
       component: CreateEvent,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
@@ -63,7 +63,7 @@ const router = new Router({
       name: "ratingResults",
       component: RatingResults,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
@@ -71,7 +71,7 @@ const router = new Router({
       name: "rateWhiskey",
       component: RateWhiskey,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
@@ -79,7 +79,7 @@ const router = new Router({
       name: "eventDetailPage",
       component: EventDetailPage,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     },
     {
@@ -87,7 +87,7 @@ const router = new Router({
       name: "homeLoggedIn",
       component: HomeLoggedIn,
       meta: {
-        requiresAuth: true
+        requiresAuth: false
       }
     }
   ]

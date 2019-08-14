@@ -5,14 +5,14 @@
 
       <h4>Title:</h4>
       <br>
-      <input type="text" v-model="eventData.title">
+      <input type="text" v-model="eventData.title" placeholder="Event Title">
       <br>
 
       <h4>
-        Is this a private event?
+        Is this a private event?   
         <input type="checkbox" v-model="eventData.isPrivate">
-        {{eventData.isPrivate ? "yes" : "no"}}
-      </h4>
+       {{eventData.isPrivate ? "yes" : "no"}}</h4>
+   
       <br>
       <h4>Date of Event:</h4>
       <br>
@@ -21,17 +21,17 @@
 
       <h4>Time of Event:</h4>
       <br>
-      <input type="text" v-model="eventData.time">
+      <input type="text" v-model="eventData.time" placeholder="HH:mm am/pm">
       <br>
 
       <h4>Location:</h4>
       <br>
-      <input type="text" v-model="eventData.location">
+      <input type="text" v-model="eventData.location" placeholder="Address">
       <br>
 
       <h4>Additional Information:</h4>
       <br>
-      <textarea v-model="eventData.eventDescription"></textarea>
+      <textarea v-model="eventData.eventDescription" placeholder="Other Info"></textarea>
       <br>
 
       <h4>
@@ -119,23 +119,27 @@ export default {
 }
 
 .event-background {
-  background: #f1f1f1;
+  margin-top: 20px;
+  background: black;
   margin: 0px;
   border: 3px solid #f1f1f1;
   width: 50%;
   align-content: center;
+  text-align: center;
 }
 
 #create-event {
   display: flex;
   justify-content: center;
+  margin-top: 20px;
+
 }
 
 /* Full-width inputs */
 .event-background > input[type="text"],
 textarea,
 input {
-  width: 80%;
+  width: 95%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -157,6 +161,11 @@ button {
 /* Add a hover effect for buttons */
 button:hover {
   opacity: 0.8;
+}
+h4 {
+  color: white;
+  text-align: center;
+  justify-content: center;
 }
 </style>
 
