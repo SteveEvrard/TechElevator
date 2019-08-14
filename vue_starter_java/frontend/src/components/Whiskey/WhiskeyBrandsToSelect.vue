@@ -4,10 +4,12 @@
       <multiselect
         class="whiskey-selection"
         v-model="selected"
+        @mouseover.native="hover = true"
+        @mouseleave.native="hover = false"
         :options="listOfBrands"
         :multiple="true"
         :close-on-select="false"
-        placeholder=" Pick whiskeys"
+        placeholder= "Click Here To Pick Whiskeys"
       />
     </div>
   </div>
@@ -30,7 +32,8 @@ export default {
     return {
       whiskeys: [],
       listOfBrands: [],
-      selected: []
+      selected: [],
+      hover: false
     };
   },
   created() {
@@ -56,16 +59,19 @@ export default {
 
 <style scoped>
 .whiskey-selection {
-  background-color: #f1f1f1;
-  padding: 0px;
+  background-color:white;
+  padding: 10px;
+  text-align: center;
+  
+}
+
+.whiskey-selection:hover {
+  background-color: #75787b;
+  padding: 10px;
   text-align: center;
 
   border-radius: 5px;
 }
-li:nth-child(odd) {
-  background-color: #598899;
 
-  padding: 0px;
-  margin: 0px;
-}
+
 </style>

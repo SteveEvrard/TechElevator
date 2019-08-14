@@ -39,7 +39,7 @@
       {{eventData.isBlindTasting ? "yes" : "no"}}
       </h4>
       <br>
-      <h4>What whiskeys will be tasted?</h4>
+      <h4>What whiskeys will be tasted?</h4><br>
       <h4>
         <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select>
       </h4>
