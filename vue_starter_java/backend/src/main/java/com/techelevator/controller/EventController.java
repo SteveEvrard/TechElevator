@@ -52,5 +52,10 @@ public class EventController {
 			return ResponseEntity.created(uriComponent.toUri()).body(newEvent);
 		}
 		
+		@PostMapping(path="/api/event/{eventId}/{userId}")
+		public void checkInUserAtEvent(@PathVariable Long userId, @PathVariable Long eventId) {
+			eventDao.checkInUserToEvent(userId, eventId);
+		}
+		
 
 }

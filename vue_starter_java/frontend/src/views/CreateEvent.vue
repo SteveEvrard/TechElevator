@@ -34,14 +34,15 @@
       <textarea v-model="eventData.eventDescription"></textarea>
       <br>
 
-      <h4>Is this a blind tasting?
-      <input type="checkbox" v-model="eventData.isBlindTasting">
-      {{eventData.isBlindTasting ? "yes" : "no"}}
+      <h4>
+        Is this a blind tasting?
+        <input type="checkbox" v-model="eventData.isBlindTasting">
+        {{eventData.isBlindTasting ? "yes" : "no"}}
       </h4>
       <br>
       <h4>What whiskeys will be tasted?</h4><br>
       <h4>
-        <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select>
+        <whiskey-brands-to-select :apiURL="API_URL" v-model="selectedWhiskeyBrands"></whiskey-brands-to-select>
       </h4>
       <br>
       <h4>
@@ -54,6 +55,7 @@
 <script>
 import FormFormat from "@/components/Formatting/FormFormat.vue";
 import WhiskeyBrandsToSelect from "@/components/Whiskey/WhiskeyBrandsToSelect.vue";
+import auth from "../auth";
 
 export default {
   components: {
@@ -63,6 +65,7 @@ export default {
 
   data() {
     return {
+      selectedWhiskeyBrands: [],
       apiURLEvent: "http://localhost:8080/AuthenticationApplication/api/events",
       API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys",
       eventData: {
@@ -73,16 +76,26 @@ export default {
         time: "",
         location: "",
         eventDescription: "",
-        isBlindTasting: true
+        isBlindTasting: true,
+        tastingWhiskeys: []
+      },
+      whiskey: {
+        brand: ""
       }
     };
   },
   methods: {
     saveEvent() {
+      this.selectedWhiskeyBrands.forEach(item => {
+        this.whiskey.brand = item;
+        this.tastingWhiskeys.push(this.whiskey);
+      });
       fetch(this.apiURLEvent, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "application/json",
+          Authorization: "Bearer " + auth.getToken()
         },
         body: JSON.stringify(this.eventData)
       })
@@ -119,7 +132,9 @@ export default {
 }
 
 /* Full-width inputs */
-.event-background > input[type=text], textarea, input{
+.event-background > input[type="text"],
+textarea,
+input {
   width: 80%;
   padding: 12px 20px;
   margin: 8px 0;
@@ -143,7 +158,6 @@ button {
 button:hover {
   opacity: 0.8;
 }
-
 </style>
 
 

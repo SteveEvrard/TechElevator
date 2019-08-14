@@ -28,27 +28,21 @@
 	<mvc:annotation-driven />
 
 	
-<!-- 	<mvc:interceptors>
->>>>>>> 31d5924ddf16805514055554455a0cb7a6c7605e
+<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<bean class="com.techelevator.authentication.JwtAuthInterceptor">
 				<property name="excludedUrls">
 					<list>
-						Every url in the app must be authenticated except /login
+						<!-- Every url in the app must be authenticated except /login -->
 						<value>/login</value>
 						<value>/register</value>
 						<value>/api/events</value>
-						<value>/api/whiskeys</value>
 					</list>
 				</property>
 			</bean>
 		</mvc:interceptor>
-<<<<<<< HEAD
 	</mvc:interceptors>
-
-=======
-	</mvc:interceptors> -->
 	
 	<mvc:cors>
 		<mvc:mapping path="/**"

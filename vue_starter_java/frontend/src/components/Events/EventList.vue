@@ -1,7 +1,7 @@
 <template>
-  <div class="event-list">
-    <div v-for="event in publicEvents" :key="event">
-      <single-event :isLoggedIn="loggedIn" :isHOME="isHome" :event="event"></single-event>
+  <div class="event-list-no-login">
+    <div v-for="singleEvent in publicEvents" :key="singleEvent">
+      <single-event :isHOME="isHome" :event="singleEvent"></single-event>
     </div>
   </div>
 </template>
@@ -18,15 +18,15 @@ export default {
   name: "EventList",
   props: {
     apiURL: String,
-    isLoggedIn: Boolean,
-    isHOME: Boolean
+    apiUrlByUser: String,
+    isLoggedInBool: Boolean,
+    isHOME: Boolean,
+    isAdminUser: Boolean
   },
   data() {
     return {
       events: [],
       publicEvents: [],
-      attendedEvents: [],
-      loggedIn: Boolean(this.isLoggedIn),
       isHome: Boolean(this.isHOME)
     };
   },
@@ -48,7 +48,6 @@ export default {
             }
           });
         })
-
         .catch(err => console.error(err));
     }
   }
@@ -56,7 +55,7 @@ export default {
 </script>
 
 <style>
-.event-list {
+.event-list-no-login {
   display: flex;
   justify-content: space-around;
   align-content: flex-start;
@@ -65,8 +64,5 @@ export default {
 }
 li {
   list-style: none;
-}
-.event-list div:hover {
-  opacity: 0.8;
 }
 </style>

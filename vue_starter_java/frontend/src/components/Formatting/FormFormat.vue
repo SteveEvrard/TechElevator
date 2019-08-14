@@ -11,24 +11,24 @@ export default {
 </script>
 
 <style>
-button {
+.form button {
   text-align: center;
   margin: 5%;
 }
 
-h1 {
+.form h1 {
   text-align: center;
   background: black;
   color: white;
 }
-h4 {
+.form h4 {
   font-size: 20px;
   align-content: center;
   text-align: center;
   align-items: center;
   align-self: center;
 }
-div {
+.form div {
   text-align: center;
   align-items: center;
   align-self: center;

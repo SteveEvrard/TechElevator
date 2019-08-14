@@ -2,7 +2,9 @@
   <div class="event">
     <div class="flex-box">
       <single-event id="this-event" v-bind:event="event"></single-event>
-      <check-in v-if="!hasCheckedIn" @checked="saveUserAndEvent"></check-in>
+      <check-in v-if="adminCheckInCheck()" @checked="saveUserAndEvent"></check-in>
+      <check-in v-if="userCanCheckIn()" @checked="saveUserAndEvent"></check-in>
+      {{user.username}}{{user.role}}
     </div>
     <div
       v-if="hasCheckedIn"
@@ -10,7 +12,9 @@
       class="select-box"
       v-on:click="passEventToRate(event.eventId)"
     >Rate Event</div>
+
     <div
+      v-if="isAdmin"
       class="select-box"
       id="to-next-page"
       v-on:click="passEventToDisplay(event.eventId)"
@@ -22,6 +26,7 @@
 import SingleEvent from "@/components/Events/SingleEvent.vue";
 import CheckIn from "../components/CheckIn.vue";
 import SelectBox from "@/components/Formatting/SelectBox.vue";
+import auth from "../auth";
 
 export default {
   components: {
@@ -30,8 +35,16 @@ export default {
   },
   data() {
     return {
+      user: {
+        username: "",
+        password: "",
+        role: ""
+      },
       hasCheckedIn: false,
+      adminHasCheckedIn: false,
       API_URL: "http://localhost:8080/AuthenticationApplication/api/event/",
+      Checkin_API_URL:
+        "http://localhost:8080/AuthenticationApplication/api/event/",
       event: {
         eventId: Number,
         title: String,
@@ -43,16 +56,31 @@ export default {
         isBlindTasting: Boolean
         // tastingWhiskeys: Array
       },
-      eventId: null
+      isAdmin: false,
+      eventId: null,
+      user: {
+        username: "",
+        password: "",
+        role: "",
+        id: null
+      }
     };
   },
   created() {
     this.eventId = this.$route.params.eventId;
     this.getEventDetails();
+    this.getUser;
   },
   methods: {
     getEventDetails() {
-      fetch(this.API_URL + this.eventId)
+      fetch(this.API_URL + this.eventId, {
+        method: "GET",
+        headers: {
+          "Access-Control-Allow-Origin": "application/json",
+          Authorization: "Bearer " + auth.getToken()
+        },
+        body: JSON.stringify(this.eventData)
+      })
         .then(response => {
           console.log(response);
           return response.json();
@@ -64,16 +92,43 @@ export default {
         .catch(err => console.error(err));
     },
     saveUserAndEvent() {
-      fetch(this.apiURLEvent, {
+      fetch(this.Checkin_API_URL + this.event.eventId + "/" + user.userId, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "application/json",
+          Authorization: "Bearer " + auth.getToken()
         },
         body: JSON.stringify(this.eventData)
       })
         .then(response => {
           if (response.ok) {
-            hasCheckedIn = true;
+            if (this.isAdmin) {
+              this.adminHasCheckedIn = true;
+            } else {
+              this.hasCheckedIn = true;
+            }
+          }
+        })
+        .catch(err => console.error(err));
+    },
+    getUser() {
+      fetch(this.userDetailURL + this.userId, {
+        method: "GET",
+        headers: {
+          "Access-Control-Allow-Origin": "application/json",
+          Authorization: "Bearer " + auth.getToken()
+        },
+        body: JSON.stringify(this.eventData)
+      })
+        .then(response => {
+          console.log(response);
+          return response.json();
+        })
+        .then(jsonUser => {
+          this.user = jsonUser;
+          if (this.user.role == "admin") {
+            this.isAdmin = true;
           }
         })
         .catch(err => console.error(err));
@@ -83,6 +138,25 @@ export default {
     },
     passEventToDisplay(eventId) {
       this.$router.push({ name: "ratingResults", params: { eventId } });
+    },
+    checkRole() {
+      if (this.user.role.equals("admin")) {
+        this.isAdmin = true;
+      }
+    },
+    adminCheckInCheck() {
+      if (this.isAdmin && !this.adminHasCheckedIn) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    userCanCheckIn() {
+      if (!this.isAdmin && this.adminHasCheckedIn) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 };

@@ -20,30 +20,25 @@ export default {
       isLoggedIn: false,
       isHomePage: true
     };
-  },
-  method: {}
+  }
 };
 </script>
 
 <style>
 .home {
-  background: #f1f1f1;
+  background-image: url("../assets/img/whiskey-glasses.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .list-of-events {
-  background-color: #2e4d58;
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 1px;
   width: 90%;
   border-radius: 10px;
   margin: 5%;
   box-shadow: -2px 10px 18px -4px rgba(0, 0, 0, 0.75);
-}
-.slider {
-  height: 20px;
-  width: 300px;
-  padding: 5%;
-  margin: 5%;
-  color: white;
 }
 </style>

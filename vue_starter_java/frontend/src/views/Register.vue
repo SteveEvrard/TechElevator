@@ -1,48 +1,46 @@
 <template>
-<form-format>
-  <div id="register" class="text-center">
-    <form class="form-register" @submit.prevent="register">
-      <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
-      <div class="alert alert-danger" role="alert" v-if="registrationErrors">
-        There were problems registering this user.
-      </div>
-      <label for="username" class="sr-only">Email</label>
-      <input
-        type="text"
-        id="username"
-        class="form-control"
-        placeholder="Email"
-        v-model="user.username"
-        required
-        autofocus
-      />
-      <label for="password" class="sr-only">Password</label>
-      <input
-        type="password"
-        id="password"
-        class="form-control"
-        placeholder="Password"
-        v-model="user.password"
-        required
-      />
-      <input
-        type="password"
-        id="confirmPassword"
-        class="form-control"
-        placeholder="Confirm Password"
-        v-model="user.confirmPassword"
-        required
-      />
-      <router-link :to="{ name: 'login' }">
-        <button>
-        Have an account?
-        </button>
-      </router-link>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Create Account
-      </button>
-    </form>
-  </div>
+  <form-format>
+    <div id="register" class="text-center">
+      <form class="form-register" @submit.prevent="register">
+        <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+        <div
+          class="alert alert-danger"
+          role="alert"
+          v-if="registrationErrors"
+        >There were problems registering this user.</div>
+        <label for="username" class="sr-only">Email</label>
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          placeholder="Email"
+          v-model="user.username"
+          required
+          autofocus
+        >
+        <label for="password" class="sr-only">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          placeholder="Password"
+          v-model="user.password"
+          required
+        >
+        <input
+          type="password"
+          id="confirmPassword"
+          class="form-control"
+          placeholder="Confirm Password"
+          v-model="user.confirmPassword"
+          required
+        >
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
+        <router-link :to="{ name: 'login' }">
+          <button>Have an account?</button>
+        </router-link>
+      </form>
+    </div>
   </form-format>
 </template>
 
@@ -53,39 +51,43 @@ export default {
   components: {
     FormFormat
   },
-  name: 'register',
+  name: "register",
   data() {
     return {
       user: {
-        username: '',
-        password: '',
-        confirmPassword: '',
-        role: 'user',
+        username: "",
+        password: "",
+        confirmPassword: "",
+        role: "user"
       },
-      registrationErrors: false,
+      registrationErrors: false
     };
   },
   methods: {
     register() {
       fetch(`${process.env.VUE_APP_REMOTE_API}/register`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "application/json"
         },
-        body: JSON.stringify(this.user),
+        body: JSON.stringify(this.user)
       })
-        .then((response) => {
+        .then(response => {
           if (response.ok) {
-            this.$router.push({ path: '/login', query: { registration: 'success' } })
+            this.$router.push({
+              path: "/login",
+              query: { registration: "success" }
+            });
           } else {
             this.registrationErrors = true;
           }
         })
 
-        .then((err) => console.error(err));
-    },
-  },
+        .then(err => console.error(err));
+    }
+  }
 };
 </script>
 
@@ -103,7 +105,8 @@ export default {
 }
 
 /* Full-width inputs */
-input[type=text], input[type=password] {
+input[type="text"],
+input[type="password"] {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
