@@ -112,7 +112,8 @@ public class JdbcEventDao implements EventDao {
 				"FROM whiskey w " + 
 				"JOIN whiskeytoevent we ON w.whiskey_id = we.whiskey_id " + 
 				"WHERE event_id = ? " + 
-				"GROUP BY event_id, w.whiskey_id;";
+				"GROUP BY event_id, w.whiskey_id " + 
+				"ORDER BY brand;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, eventId);
 		while(results.next()) {
 			Whiskey whiskey = new Whiskey();
