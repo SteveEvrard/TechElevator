@@ -3,25 +3,17 @@
     <div v-on:click="showdetail(event)">
       <h2>{{event.title}}</h2>
       <!-- <img src="{{event.imgUrl}}"> -->
+      <div id="left-aligned">
+        <h4>Date:</h4>
+        <p>{{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}}</p>
 
-      <ul>
-        <li>
-          <h4>Date:</h4>
-          <p>{{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}}</p>
-        </li>
+        <h4>Time:</h4>
+        <p>{{event.time}}</p>
+        <h4>Location:</h4>
+        <p>{{event.location}}</p>
 
-        <li>
-          <h4>Time:</h4>
-          <p>{{event.time}}</p>
-        </li>
-        <li>
-          <h4>Location:</h4>
-          <p>{{event.location}}</p>
-        </li>
-        <li v-if="!isHomePage">
-          <p>{{event.eventDescription}}</p>
-        </li>
-      </ul>
+        <p v-if="!isHomePage">{{event.eventDescription}}</p>
+      </div>
     </div>
   </tile-format>
 </template>
@@ -63,21 +55,30 @@ export default {
 };
 </script>
 
-<style scoped>
-h4,
-p {
-  display: inline-block;
+<style>
+.single-event h4 {
+  margin: 10px 0px 5px 0px;
+  font-size: 1.2em;
+  font-weight: 500px;
+  padding-right: 10px;
 }
-p {
-  margin-right: 8%;
+.single-event p {
+  margin: 0px;
 }
-h2 {
+.single-event h2 {
   text-align: center;
+  margin: 10px;
 }
 .single-event {
-  padding: 2%;
+  padding: 5px;
   background-color: white;
-  width: 320px;
-  min-height: 320px;
+  width: 300px;
+  height: 300px;
+}
+#left-aligned {
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  text-align: left;
 }
 </style>

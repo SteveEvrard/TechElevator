@@ -26,12 +26,15 @@ export default {
 
 <style>
 .home {
-  background: #f1f1f1;
+  background-image: url("../assets/img/whiskey-glasses.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 .list-of-events {
-  background-color: #2e4d58;
+  background-color: rgba(0, 0, 0, 0.6);
   padding: 1px;
   width: 90%;
   border-radius: 10px;

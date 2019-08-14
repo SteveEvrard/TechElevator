@@ -55,22 +55,3 @@ export default {
   name: "SingleEvent"
 };
 </script>
-
-<style scoped>
-h4,
-p {
-  display: inline-block;
-}
-p {
-  margin-right: 8%;
-}
-h2 {
-  text-align: center;
-}
-.single-event {
-  padding: 2%;
-  background-color: white;
-  width: 320px;
-  min-height: 320px;
-}
-</style>

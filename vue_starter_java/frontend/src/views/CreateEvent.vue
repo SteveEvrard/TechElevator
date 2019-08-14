@@ -42,7 +42,7 @@
       <br>
       <h4>What whiskeys will be tasted?</h4>
       <h4>
-        <whiskey-brands-to-select :apiURL="API_URL"></whiskey-brands-to-select>
+        <whiskey-brands-to-select :apiURL="API_URL" v-model="selectedWhiskeyBrands"></whiskey-brands-to-select>
       </h4>
       <br>
       <h4>
@@ -65,6 +65,7 @@ export default {
 
   data() {
     return {
+      selectedWhiskeyBrands: [],
       apiURLEvent: "http://localhost:8080/AuthenticationApplication/api/events",
       API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys",
       eventData: {
@@ -75,12 +76,20 @@ export default {
         time: "",
         location: "",
         eventDescription: "",
-        isBlindTasting: true
+        isBlindTasting: true,
+        tastingWhiskeys: []
+      },
+      whiskey: {
+        brand: ""
       }
     };
   },
   methods: {
     saveEvent() {
+      this.selectedWhiskeyBrands.forEach(item => {
+        this.whiskey.brand = item;
+        this.tastingWhiskeys.push(this.whiskey);
+      });
       fetch(this.apiURLEvent, {
         method: "POST",
         headers: {

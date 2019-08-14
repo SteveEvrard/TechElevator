@@ -202,6 +202,7 @@ export default {
           body: JSON.stringify(this.whiskeyRating)
         }
       ).catch(err => console.error(err));
+      this.$emit(submit);
     },
     assignData() {
       this.whiskeyRating.tasteRating = this.slider.tasteValue;
