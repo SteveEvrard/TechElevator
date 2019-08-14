@@ -149,4 +149,9 @@ span.psw {
   float: right;
   padding-top: 16px;
 }
+#login {
+  color: whitesmoke;
+  justify-content: center;
+  text-align: center;
+}
 </style>

@@ -148,4 +148,9 @@ span.psw {
   float: right;
   padding-top: 16px;
 }
+.sr-only {
+  color: white;
+  text-align: center;
+  justify-content: center;
+}
 </style>
