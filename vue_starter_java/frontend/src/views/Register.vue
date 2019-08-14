@@ -35,9 +35,9 @@
           v-model="user.confirmPassword"
           required
         >
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
+        <button id = "thisbtn" class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
         <router-link :to="{ name: 'login' }">
-          <button>Have an account?</button>
+          <button id = "thisbtn"> Have an account?</button>
         </router-link>
       </form>
     </div>
@@ -107,7 +107,7 @@ export default {
 /* Full-width inputs */
 input[type="text"],
 input[type="password"] {
-  width: 100%;
+  width: 95%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
@@ -123,7 +123,9 @@ button {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 100%;
+  
+  box-sizing: border-box;
+  
 }
 
 /* Add a hover effect for buttons */
@@ -148,9 +150,19 @@ span.psw {
   float: right;
   padding-top: 16px;
 }
+/* added white font and centered*/
 .sr-only {
   color: white;
   text-align: center;
   justify-content: center;
+}
+#thisbtn{
+  width: 95%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid grey;
+  box-sizing: border-box;
+  font-size:20px
 }
 </style>
