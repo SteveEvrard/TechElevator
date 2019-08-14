@@ -108,7 +108,7 @@ Insert Into event Values (default, '10/31/2019', '1:00 PM', 'A soul-stirring tas
 Insert Into whiskey (brand, price) Values ('Jamisons 18 Year Limited reserve', 200);
 Insert Into whiskey (brand, price) Values ('Colonel Taylor Small Batch KY Bourbon', 40);
 
-insert into users (id, username, password, salt, role) values (2, 'test', 'test', 'test', 'user');
-insert into users (id, username, password, salt, role) values (3, 'Admin', 'KWS2019$', 'test', 'admin');
+insert into users values (default, 'whiskey', '8mR22I72p+QlLz/aOpVgKg==', 'Shb49EyESa/+y5mT5sRgLlNLF9PNyze+78RnsO5ZwJdZ9GhUle+VQct1rxAW9abWm6ygjxENS4QHkDiCJQgYEO1gGw6w6ODTJLeqBwPy7M4QDXPssH4k6jyLxfcKQzPzv191kbbMRQuJr7QKRjecNFi7miz4d2PGrwW0wu55C9I=', 'admin');
+insert into users (id, username, password, salt, role) values (default, 'test', 'test', 'test', 'user');
 
 COMMIT;
