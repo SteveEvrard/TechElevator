@@ -18,7 +18,7 @@
         :data="json_data"
         :fields="json_fields"
         worksheet="My Worksheet"
-        name="filename.xls"
+        name="ratings.xls"
       >Download all ratings to csv.</download-excel>
       <div class="list-of-events">
         <h2>All Events</h2>
@@ -46,10 +46,16 @@ import auth from "../auth";
 
 export default {
   components: {
-    EventListLoggedIn
+    EventListLoggedIn,
+    JsonExcel
   },
   name: "home",
   data() {
+    json_fields: {
+
+
+    }
+
     return {
       userDetailURL: "http://localhost:8080/AuthenticationApplication/user/",
       isLoggedIn: true,
