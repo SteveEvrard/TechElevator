@@ -89,7 +89,12 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    }//,
+    //{
+      //path: "/logout",
+      //name: "logout",
+      //component: Logout
+    //}
   ]
 })
 
