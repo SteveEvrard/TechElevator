@@ -2,7 +2,7 @@ package com.techelevator.model;
 
 public class UserDetail {
 	
-	private long username;
+	private String username;
 	private String fullName;
 	private String phoneNumber;
 	private String cityOfResidence;
@@ -11,10 +11,10 @@ public class UserDetail {
 	
 	
 
-	public long getUsername() {
+	public String getUsername() {
 		return username;
 	}
-	public void setUsername(long username) {
+	public void setUsername(String username) {
 		this.username = username;
 	}
 	
