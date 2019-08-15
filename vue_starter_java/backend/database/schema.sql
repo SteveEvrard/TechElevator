@@ -111,4 +111,10 @@ Insert Into whiskey (brand, price) Values ('Colonel Taylor Small Batch KY Bourbo
 insert into users values (default, 'whiskey', '8mR22I72p+QlLz/aOpVgKg==', 'Shb49EyESa/+y5mT5sRgLlNLF9PNyze+78RnsO5ZwJdZ9GhUle+VQct1rxAW9abWm6ygjxENS4QHkDiCJQgYEO1gGw6w6ODTJLeqBwPy7M4QDXPssH4k6jyLxfcKQzPzv191kbbMRQuJr7QKRjecNFi7miz4d2PGrwW0wu55C9I=', 'admin');
 insert into users (id, username, password, salt, role) values (default, 'test', 'test', 'test', 'user');
 
+insert into whiskeytoevent values (1, 1);
+insert into whiskeytoevent values (1, 2);
+insert into whiskeytoevent values (2, 1);
+insert into whiskeytoevent values (2, 2);
+
+
 COMMIT;
