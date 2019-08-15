@@ -34,7 +34,8 @@ body {
   object-fit: contain;
   filter: invert(100%);
 }
-.nav {
+.nav,
+.admin-nav {
   background-color: #2e4d58;
   text-align: center;
   padding: 30px 0px 30px 0px;
@@ -49,7 +50,16 @@ body {
 }
 /*links for admin when logged in due to number of them to make them fit */
 .admin-nav-link {
-  font-size: 1.5em;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 5%;
+  font-size: 1.7em;
+}
+
+.admin-nav-link:hover {
+  text-decoration: underline;
+  color: #9d432c;
 }
 
 .nav-link:hover {
