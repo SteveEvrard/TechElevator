@@ -91,15 +91,14 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-<<<<<<< HEAD
-    }//,
+    },
+    //,
     //{
       //path: "/logout",
       //name: "logout",
       //component: Logout
     //}
-=======
-    },
+
     {
       path: "/resetPass",
       name: "resetPassword",
@@ -116,7 +115,7 @@ const router = new Router({
         requiresAuth: true
       }
     }
->>>>>>> 49e4e9e374b8296bb3ea8d8cbf8c14187c4908d6
+
   ]
 })
 
