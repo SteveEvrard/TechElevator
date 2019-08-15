@@ -1,12 +1,14 @@
 <template>
   <div>
-    <div class="nav">
+    <div v-if="!isAdmin" class="nav">
       <router-link class="nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
-      <router-link class="nav-link" :to="{ name: 'logout' }">Logout</router-link>
-      <router-link class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
-
-      <!-- v-if="isAdmin" -->
-      <router-link class="nav-link" v-bind:to="{ name: 'resetPassword' }">Reset Password</router-link>
+      <router-link class="nav-link" :to="{ name: 'home' }">Logout</router-link>
+    </div>
+    <div v-if="isAdmin" class="admin-nav">
+      <router-link class="admin-nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
+      <router-link class="admin-nav-link" :to="{ name: 'home' }">Logout</router-link>
+      <router-link class="admin-nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
+      <router-link class="admin-nav-link" v-bind:to="{ name: 'resetPassword' }">Reset Password</router-link>
     </div>
     <div class="home">
       <download-excel
@@ -14,7 +16,7 @@
         :data="json_data"
         :fields="json_fields"
         worksheet="My Worksheet"
-        name="filename.xls"
+        name="ratings.xls"
       >Download all ratings to csv.</download-excel>
       <div class="list-of-events">
         <h2>All Events</h2>
@@ -42,10 +44,16 @@ import auth from "../auth";
 
 export default {
   components: {
-    EventListLoggedIn
+    EventListLoggedIn,
+    JsonExcel
   },
   name: "home",
   data() {
+    json_fields: {
+
+
+    }
+
     return {
       userDetailURL: "http://localhost:8080/AuthenticationApplication/user/",
       isLoggedIn: true,

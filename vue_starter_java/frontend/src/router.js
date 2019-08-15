@@ -91,12 +91,6 @@ const router = new Router({
         requiresAuth: true
       }
     },
-    //,
-    //{
-    //path: "/logout",
-    //name: "logout",
-    //component: Logout
-    //}
 
     {
       path: "/resetPass",
