@@ -7,16 +7,9 @@
     <div class="main-logo">
       <img src="@/assets/img/TKWS_Black Logo.png">
     </div>
-    <div class="nav">
-      <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
-      <router-link class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
-      <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
-      <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
-    </div>
     <router-view/>
     <br>
   </div>
-  
 </template>
 
 
@@ -52,7 +45,7 @@ body {
   text-decoration: none;
   font-weight: bold;
   padding: 5%;
-  font-size: 24px;
+  font-size: 28px;
 }
 
 .nav-link:hover {

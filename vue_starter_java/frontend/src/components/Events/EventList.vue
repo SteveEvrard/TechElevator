@@ -8,12 +8,10 @@
 
 <script>
 import SingleEvent from "@/components/Events/SingleEvent.vue";
-import CheckIn from "@/components/CheckIn.vue";
 
 export default {
   components: {
-    SingleEvent,
-    CheckIn
+    SingleEvent
   },
   name: "EventList",
   props: {

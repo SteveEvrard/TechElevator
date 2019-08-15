@@ -66,7 +66,7 @@ export default {
 
 <style scoped>
 .whiskey-selection {
-  background-color:  #75787b;
+  background-color: #75787b;
   padding: 10px;
   text-align: center;
   border-radius: 5px;

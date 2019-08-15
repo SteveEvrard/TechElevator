@@ -37,6 +37,7 @@ public interface UserDao {
 
     public User getUserByUsername(String username);
     public User getUserById(Long id);
+    List<User> getAdminIds();
 
     public boolean isUserCheckedIn(long id, long eventId);
 }

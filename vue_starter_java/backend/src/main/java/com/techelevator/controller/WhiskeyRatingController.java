@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 
-import com.techelevator.model.Event;
+import com.techelevator.authentication.AuthProvider;
+import com.techelevator.model.User;
 import com.techelevator.model.WhiskeyRating;
 import com.techelevator.model.WhiskeyRatingDao;
 
@@ -20,6 +22,9 @@ import com.techelevator.model.WhiskeyRatingDao;
 @RestController
 @CrossOrigin
 public class WhiskeyRatingController {
+	
+	@Autowired
+    private AuthProvider auth;
 	
 	private final WhiskeyRatingDao whiskeyRatingDao;
 
@@ -37,13 +42,17 @@ public class WhiskeyRatingController {
 		return whiskeyRatingDao.getRatingsByEventAndWhiskey(eventId, whiskeyId);
 	}
 
-//	@GetMapping(path="/api/users/{userId}/whiskeyRating")
-//	public List<WhiskeyRating> getAllRatingsByEventAndUser(long eventId) {
-//		return whiskeyRatingDao.getRatingsByEvent(eventId);
-//	}
+	@GetMapping(path="/api/users/{eventId}/whiskeyRatings")
+	public List<WhiskeyRating> getAllRatingsByEventAndUser(long eventId) {
+		User currentUser = auth.getCurrentUser();
+		
+		return whiskeyRatingDao.getRatingsByUserAndEvent(currentUser.getId(), eventId);
+	}
 	
-	@PostMapping(path="/api/users/{userId}/{eventId}/{whiskeyId}/whiskeyRating")
+	@PostMapping(path="/api/users/{eventId}/{whiskeyId}/whiskeyRating")
 	public ResponseEntity<WhiskeyRating> rateWhiskey(@RequestBody WhiskeyRating rating) {
+		User currentUser = auth.getCurrentUser();
+		rating.setUserId(currentUser.getId());
 
 		whiskeyRatingDao.submitRating(rating);
 

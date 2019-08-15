@@ -1,43 +1,49 @@
 <template>
+  <div>
+    <div class="nav">
+      <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
+    </div>
+    <div id="login" class="text-center">
+      <form class="form-signin" @submit.prevent="login">
+        <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+        <div
+          class="alert alert-danger"
+          role="alert"
+          v-if="invalidCredentials"
+        >Invalid username and password!</div>
+        <div
+          class="alert alert-success"
+          role="alert"
+          v-if="this.$route.query.registration"
+        >Thank you for registering, please sign in.</div>
+        <label for="username" class="sr-only">Email</label>
+        <input
+          type="text"
+          id="username"
+          class="form-control"
+          placeholder="Email"
+          v-model="user.username"
+          required
+          autofocus
+        >
+        <label for="password" class="sr-only">Password</label>
+        <input
+          type="password"
+          id="password"
+          class="form-control"
+          placeholder="Password"
+          v-model="user.password"
+          required
+        >
 
-  <div id="login" class="text-center">
-    <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
-      <div
-        class="alert alert-danger"
-        role="alert"
-        v-if="invalidCredentials"
-      >Invalid username and password!</div>
-      <div
-        class="alert alert-success"
-        role="alert"
-        v-if="this.$route.query.registration"
-      >Thank you for registering, please sign in.</div>
-      <label for="username" class = "sr-only">Email</label>
-      <input
-        type="text"
-        id="username"
-        class="form-control"
-        placeholder="Email"
-        v-model="user.username"
-        required
-        autofocus
-      >
-      <label for="password" class="sr-only">Password</label>
-      <input
-        type="password"
-        id="password"
-        class="form-control"
-        placeholder="Password"
-        v-model="user.password"
-        required
-      >
-
-      <button id="thisbtn" type="submit">Sign in</button>
-      <router-link :to="{ name: 'register' }">
-        <button id="thisbtn">Need an account?</button>
-      </router-link>
-    </form>
+        <button id="thisbtn" type="submit">Sign in</button>
+        <router-link :to="{ name: 'register' }">
+          <button id="thisbtn">Need an account?</button>
+        </router-link>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -97,6 +103,7 @@ export default {
 /* Bordered form */
 .form-signin {
   border: 3px solid #f1f1f1;
+  background: #f1f1f1;
   width: 50%;
   align-content: center;
 }
@@ -120,7 +127,7 @@ input[type="password"] {
 
 /* Set a style for all buttons */
 button {
-  background-color:#9B5A1A;
+  background-color: #9b5a1a;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -146,13 +153,21 @@ button:hover {
   padding: 16px;
 }
 
+.text-center {
+  background-image: url("../assets/img/whiskey-glasses.jpg");
+  background-repeat: no-repeat;
+  background-size: 120%;
+  background-attachment: fixed;
+  padding: 5%;
+}
+
 /* The "Forgot password" text */
 span.psw {
   float: right;
   padding-top: 16px;
 }
 #login {
-  color: whitesmoke;
+  color: black;
   justify-content: center;
   text-align: center;
 }

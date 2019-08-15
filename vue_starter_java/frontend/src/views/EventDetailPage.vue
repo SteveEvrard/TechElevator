@@ -1,32 +1,90 @@
 <template>
-  <div class="event">
-    <div class="flex-box">
-      <single-event-logged-in id="this-event" v-bind:event="event"></single-event-logged-in>
-      <check-in v-if="adminCheckInCheck()" @checked="saveUserAndEvent"></check-in>
-      <check-in v-if="userCanCheckIn()" @checked="saveUserAndEvent"></check-in>
-      {{user.username}}{{user.role}}
+  <div>
+    <div class="nav">
+      <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
+      <router-link v-if="isAdmin" class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
     </div>
-    <!-- v-if="hasCheckedIn" -->
-    <div id="to-next-page" class="select-box" v-on:click="passEventToRate(event.eventId)">Rate Event</div>
-    <!-- v-if="isAdmin" -->
-    <div
-      class="select-box"
-      id="to-next-page"
-      v-on:click="passEventToDisplay(event.eventId)"
-    >View Ratings</div>
+    <div class="event">
+      <div class="flex-box">
+        <tile-format class="single-event-detail" id="detail-page-tile">
+          <div>
+            <h2>{{event.title}}</h2>
+            <!-- <img src="{{event.imgUrl}}"> -->
+            <div id="line-div">
+              <h4>When:</h4>
+              <p>{{event.date[1]}} / {{event.date[2]}} / {{event.date[0]}} at {{event.time}}</p>
+            </div>
+            <div id="line-div">
+              <h4>Where:</h4>
+              <p>{{event.location}}</p>
+            </div>
+            <div>
+              <div id="description">
+                <h4>About the Event</h4>
+                <p>{{event.eventDescription}}</p>
+                <!-- <h4 id="table-label">Your Ratings:</h4>
+                <table class="table" v-if="!isHomePage">
+                  <tr>
+                    <th>Whiskey</th>
+                    <th>Taste</th>
+                    <th>Smell</th>
+                    <th>Color</th>
+                    <th>Finish</th>
+                    <th>Price</th>
+                    <th>Overall</th>
+                  </tr>
+                  <tr v-for="rating in whiskeyRatingList" :key="rating">
+                    <td>{{rating.whiskey.brand}}</td>
+                    <td>{{rating.tasteRating}}</td>
+                    <td>{{rating.smellRating}}</td>
+                    <td>{{rating.colorRating}}</td>
+                    <td>{{rating.finishRating}}</td>
+                    <td>{{rating.priceRating}}</td>
+                    <td>{{rating.overallRating}}</td>
+                  </tr>
+                </table>-->
+              </div>
+              <div v-if="!hasCheckedIn && adminHasCheckedIn">
+                <div class="check-in-div" v-if="!isAdmin" @click="saveUserAndEvent()">
+                  <label for="checkin">Check In</label>
+                  <input type="checkbox" id="checkin" name="checkin" @click:="saveUserAndEvent()">
+                </div>
+                <div class="check-in-div" v-if="isAdmin" @click="saveUserAndEvent()">
+                  <label for="checkin">Check In</label>
+                  <input type="checkbox" id="checkin" name="checkin" @click:="saveUserAndEvent()">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            v-if="!isAdmin && adminHasCheckedIn"
+            id="to-next-page"
+            class="select-box"
+            v-on:click="passEventToRate(event.eventId)"
+          >Rate Whiskey</div>
+          <div
+            v-if="isAdmin"
+            class="select-box"
+            id="to-next-page"
+            v-on:click="passEventToDisplay(event.eventId)"
+          >View Ratings</div>
+        </tile-format>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import SingleEventLoggedIn from "@/components/Events/SingleEventLoggedIn.vue";
-import CheckIn from "../components/CheckIn.vue";
-import SelectBox from "@/components/Formatting/SelectBox.vue";
-import auth from "../auth";
+import TileFormat from "@/components/Formatting/TileFormat.vue";
+import auth from "@/auth";
 
 export default {
   components: {
     SingleEventLoggedIn,
-    CheckIn
+    TileFormat
   },
   data() {
     return {
@@ -35,23 +93,26 @@ export default {
         password: "",
         role: ""
       },
+      isAdmin: false,
       hasCheckedIn: false,
       adminHasCheckedIn: false,
       API_URL: "http://localhost:8080/AuthenticationApplication/api/event/",
       Checkin_API_URL:
         "http://localhost:8080/AuthenticationApplication/api/event/",
+      userDetailURL: "http://localhost:8080/AuthenticationApplication/api/user",
+      adminCheckinApiURL:
+        "http://localhost:8080/AuthenticationApplication/api/admin/checkin/",
       event: {
-        eventId: Number,
-        title: String,
-        imgUrl: String,
+        eventId: null,
+        title: "",
+        // imgUrl: "",
         date: new Date(),
-        time: String,
-        eventDescription: String,
-        isPrivate: Boolean,
-        isBlindTasting: Boolean
-        // tastingWhiskeys: Array
+        time: "",
+        eventDescription: "",
+        isPrivate: true,
+        isBlindTasting: false,
+        tastingWhiskeys: []
       },
-      isAdmin: false,
       eventId: null,
       user: {
         username: "",
@@ -64,17 +125,16 @@ export default {
   created() {
     this.eventId = this.$route.params.eventId;
     this.getEventDetails();
-    this.getUser;
+    this.getUser();
+    this.getCheckin();
   },
   methods: {
     getEventDetails() {
       fetch(this.API_URL + this.eventId, {
         method: "GET",
         headers: {
-          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
-        },
-        body: JSON.stringify(this.eventData)
+        }
       })
         .then(response => {
           console.log(response);
@@ -87,33 +147,22 @@ export default {
         .catch(err => console.error(err));
     },
     saveUserAndEvent() {
-      fetch(this.Checkin_API_URL + this.event.eventId + "/" + user.userId, {
+      fetch(this.Checkin_API_URL + this.event.eventId, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
         },
-        body: JSON.stringify(this.eventData)
-      })
-        .then(response => {
-          if (response.ok) {
-            if (this.isAdmin) {
-              this.adminHasCheckedIn = true;
-            } else {
-              this.hasCheckedIn = true;
-            }
-          }
-        })
-        .catch(err => console.error(err));
+        body: JSON.stringify(this.event)
+      }).catch(err => console.error(err));
+      this.hasCheckedIn = true;
     },
     getUser() {
-      fetch(this.userDetailURL + this.userId, {
+      fetch(this.userDetailURL, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + auth.getToken()
-        },
-        body: JSON.stringify(this.eventData)
+        }
       })
         .then(response => {
           console.log(response);
@@ -127,36 +176,69 @@ export default {
         })
         .catch(err => console.error(err));
     },
+    getCheckin() {
+      fetch(this.adminCheckinApiURL + this.eventId, {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + auth.getToken()
+        }
+      })
+        .then(response => {
+          console.log(response);
+          return response.json();
+        })
+        .then(jsonBoolean => {
+          this.adminHasCheckedIn = jsonBoolean;
+          console.log(jsonBoolean);
+        })
+        .catch(err => console.error(err));
+    },
     passEventToRate(eventId) {
       this.$router.push({ name: "rateWhiskey", params: { eventId } });
     },
     passEventToDisplay(eventId) {
       this.$router.push({ name: "ratingResults", params: { eventId } });
-    },
-    checkRole() {
-      if (this.user.role.equals("admin")) {
-        this.isAdmin = true;
-      }
-    },
-    adminCheckInCheck() {
-      if (this.isAdmin && !this.adminHasCheckedIn) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    userCanCheckIn() {
-      if (!this.isAdmin && this.adminHasCheckedIn) {
-        return true;
-      } else {
-        return false;
-      }
     }
   }
 };
 </script>
 
 <style>
+table {
+  border: 1px solid #f1f1f1;
+  border-collapse: collapse;
+  margin: 2% 3% 1% 3%;
+}
+td,
+th {
+  padding: 6px;
+  border: 1px solid #f1f1f1;
+}
+th {
+  background-color: rgba(120, 113, 33, 0.5);
+  font-size: 1.3em;
+}
+.check-in-div {
+  background-color: #51284f;
+  font-size: 1.5em;
+  padding: 10px;
+  color: white;
+  font-weight: bold;
+  width: fit-content;
+  border-radius: 5px;
+  box-shadow: -2px 10px 18px -4px rgba(0, 0, 0, 0.75);
+  margin: 5% 0% 2% 2%;
+}
+
+.check-in-div input {
+  width: 15px;
+  height: 15px;
+}
+
+.check-in-div label {
+  padding-right: 5px;
+}
+
 .flex-box {
   display: flex;
   justify-content: flex-start;
@@ -165,12 +247,67 @@ export default {
   margin: 5px;
   width: fit-content;
 }
+.single-event-detail h4 {
+  margin: 10px 0px 5px 0px;
+  font-size: 2em;
+  font-weight: 500px;
+  padding-right: 10px;
+  display: inline-block;
+  color: black;
+}
+.single-event-detail p {
+  margin: 0px;
+  display: inline-block;
+  font-size: 1.8em;
+}
+.single-event-detail h2 {
+  text-align: center;
+  margin: 20px 0px 40px 0px;
+  font-family: "Great Vibes", sans-serif;
+  font-size: 4em;
+  font-weight: 300px;
+}
+.single-event-detail {
+  padding: 5px;
+  background-color: white;
+  width: 350px;
+  height: 250px;
+}
+
+#line-div {
+  width: 100%;
+  display: block;
+  padding: 5px 20px 5px 20px;
+}
 #this-event {
   width: 50%;
   height: 50%;
 }
 #to-next-page {
   display: block;
+}
+#description {
+  margin-top: 45px;
+  margin-bottom: 10px;
+  text-align: center;
+  width: 80%;
+  padding-right: 10%;
+  padding-left: 10%;
+}
+#description h4 {
+  margin-bottom: 10px;
+}
+#detail-page-tile {
+  width: 60%;
+  height: fit-content;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+#table-label {
+  width: fit-content;
+  padding-right: 35%;
+  padding-left: 35%;
+  margin-top: 20px;
 }
 </style>
 

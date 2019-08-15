@@ -1,13 +1,13 @@
 <template>
   <form-format>
-    <tile-format>
+    <tile-format id="rating-tile">
       <div class="rating-questions-and-sliders">
         <h4>
           Rate the
-          <h4 class="emphasis-word">taste</h4>of the whiskey:
+          <h4 id="emphasis-word">taste</h4>of the whiskey:
         </h4>
         <VueSlideBar
-          class="slider"
+          id="slider"
           v-model="slider.tasteValue"
           :processStyle="slider.processStyle"
           :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
@@ -20,10 +20,10 @@
 
         <h4>
           Rate the
-          <h4 class="emphasis-word">smell</h4>of the whiskey:
+          <h4 id="emphasis-word">smell</h4>of the whiskey:
         </h4>
         <VueSlideBar
-          class="slider"
+          id="slider"
           v-model="slider.smellValue"
           :processStyle="slider.processStyle"
           :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
@@ -36,10 +36,10 @@
 
         <h4>
           Rate the
-          <h4 class="emphasis-word">color</h4>of the whiskey:
+          <h4 id="emphasis-word">color</h4>of the whiskey:
         </h4>
         <VueSlideBar
-          class="slider"
+          id="slider"
           v-model="slider.colorValue"
           :processStyle="slider.processStyle"
           :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
@@ -52,10 +52,10 @@
 
         <h4>
           Rate the
-          <h4 class="emphasis-word">body</h4>of the whiskey:
+          <h4 id="emphasis-word">body</h4>of the whiskey:
         </h4>
         <VueSlideBar
-          class="slider"
+          id="slider"
           v-model="slider.bodyValue"
           :processStyle="slider.processStyle"
           :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
@@ -68,10 +68,10 @@
 
         <h4>
           Rate the
-          <h4 class="emphasis-word">finish</h4>of the whiskey:
+          <h4 id="emphasis-word">finish</h4>of the whiskey:
         </h4>
         <VueSlideBar
-          class="slider"
+          id="slider"
           v-model="slider.finishValue"
           :processStyle="slider.processStyle"
           :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
@@ -84,10 +84,10 @@
 
         <h4>
           Rate the
-          <h4 class="emphasis-word">price</h4>of the whiskey:
+          <h4 id="emphasis-word">price</h4>of the whiskey:
         </h4>
         <VueSlideBar
-          class="slider"
+          id="slider"
           v-model="slider.priceValue"
           :processStyle="slider.processStyle"
           :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
@@ -98,9 +98,9 @@
           :draggable="true"
         ></VueSlideBar>
 
-        <h4 class="emphasis-word">What did you think of the whiskey overall?</h4>
+        <h4 id="emphasis-word">What did you think of the whiskey overall?</h4>
         <VueSlideBar
-          class="slider"
+          id="slider"
           v-model="slider.overallValue"
           :processStyle="slider.processStyle"
           :labelStyles="{ color: 'white', backgroundColor: 'transparent' }"
@@ -110,7 +110,11 @@
           :tooltipStyles="{ backgroundColor: '#2E4D58', borderColor: '#2E4D58' }"
           :draggable="true"
         ></VueSlideBar>
-        <button type="submit" v-on:click.prevent="saveWhiskeyRating">{{submitMessage()}}</button>
+        <button
+          id="slide-bar-submit"
+          type="submit"
+          v-on:click.prevent="saveWhiskeyRating"
+        >{{submitMessage()}}</button>
       </div>
     </tile-format>
   </form-format>
@@ -120,6 +124,7 @@
 import TileFormat from "@/components/Formatting/TileFormat.vue";
 import FormFormat from "@/components/Formatting/FormFormat.vue";
 import VueSlideBar from "vue-slide-bar";
+import auth from "@/auth";
 
 export default {
   components: {
@@ -140,29 +145,29 @@ export default {
       // tastingWhiskeys: Array,
       isPrivate: Boolean,
       isBlindTasting: Boolean
+    },
+    whiskey: {
+      brand: String,
+      whiskeyId: Number
     }
   },
   data() {
     return {
       event: {
-        isBlindTasting: false
-      },
-      isSubmitted: false,
-      whiskey: {
-        brand: String,
-        whiskeyId: Number
+        isBlindTasting: false,
+        eventId: Number
       },
       whiskeyRating: {
         whiskeyId: 9,
         userId: 1,
-        eventId: Number,
-        tasteRating: Number,
-        smellRating: Number,
-        colorRating: Number,
-        bodyRating: Number,
-        finishRating: Number,
-        priceRating: Number,
-        overallRating: Number
+        eventId: 0,
+        tasteRating: 0,
+        smellRating: 0,
+        colorRating: 0,
+        bodyRating: 0,
+        finishRating: 0,
+        priceRating: 0,
+        overallRating: 0
       },
       whiskeyRatingAPI:
         "http://localhost:8080/AuthenticationApplication/api/users/",
@@ -176,33 +181,34 @@ export default {
         priceValue: 3,
         overallValue: 3,
         draggable: false,
+        speed: 0.2,
         processStyle: {
           backgroundColor: "#2E4D58"
         }
-      }
+      },
+      isSubmitted: false
     };
   },
   methods: {
     saveWhiskeyRating() {
       this.isSubmitted = true;
       this.assignData();
+      this.$emit("submitrating");
       fetch(
         this.whiskeyRatingAPI +
-          1 +
+          this.rswEvent.eventId +
           "/" +
-          this.eventId +
-          "/" +
-          9 +
+          this.whiskey.whiskeyId +
           "/whiskeyRating",
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + auth.getToken()
           },
           body: JSON.stringify(this.whiskeyRating)
         }
       ).catch(err => console.error(err));
-      this.$emit(submitrating);
     },
     assignData() {
       this.whiskeyRating.tasteRating = this.slider.tasteValue;
@@ -213,9 +219,11 @@ export default {
       this.whiskeyRating.priceRating = this.slider.priceValue;
       this.whiskeyRating.overallRating = this.slider.overallValue;
       this.whiskeyRating.eventId = this.rswEvent.eventId;
+      this.whiskeyRating.whiskeyId = this.whiskey.whiskeyId;
     },
     submitMessage() {
       if (this.isSubmitted) {
+        this.isSubmitted = false;
         return "SUBMITTED";
       } else {
         return "SUBMIT  REVIEW";
@@ -226,12 +234,20 @@ export default {
 </script>
 
 <style>
-h4 {
+.rating-questions-and-sliders h4 {
+  color: black;
   display: inline-block;
-  margin: 20px 0px 10px 0px;
+  margin: 40px 0px 10px 0px;
+  font-size: 1.5em;
 }
-.slider {
+#slider {
   margin: 0% 30% 0% 30%;
+}
+#emphasis-word {
+  color: #9d432c;
+  padding-right: 5px;
+  padding-left: 2px;
+  font-size: 32px;
 }
 
 #rating-choice {
@@ -254,12 +270,16 @@ h4 {
   background: white;
   color: #2e4d58;
 }
+#rating-tile {
+  width: 60%;
+  display: block;
+  margin-left: 20%;
+  margin-right: 20%;
+}
 
-.emphasis-word {
-  color: #9d432c;
-  padding-right: 5px;
-  padding-left: 2px;
-  font-size: 1.1em;
+#slide-bar-submit {
+  width: fit-content;
+  font-size: 1.3em;
 }
 </style>
 

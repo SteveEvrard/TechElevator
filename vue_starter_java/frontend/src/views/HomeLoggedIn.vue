@@ -1,12 +1,24 @@
 <template>
-  <div class="home">
-    <div class="list-of-events">
-      <h2>All Events</h2>
-      <event-list-logged-in :childUserId="userId" :isHOME="isHomePage" :isLoggedInBool="isLoggedIn"></event-list-logged-in>
+  <div>
+    <div class="nav">
+      <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
     </div>
-    <div class="list-of-events">
-      <h2>My Past Events</h2>
-      <event-list-logged-in :childUserId="userId" :isHOME="isHomePage"></event-list-logged-in>
+    <div class="home">
+      <div class="list-of-events">
+        <h2>All Events</h2>
+        <event-list-logged-in
+          :childUserId="userId"
+          :isHOME="isHomePage"
+          :isLoggedInBool="isLoggedIn"
+        ></event-list-logged-in>
+      </div>
+      <div class="list-of-events">
+        <h2>My Past Events</h2>
+        <event-list-logged-in :childUserId="userId" :isHOME="isHomePage"></event-list-logged-in>
+      </div>
     </div>
   </div>
 </template>

@@ -8,13 +8,11 @@
 
 <script>
 import SingleEventLoggedIn from "@/components/Events/SingleEventLoggedIn.vue";
-import CheckIn from "@/components/CheckIn.vue";
 import auth from "@/auth";
 
 export default {
   components: {
-    SingleEventLoggedIn,
-    CheckIn
+    SingleEventLoggedIn
   },
   name: "EventList",
   props: {
@@ -43,8 +41,7 @@ export default {
         method: "GET",
         headers: {
           Authorization: "Bearer " + auth.getToken()
-        },
-        body: JSON.stringify(this.eventData)
+        }
       })
         .then(response => {
           console.log(response);
