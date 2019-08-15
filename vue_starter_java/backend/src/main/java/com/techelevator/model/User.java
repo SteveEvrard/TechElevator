@@ -18,8 +18,7 @@ public class User {
     @NotBlank(message = "Password is required")
     private String password;
     private String confirmPassword;
-
-    private boolean passwordMatching;
+    private UserDetail userDetails;
 
     @AssertTrue(message = "Passwords must match")
     public boolean isPasswordMatching() {
@@ -37,7 +36,15 @@ public class User {
         return confirmPassword;
     }
 
-    /**
+    public UserDetail getUserDetails() {
+		return userDetails;
+	}
+
+	public void setUserDetails(UserDetail userDetails) {
+		this.userDetails = userDetails;
+	}
+
+	/**
      * @return the username
      */
     public String getUsername() {

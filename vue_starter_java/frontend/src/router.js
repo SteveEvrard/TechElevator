@@ -12,7 +12,6 @@ import HomeLoggedIn from './views/HomeLoggedIn.vue'
 import ResetPassword from './views/ResetPassword.vue'
 import EventSurveyPage from './views/EventSurveyPage.vue'
 
-
 Vue.use(Router)
 
 /**

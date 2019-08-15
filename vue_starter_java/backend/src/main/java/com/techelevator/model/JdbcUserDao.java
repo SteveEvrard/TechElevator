@@ -104,7 +104,8 @@ public class JdbcUserDao implements UserDao {
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<User>();
-        String sqlSelectAllUsers = "SELECT id, username, role FROM users";
+        String sqlSelectAllUsers = "SELECT id, u.username, role, full_name, phone, city, fav_brands, fav_types FROM users as u WHERE id = ? " + 
+        		"JOIN userdetails WHERE user_id = id Order By full_name";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectAllUsers);
 
         while (results.next()) {
@@ -173,7 +174,22 @@ public class JdbcUserDao implements UserDao {
         user.setId(results.getLong("id"));
         user.setUsername(results.getString("username"));
         user.setRole(results.getString("role"));
+        user.setUserDetails(mapResultsToUserDetail(results));
+     
         return user;
+    }
+    
+    private UserDetail mapResultsToUserDetail(SqlRowSet results) {
+    	UserDetail uD = new UserDetail();
+    	
+    	uD.setFullName(results.getString("full_name"));
+    	uD.setPhoneNumber(results.getString("phone"));
+    	uD.setCityOfResidence(results.getString("city"));
+    	uD.setFavBrandsOfWhiskeys(results.getString("fav_brands"));
+    	uD.setFavTypesOfWhiskeys(results.getString("fav_types"));
+    	uD.setUsername(results.getString("username"));
+    	
+    	return uD;
     }
 
 }

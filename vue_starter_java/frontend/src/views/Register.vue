@@ -41,6 +41,49 @@
             v-model="user.confirmPassword"
             required
           >
+          <label for="name" class="sr-only">Full Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            placeholder="Your Full Name"
+            v-model="user.userDetail.fullname"
+            required
+          >
+          <label for="phone" class="sr-only">Phone Number</label>
+          <input
+            type="text"
+            id="phone"
+            class="form-control"
+            placeholder="XXX-XXX-XXXX"
+            v-model="user.userDetail.phoneNumber"
+          >
+          <label for="city" class="sr-only">City of Residence</label>
+          <input
+            type="text"
+            id="city"
+            class="form-control"
+            placeholder="Your city"
+            v-model="user.userDetail.cityOfResidence"
+          >
+          <label for="favbrands" class="sr-only">What are your favorite whiskey brands?</label>
+          <input
+            type="text"
+            id="favbrands"
+            class="form-control"
+            placeholder="Yes"
+            v-model="user.userDetail.favBrandsOfWhiskeys"
+            required
+          >
+          <label for="favwhiskey" class="sr-only">What type(s) of whiskey do you like best?</label>
+          <input
+            type="text"
+            id="favwhiskey"
+            class="form-control"
+            placeholder="Rye, Scotch, Bourbon, etc."
+            v-model="user.userDetail.favTypesOfWhiskeys"
+            required
+          >
           <button id="thisbtn" class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
           <router-link :to="{ name: 'login' }">
             <button id="thisbtn">Have an account?</button>
@@ -65,7 +108,14 @@ export default {
         username: "",
         password: "",
         confirmPassword: "",
-        role: "user"
+        role: "user",
+        userDetail: {
+          fullName: "",
+          phoneNumber: "",
+          cityOfResidence: "",
+          favTypesOfWhiskeys: "",
+          favBrandsOfWhiskeys: ""
+        }
       },
       registrationErrors: false
     };
@@ -144,6 +194,10 @@ button {
 /* Add a hover effect for buttons */
 button:hover {
   opacity: 0.8;
+}
+
+:placeholder-shown {
+  font-size: 0.9em;
 }
 
 /* Extra style for the cancel button (red) */
