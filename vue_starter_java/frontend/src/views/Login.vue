@@ -4,8 +4,6 @@
       <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
       <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
       <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
-     <!-- <li v-if="!loggedIn"><router-link :to="{ name: 'logout' }">Logout</router-link></li> -->
-
     </div>
     <div id="login" class="text-center">
       <form class="form-signin" @submit.prevent="login">

@@ -2,6 +2,7 @@
   <div>
     <div class="nav">
       <router-link class="nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
+      <router-link :to="{ name: 'logout' }">Logout</router-link>
       <router-link class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
       <router-link class="nav-link" v-bind:to="{ name: 'resetPassword' }">Reset Password</router-link>
     </div>
