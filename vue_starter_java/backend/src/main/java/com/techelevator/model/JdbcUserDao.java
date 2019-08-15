@@ -109,7 +109,7 @@ public class JdbcUserDao implements UserDao {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectAllUsers);
 
         while (results.next()) {
-            User user = mapResultToUser(results);
+            User user = mapResultToUserWithUserDetail(results);
             users.add(user);
         }
 
@@ -174,6 +174,13 @@ public class JdbcUserDao implements UserDao {
         user.setId(results.getLong("id"));
         user.setUsername(results.getString("username"));
         user.setRole(results.getString("role"));
+     
+        return user;
+    }
+    
+    private User mapResultToUserWithUserDetail(SqlRowSet results) {
+        User user = new User();
+        user = mapResultToUser(results);
         user.setUserDetails(mapResultsToUserDetail(results));
      
         return user;
