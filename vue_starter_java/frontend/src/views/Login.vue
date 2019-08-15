@@ -103,6 +103,7 @@ export default {
 /* Bordered form */
 .form-signin {
   border: 3px solid #f1f1f1;
+  background: #f1f1f1;
   width: 50%;
   align-content: center;
 }
@@ -152,13 +153,21 @@ button:hover {
   padding: 16px;
 }
 
+.text-center {
+  background-image: url("../assets/img/whiskey-glasses.jpg");
+  background-repeat: no-repeat;
+  background-size: 120%;
+  background-attachment: fixed;
+  padding: 5%;
+}
+
 /* The "Forgot password" text */
 span.psw {
   float: right;
   padding-top: 16px;
 }
 #login {
-  color: whitesmoke;
+  color: black;
   justify-content: center;
   text-align: center;
 }

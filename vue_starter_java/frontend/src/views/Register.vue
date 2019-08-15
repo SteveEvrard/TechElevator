@@ -102,6 +102,7 @@ export default {
 /* Bordered form */
 .form-register {
   border: 3px solid #f1f1f1;
+  background: #f1f1f1;
   width: 50%;
   align-content: center;
 }
@@ -110,6 +111,11 @@ export default {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  background-image: url("../assets/img/whiskey-glasses.jpg");
+  background-repeat: no-repeat;
+  background-size: 120%;
+  background-attachment: fixed;
+  padding: 5%;
 }
 
 /* Full-width inputs */
@@ -159,7 +165,7 @@ span.psw {
 }
 /* added white font and centered*/
 .sr-only {
-  color: white;
+  color: black;
   text-align: center;
   justify-content: center;
 }
@@ -169,6 +175,7 @@ span.psw {
   margin: 8px 0;
   display: inline-block;
   border: 1px solid grey;
+  background-color: #75787b;
   box-sizing: border-box;
   font-size: 20px;
 }
