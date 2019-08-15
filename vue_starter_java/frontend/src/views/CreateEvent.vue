@@ -1,14 +1,13 @@
 <template>
   <div>
     <div class="nav">
-      <!-- <router-link class="nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link> -->
-      <!-- <router-link class="nav-link" :to="{ name: 'logout' }">Logout</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
+      <router-link class="nav-link" :to="{ name: 'logout' }">Logout</router-link>
       <router-link class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
-      <router-link class="nav-link" v-bind:to="{ name: 'resetPassword' }">Reset Password</router-link>-->
+      <router-link class="nav-link" v-bind:to="{ name: 'resetPassword' }">Reset Password</router-link>
     </div>
     <div id="create-event">
-      <!-- v-if="isCreated" -->
-      <form class="event-background">
+      <form-format class="event-background">
         <h1>Create a New Event</h1>
 
         <h4>Title:</h4>
@@ -63,33 +62,16 @@
           <input type="text" v-model="whiskey4.brand" placeholder="Specific Whiskey name">
           <input type="text" v-model="whiskey5.brand" placeholder="Specific Whiskey name">
         </div>
-        <h4>
-          Do you want to embed a Google Form on this event's page?
-          <input
-            type="checkbox"
-            v-model="addForm"
-          >
-          {{addForm ? "yes" : "no"}}
-        </h4>
+        <h4>Embed a survey by pasting the html into the text area below.</h4>
+        <textarea v-model="survey.question" placeholder="Google Form embed html"></textarea>
         <h4>
           <button
             id="create-event-button"
             type="submit"
-            v-on:click.prevent="saveEvent()"
+            v-on:click.prevent="saveEventAndForm()"
           >Create Event</button>
         </h4>
-      </form>
-      <!-- <form-format>
-        <div class="add-survey" v-if="addForm">
-      <h4>Paste the Google Form's embed html into the text area below.</h4>-->
-      <!-- <textarea v-model="survey.question" placeholder="Google Form embed html"></textarea>
-          <button
-            id="add-form-buttom"
-            type="submit"
-            v-on:click.prevent="saveFormEmbedInfo()"
-      >Create Event</button>-->
-      <!-- </div>
-      </form-format>-->
+      </form-format>
     </div>
   </div>
 </template>
@@ -202,6 +184,10 @@ export default {
           }
         })
         .catch(err => console.error(err));
+    },
+    saveEventAndForm() {
+      this.saveEvent();
+      this.saveFormEmbedInfo();
     },
     addWhiskeyToArray() {
       this.eventData.tastingWhiskeys.push(this.whiskey);

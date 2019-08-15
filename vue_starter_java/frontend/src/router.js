@@ -84,7 +84,7 @@ const router = new Router({
       }
     },
     {
-      path: "/:userId",
+      path: "/home",
       name: "homeLoggedIn",
       component: HomeLoggedIn,
       meta: {
@@ -93,9 +93,9 @@ const router = new Router({
     },
     //,
     //{
-      //path: "/logout",
-      //name: "logout",
-      //component: Logout
+    //path: "/logout",
+    //name: "logout",
+    //component: Logout
     //}
 
     {

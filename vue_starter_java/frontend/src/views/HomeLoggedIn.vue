@@ -66,29 +66,6 @@ export default {
     if (this.user.role == "admin") {
       this.isAdmin = true;
     }
-    // this.getUser():
-  },
-  methods: {
-    getUser() {
-      fetch(this.userDetailURL + this.userId, {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + auth.getToken()
-        },
-        body: JSON.stringify(this.eventData)
-      })
-        .then(response => {
-          console.log(response);
-          return response.json();
-        })
-        .then(jsonUser => {
-          this.user = jsonUser;
-          if (this.user.role == "admin") {
-            this.isAdmin = true;
-          }
-        })
-        .catch(err => console.error(err));
-    }
   }
 };
 </script>
