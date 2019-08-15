@@ -10,6 +10,17 @@ CREATE TABLE users(
   role varchar(255) NOT NULL default('user')
 );
 
+DROP TABLE IF EXISTS userdetails;
+
+CREATE TABLE userdetails(
+	username varchar(255)  REFERENCES users(username),
+	full_name varchar(255),
+	phone varchar(255),
+	city varchar(255),
+	fav_brands varchar(1047),
+	fav_types varchar(1047)
+);
+
 DROP TABLE IF EXISTS event;
 
 Create Table event(
