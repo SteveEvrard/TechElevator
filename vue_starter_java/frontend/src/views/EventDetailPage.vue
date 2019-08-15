@@ -2,11 +2,11 @@
   <div>
     <div v-if="!isAdmin" class="nav">
       <router-link class="nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
-      <router-link class="nav-link" :to="{ name: 'logout' }">Logout</router-link>
+      <router-link class="nav-link" :to="{ name: 'home' }">Logout</router-link>
     </div>
     <div v-if="isAdmin" class="admin-nav">
       <router-link class="admin-nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
-      <router-link class="admin-nav-link" :to="{ name: 'logout' }">Logout</router-link>
+      <router-link class="admin-nav-link" :to="{ name: 'home' }">Logout</router-link>
       <router-link class="admin-nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
       <router-link class="admin-nav-link" v-bind:to="{ name: 'resetPassword' }">Reset Password</router-link>
     </div>
@@ -53,16 +53,6 @@
                   </table>
                 </div>
               </div>
-              <div v-if="!hasCheckedIn && adminHasCheckedIn">
-                <div class="check-in-div" v-if="!isAdmin" @click="saveUserAndEvent()">
-                  <label for="checkin">Check In</label>
-                  <input type="checkbox" id="checkin" name="checkin" @click:="saveUserAndEvent()">
-                </div>
-                <div class="check-in-div" v-if="isAdmin" @click="saveUserAndEvent()">
-                  <label for="checkin">Check In</label>
-                  <input type="checkbox" id="checkin" name="checkin" @click:="saveUserAndEvent()">
-                </div>
-              </div>
             </div>
           </div>
           <div
@@ -78,8 +68,18 @@
             v-on:click="passEventToDisplay(event.eventId)"
           >View Ratings</div>
         </tile-format>
+        <div v-if="!hasCheckedIn && adminHasCheckedIn">
+          <div class="check-in-div" v-if="!isAdmin" @click="saveUserAndEvent()">
+            <label for="checkin">Check In</label>
+            <input type="checkbox" id="checkin" name="checkin" @click:="saveUserAndEvent()">
+          </div>
+        </div>
+        <div class="check-in-div" v-if="isAdmin" @click="saveUserAndEvent()">
+          <label for="checkin">Check In</label>
+          <input type="checkbox" id="checkin" name="checkin" @click:="saveUserAndEvent()">
+        </div>
         <router-link
-          v-if="!isAdmin"
+          v-if="!isAdmin && hasCheckedIn"
           class="event-survey"
           v-bind:to="{ name: 'eventSurveyPage' }"
         >After the event, take the survey!</router-link>
@@ -100,9 +100,6 @@ export default {
   },
   data() {
     return {
-      user: {
-        role: ""
-      },
       isAdmin: false,
       hasCheckedIn: false,
       adminHasCheckedIn: false,
@@ -125,12 +122,17 @@ export default {
         isBlindTasting: false,
         tastingWhiskeys: []
       },
-      eventId: null
+      eventId: null,
+
+      user: {
+        role: ""
+      }
     };
   },
   created() {
     this.eventId = this.$route.params.eventId;
     this.getEventDetails();
+    this.user.role = auth.getUser().rol;
     if (this.user.role == "admin") {
       this.isAdmin = true;
     }
@@ -211,22 +213,22 @@ th {
 .check-in-div {
   background-color: #51284f;
   font-size: 1.5em;
-  padding: 10px;
   color: white;
   font-weight: bold;
   width: fit-content;
+  height: fit-content;
   border-radius: 5px;
   box-shadow: -2px 10px 18px -4px rgba(0, 0, 0, 0.75);
-  margin: 5% 0% 2% 2%;
+  margin: 5% 2% 2% 2%;
 }
 
 .check-in-div input {
-  width: 15px;
-  height: 15px;
+  width: 25px;
+  height: 25px;
 }
 
 .check-in-div label {
-  padding-right: 5px;
+  padding: 5%;
 }
 .event-detail {
   background-image: url("../assets/img/whiskey-glasses.jpg");
@@ -249,8 +251,15 @@ th {
   justify-content: flex-start;
 }
 .select-box {
-  margin: 5px;
-  width: fit-content;
+  margin: 2%;
+  padding: 2%;
+  width: 90%;
+  background-color: #2e4d58;
+  color: white;
+  font-size: 1.2em;
+}
+.select-box div:hover {
+  background-color: #2e4d58;
 }
 .single-event-detail h4 {
   display: inline-block;

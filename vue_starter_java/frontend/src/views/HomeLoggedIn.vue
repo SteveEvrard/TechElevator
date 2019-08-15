@@ -2,11 +2,11 @@
   <div>
     <div v-if="!isAdmin" class="nav">
       <router-link class="nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
-      <router-link class="nav-link" :to="{ name: 'logout' }">Logout</router-link>
+      <router-link class="nav-link" :to="{ name: 'home' }">Logout</router-link>
     </div>
     <div v-if="isAdmin" class="admin-nav">
       <router-link class="admin-nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
-      <router-link class="admin-nav-link" :to="{ name: 'logout' }">Logout</router-link>
+      <router-link class="admin-nav-link" :to="{ name: 'home' }">Logout</router-link>
       <router-link class="admin-nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
       <router-link class="admin-nav-link" v-bind:to="{ name: 'resetPassword' }">Reset Password</router-link>
     </div>

@@ -4,7 +4,7 @@
       <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[0].brand}}</h1>
       <h1 v-if="event.isBlindTasting">1st Whiskey</h1>
       <single-whiskey-rating
-        v-bind:whiskey="tastingWhiskeys[0]"
+        v-bind:whiskey="event.tastingWhiskeys[0]"
         v-bind:blind="event.isBlindTasting"
       ></single-whiskey-rating>
     </div>
@@ -129,6 +129,7 @@ export default {
     };
   },
   created() {
+    this.eventId = this.$route.params.eventId;
     this.getEventDetails();
   },
   methods: {
