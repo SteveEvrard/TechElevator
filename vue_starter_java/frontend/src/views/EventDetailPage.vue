@@ -7,12 +7,8 @@
     <div v-if="isAdmin" class="admin-nav">
       <router-link class="admin-nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
       <router-link class="admin-nav-link" :to="{ name: 'logout' }">Logout</router-link>
-      <router-link v-if="isAdmin" class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
-      <router-link
-        v-if="isAdmin"
-        class="nav-link"
-        v-bind:to="{ name: 'resetPassword' }"
-      >Reset Password</router-link>
+      <router-link class="admin-nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
+      <router-link class="admin-nav-link" v-bind:to="{ name: 'resetPassword' }">Reset Password</router-link>
     </div>
     <div class="event-detail">
       <div class="flex-box">
@@ -105,8 +101,6 @@ export default {
   data() {
     return {
       user: {
-        username: "",
-        password: "",
         role: ""
       },
       isAdmin: false,
@@ -131,19 +125,17 @@ export default {
         isBlindTasting: false,
         tastingWhiskeys: []
       },
-      eventId: null,
-      user: {
-        username: "",
-        password: "",
-        role: "",
-        id: null
-      }
+      eventId: null
     };
   },
   created() {
     this.eventId = this.$route.params.eventId;
     this.getEventDetails();
+    if (this.user.role == "admin") {
+      this.isAdmin = true;
+    }
     this.getAdminCheckin();
+    this.user.role = auth.getUser().rol;
   },
   methods: {
     getEventDetails() {
