@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="nav">
-      <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
       <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
       <router-link v-if="!isAdmin" class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
       <router-link v-if="isAdmin" class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
@@ -29,7 +29,8 @@
               <div id="description">
                 <h4>About the Event</h4>
                 <p>{{event.eventDescription}}</p>
-                <div v-if="isPast()">
+                <!-- v-if="isPast()" -->
+                <div>
                   <h4 id="table-label">Your Ratings:</h4>
                   <table class="table" v-if="!isHomePage">
                     <tr>
@@ -202,15 +203,15 @@ export default {
         })
         .catch(err => console.error(err));
     },
-    isPast() {
-      const datep = $("#datepicker").val();
+    // isPast() {
+    //   const datep = $("#datepicker").val();
 
-      if (this.event.date.parse(datep) - Date.parse(new Date()) < 0) {
-        return true;
-      } else {
-        return false;
-      }
-    },
+    //   if (this.event.date.parse(datep) - Date.parse(new Date()) < 0) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // },
     passEventToRate(eventId) {
       this.$router.push({ name: "rateWhiskey", params: { eventId } });
     },
