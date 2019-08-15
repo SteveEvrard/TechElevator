@@ -81,6 +81,9 @@ public class JdbcWhiskeyRatingDao implements WhiskeyRatingDao {
 		jdbcTemplate.update(sql, rating.getWhiskeyId(), rating.getEventId(), rating.getUserId(), rating.getTasteRating(),
 				rating.getSmellRating(), rating.getColorRating(), rating.getBodyRating(), rating.getFinishRating(),
 				rating.getPriceRating(), rating.getOverallRating());
+		
+		String sql2 = "INSERT INTO whiskeytouser VALUES (?, ?);";
+		jdbcTemplate.update(sql2, rating.getWhiskeyId(), rating.getUserId());
 
 	}
 	
