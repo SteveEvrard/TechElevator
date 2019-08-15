@@ -65,6 +65,21 @@ public class AccountController {
         
         return "{\"success\":true}";
     }
+    
+    @RequestMapping(path = "/api/reset", method = RequestMethod.POST)
+    public String resetPassWord(@Valid @RequestBody User user, BindingResult result) throws UserCreationException {
+        if (result.hasErrors()) {
+            String errorMessages = "";
+            for (ObjectError error : result.getAllErrors()) {
+                errorMessages += error.getDefaultMessage() + "\n";
+            }
+            throw new UserCreationException(errorMessages);
+        } else {
+            auth.register(user.getUsername(), user.getPassword(), user.getRole());
+        }
+        
+        return "{\"success\":true}";
+    }
 
 	@GetMapping(path="/api/user")
 	public User getUserDetails() {

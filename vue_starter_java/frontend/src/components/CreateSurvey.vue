@@ -14,14 +14,13 @@
 </template>
 
 <script>
-import TileFormat from "../components/TileFormat";
-import FormFormat from "../components/FormFormat";
-import SingleEvent from "../components/SingleEvent";
-import SingleWhiskeyRating from "../components/SingleWhiskeyRating";
+import TileFormat from "@/components/Formatting/TileFormat";
+import FormFormat from "@/components/Formatting/FormFormat";
 
 export default {
   components: {
-    FormFormat
+    FormFormat,
+    TileFormat
   },
   data() {
     return {

@@ -2,9 +2,14 @@
   <div>
     <div class="nav">
       <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
-      <router-link v-if="isAdmin" class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
       <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
-      <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
+      <router-link v-if="!isAdmin" class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
+      <router-link v-if="isAdmin" class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
+      <router-link
+        v-if="isAdmin"
+        class="nav-link"
+        v-bind:to="{ name: 'resetPassword' }"
+      >Reset Password</router-link>
     </div>
     <div class="event">
       <div class="flex-box">
