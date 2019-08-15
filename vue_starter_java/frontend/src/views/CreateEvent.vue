@@ -1,13 +1,14 @@
 <template>
   <div>
     <div class="nav">
-      <router-link class="nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
-      <router-link :to="{ name: 'logout' }">Logout</router-link>
+      <!-- <router-link class="nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link> -->
+      <!-- <router-link class="nav-link" :to="{ name: 'logout' }">Logout</router-link>
       <router-link class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
-      <router-link class="nav-link" v-bind:to="{ name: 'resetPassword' }">Reset Password</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'resetPassword' }">Reset Password</router-link>-->
     </div>
     <div id="create-event">
-      <form-format v-if="isCreated" class="event-background">
+      <!-- v-if="isCreated" -->
+      <form class="event-background">
         <h1>Create a New Event</h1>
 
         <h4>Title:</h4>
@@ -77,18 +78,18 @@
             v-on:click.prevent="saveEvent()"
           >Create Event</button>
         </h4>
-      </form-format>
-      <form-format>
+      </form>
+      <!-- <form-format>
         <div class="add-survey" v-if="addForm">
-          <h4>Paste the Google Form's embed html into the text area below.</h4>
-          <textarea v-model="survey.question" placeholder="Google Form embed html"></textarea>
+      <h4>Paste the Google Form's embed html into the text area below.</h4>-->
+      <!-- <textarea v-model="survey.question" placeholder="Google Form embed html"></textarea>
           <button
             id="add-form-buttom"
             type="submit"
             v-on:click.prevent="saveFormEmbedInfo()"
-          >Create Event</button>
-        </div>
-      </form-format>
+      >Create Event</button>-->
+      <!-- </div>
+      </form-format>-->
     </div>
   </div>
 </template>
@@ -116,7 +117,7 @@ export default {
         title: "",
         // eventImageURL: "",
         isPrivate: true,
-        date: new Date(),
+        date: "",
         time: "",
         location: "",
         eventDescription: "",

@@ -2,15 +2,11 @@
   <div>
     <div class="nav">
       <router-link class="nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
-      <router-link :to="{ name: 'logout' }">Logout</router-link>
-      <router-link class="nav-link" v-if="isAdmin" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
+      <router-link class="nav-link" :to="{ name: 'logout' }">Logout</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
+
+      <!-- v-if="isAdmin" -->
       <router-link class="nav-link" v-bind:to="{ name: 'resetPassword' }">Reset Password</router-link>
-      <router-link
-        class="nav-link"
-        v-if="isAdmin"
-        v-bind:to="{ name: 'resetPassword' }"
-      >Reset Password</router-link>
-      <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
     </div>
     <div class="home">
       <download-excel
@@ -66,7 +62,11 @@ export default {
   },
   created() {
     this.userId = this.$route.params.userId;
-    this.getUser();
+    this.user.role = auth.getUser().rol;
+    if (this.user.role == "admin") {
+      this.isAdmin = true;
+    }
+    // this.getUser():
   },
   methods: {
     getUser() {
