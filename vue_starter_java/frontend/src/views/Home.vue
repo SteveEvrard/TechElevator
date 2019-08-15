@@ -4,6 +4,8 @@
       <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
       <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
       <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
+      <!-- <router-link class="nav-link" v-bind:to="{ name: 'logout' }">Logout</router-link> -->
+     
     </div>
     <div class="home">
       <div class="list-of-events">
@@ -18,6 +20,9 @@ import EventList from "../components/Events/EventList.vue";
 
 export default {
   components: {
+     //loggedIn() {
+     //return this
+    //} 
     EventList
   },
   name: "home",
