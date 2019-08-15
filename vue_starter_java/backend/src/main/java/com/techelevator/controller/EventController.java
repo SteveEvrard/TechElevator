@@ -1,6 +1,7 @@
 package com.techelevator.controller;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 
+import com.techelevator.authentication.AuthProvider;
 import com.techelevator.model.Event;
 import com.techelevator.model.EventDao;
+import com.techelevator.model.User;
 
 
 
@@ -21,6 +24,9 @@ import com.techelevator.model.EventDao;
 public class EventController {
 
 		private final EventDao eventDao;
+		
+	    @Autowired
+	    private AuthProvider auth;
 
 		public EventController(EventDao eventDao) {
 			this.eventDao = eventDao;
@@ -52,9 +58,10 @@ public class EventController {
 			return ResponseEntity.created(uriComponent.toUri()).body(newEvent);
 		}
 		
-		@PostMapping(path="/api/event/{eventId}/{userId}")
-		public void checkInUserAtEvent(@PathVariable Long userId, @PathVariable Long eventId) {
-			eventDao.checkInUserToEvent(userId, eventId);
+		@PostMapping(path="/api/event/{eventId}")
+		public void checkInUserAtEvent(@PathVariable Long eventId) {
+			User currentUser = auth.getCurrentUser();
+			eventDao.checkInUserToEvent(currentUser.getId(), eventId);
 		}
 		
 

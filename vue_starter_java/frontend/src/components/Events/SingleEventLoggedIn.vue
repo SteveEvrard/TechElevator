@@ -12,31 +12,10 @@
         <p>{{event.location}}</p>
       </div>
       <div v-if="!isHomePage">
-        <div id="description">
+        <!-- <div id="description">
           <h4>About the Event</h4>
           <p>{{event.eventDescription}}</p>
-        </div>
-        <!-- <h4 id="table-label">Your Ratings:</h4>
-        <table class="table" v-if="!isHomePage">
-          <tr>
-            <th>Whiskey</th>
-            <th>Taste</th>
-            <th>Smell</th>
-            <th>Color</th>
-            <th>Finish</th>
-            <th>Price</th>
-            <th>Overall</th>
-          </tr>
-          <tr v-for="rating in whiskeyRatingList" :key="rating">
-            <td>{{rating.whiskey.brand}}</td>
-            <td>{{rating.tasteRating}}</td>
-            <td>{{rating.smellRating}}</td>
-            <td>{{rating.colorRating}}</td>
-            <td>{{rating.finishRating}}</td>
-            <td>{{rating.priceRating}}</td>
-            <td>{{rating.overallRating}}</td>
-          </tr>
-        </table>-->
+        </div>-->
       </div>
     </div>
   </tile-format>
@@ -100,21 +79,6 @@ export default {
 </script>
 
 <style>
-table {
-  border: 1px solid #f1f1f1;
-  border-collapse: collapse;
-  margin: 2% 3% 1% 3%;
-}
-td,
-th {
-  padding: 6px;
-  border: 1px solid #f1f1f1;
-}
-th {
-  background-color: rgba(120, 113, 33, 0.5);
-  font-size: 1.3em;
-}
-
 .single-event h4 {
   margin: 10px 0px 5px 0px;
   font-size: 1.5em;
@@ -146,22 +110,5 @@ th {
   width: 100%;
   display: block;
   padding: 5px 20px 5px 20px;
-}
-#description {
-  margin-top: 25px;
-  margin-bottom: 10px;
-  text-align: center;
-  width: 80%;
-  padding-right: 10%;
-  padding-left: 10%;
-}
-#description h4 {
-  margin-bottom: 10px;
-}
-#table-label {
-  width: fit-content;
-  padding-right: 35%;
-  padding-left: 35%;
-  margin-top: 20px;
 }
 </style>

@@ -8,13 +8,11 @@
 
 <script>
 import SingleEventLoggedIn from "@/components/Events/SingleEventLoggedIn.vue";
-import CheckIn from "@/components/CheckIn.vue";
 import auth from "@/auth";
 
 export default {
   components: {
-    SingleEventLoggedIn,
-    CheckIn
+    SingleEventLoggedIn
   },
   name: "EventList",
   props: {

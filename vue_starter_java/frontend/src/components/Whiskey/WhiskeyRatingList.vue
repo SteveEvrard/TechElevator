@@ -85,7 +85,6 @@
 
 <script>
 import SingleEvent from "@/components/Events/SingleEvent.vue";
-import CheckIn from "@/components/CheckIn.vue";
 import TileFormat from "@/components/Formatting/TileFormat.vue";
 import SingleWhiskeyRating from "@/components/Whiskey/SingleWhiskeyRating.vue";
 import auth from "@/auth";
@@ -93,7 +92,6 @@ import auth from "@/auth";
 export default {
   components: {
     SingleEvent,
-    CheckIn,
     TileFormat,
     SingleWhiskeyRating
   },

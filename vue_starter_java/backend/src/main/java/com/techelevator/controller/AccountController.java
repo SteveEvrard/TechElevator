@@ -1,5 +1,7 @@
 package com.techelevator.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +19,6 @@ import com.techelevator.authentication.AuthProvider;
 import com.techelevator.authentication.JwtTokenHandler;
 import com.techelevator.authentication.UnauthorizedException;
 import com.techelevator.authentication.UserCreationException;
-import com.techelevator.model.Event;
 import com.techelevator.model.User;
 import com.techelevator.model.UserDao;
 
@@ -69,6 +70,17 @@ public class AccountController {
 	public User getUserDetails() {
 		User currentUser = auth.getCurrentUser();
 		return userDao.getUserById(currentUser.getId());
+	}
+	
+	@GetMapping(path="/api/admin/checkin/{eventId}")
+	public Boolean getUserCheckin(@PathVariable long eventId) {
+	List<User> adminUsers = userDao.getAdminIds();
+	for(User admin : adminUsers) {
+		if(userDao.isUserCheckedIn(eventId, admin.getId())) {
+			return true;
+		}
+	}
+	return false;
 	}
 	
 	
