@@ -113,15 +113,15 @@ export default {
       whiskeyApiURL:
         "http://localhost:8080/AuthenticationApplication/api/event/",
       event: {
-        eventId: Number,
-        title: String,
-        imgUrl: String,
+        eventId: 0,
+        title: "",
+        // imgUrl: "",
         date: new Date(),
-        time: String,
-        eventDescription: String,
-        isPrivate: Boolean,
-        isBlindTasting: Boolean
-        // tastingWhiskeys: Array
+        time: "",
+        eventDescription: "",
+        isPrivate: true,
+        isBlindTasting: true,
+        tastingWhiskeys: []
       },
       whiskey: {
         brand: String,
@@ -138,10 +138,8 @@ export default {
       fetch(this.API_URL + this.eventId, {
         method: "GET",
         headers: {
-          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
-        },
-        body: JSON.stringify(this.eventData)
+        }
       })
         .then(response => {
           console.log(response);
@@ -150,6 +148,7 @@ export default {
         .then(jsonEvent => {
           this.event = jsonEvent;
         })
+
         .catch(err => console.error(err));
     }
   }

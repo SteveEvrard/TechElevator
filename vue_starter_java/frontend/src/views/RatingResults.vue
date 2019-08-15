@@ -22,7 +22,7 @@ export default {
 
   data() {
     return {
-      eventID: Number
+      eventID: 0
     };
   },
   created() {
