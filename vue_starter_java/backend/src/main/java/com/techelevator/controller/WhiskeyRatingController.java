@@ -42,12 +42,12 @@ public class WhiskeyRatingController {
 		return whiskeyRatingDao.getRatingsByEventAndWhiskey(eventId, whiskeyId);
 	}
 
-//	@GetMapping(path="/api/users/whiskeyRatings")
-//	public List<WhiskeyRating> getAllRatingsByEventAndUser(long eventId) {
-//		User currentUser = auth.getCurrentUser();
-//		
-//		return whiskeyRatingDao.getRatingsByEventAndUser(eventId, currentUser.getId());
-//	}
+	@GetMapping(path="/api/users/{eventId}/whiskeyRatings")
+	public List<WhiskeyRating> getAllRatingsByEventAndUser(long eventId) {
+		User currentUser = auth.getCurrentUser();
+		
+		return whiskeyRatingDao.getRatingsByUserAndEvent(currentUser.getId(), eventId);
+	}
 	
 	@PostMapping(path="/api/users/{eventId}/{whiskeyId}/whiskeyRating")
 	public ResponseEntity<WhiskeyRating> rateWhiskey(@RequestBody WhiskeyRating rating) {

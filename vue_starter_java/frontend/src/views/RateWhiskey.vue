@@ -1,94 +1,101 @@
 <template>
-  <div class="rate-whiskey" id="scroll-to-this">
-    <div v-if="readyFor1()">
-      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[0].brand}}</h1>
-      <h1 v-if="event.isBlindTasting">Whiskey #1</h1>
-      <rate-single-whiskey
-        v-on:submitrating="incrementAndLoadHigher()"
-        v-bind:rswEvent="event"
-        v-bind:whiskey="event.tastingWhiskeys[0]"
-      ></rate-single-whiskey>
+  <div>
+    <div class="nav">
+      <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
     </div>
-    <div v-if="readyFor2()">
-      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[1].brand}}</h1>
-      <h1 v-if="event.isBlindTasting">Whiskey #2</h1>
-      <rate-single-whiskey
-        v-on:submitrating="incrementAndLoadHigher()"
-        v-bind:rswEvent="event"
-        v-bind:whiskey="event.tastingWhiskeys[1]"
-      ></rate-single-whiskey>
-    </div>
-    <div v-if="readyFor3()">
-      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[2].brand}}</h1>
-      <h1 v-if="event.isBlindTasting">Whiskey #3</h1>
-      <rate-single-whiskey
-        v-on:submitrating="incrementAndLoadHigher()"
-        v-bind:rswEvent="event"
-        v-bind:whiskey="event.tastingWhiskeys[2]"
-      ></rate-single-whiskey>
-    </div>
-    <div v-if="readyFor4()">
-      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[3].brand}}</h1>
-      <h1 v-if="event.isBlindTasting">Whiskey #4</h1>
-      <rate-single-whiskey
-        v-on:submitrating="incrementAndLoadHigher()"
-        v-bind:rswEvent="event"
-        v-bind:whiskey="event.tastingWhiskeys[3]"
-      ></rate-single-whiskey>
-    </div>
-    <div v-if="readyFor5()">
-      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[4].brand}}</h1>
-      <h1 v-if="event.isBlindTasting">Whiskey #5</h1>
-      <rate-single-whiskey
-        v-on:submitrating="incrementAndLoadHigher()"
-        v-bind:rswEvent="event"
-        v-bind:whiskey="event.tastingWhiskeys[4]"
-      ></rate-single-whiskey>
-    </div>
-    <div v-if="readyFor6()">
-      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[5].brand}}</h1>
-      <h1 v-if="event.isBlindTasting">Whiskey #6</h1>
-      <rate-single-whiskey
-        v-on:submitrating="incrementAndLoadHigher()"
-        v-bind:rswEvent="event"
-        v-bind:whiskey="event.tastingWhiskeys[5]"
-      ></rate-single-whiskey>
-    </div>
-    <div v-if="readyFor7()">
-      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[6].brand}}</h1>
-      <h1 v-if="event.isBlindTasting">Whiskey #7</h1>
-      <rate-single-whiskey
-        v-on:submitrating="incrementAndLoadHigher()"
-        v-bind:rswEvent="event"
-        v-bind:whiskey="event.tastingWhiskeys[6]"
-      ></rate-single-whiskey>
-    </div>
-    <div v-if="readyFor8()">
-      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[7].brand}}</h1>
-      <h1 v-if="event.isBlindTasting">Whiskey #8</h1>
-      <rate-single-whiskey
-        v-on:submitrating="incrementAndLoadHigher()"
-        v-bind:rswEvent="event"
-        v-bind:whiskey="event.tastingWhiskeys[7]"
-      ></rate-single-whiskey>
-    </div>
-    <div v-if="readyFor9()">
-      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[8].brand}}</h1>
-      <h1 v-if="event.isBlindTasting">Whiskey #9</h1>
-      <rate-single-whiskey
-        v-on:submitrating="incrementAndLoadHigher()"
-        v-bind:rswEvent="event"
-        v-bind:whiskey="event.tastingWhiskeys[8]"
-      ></rate-single-whiskey>
-    </div>
-    <div v-if="readyFor10()">
-      <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[9].brand}}</h1>
-      <h1 v-if="event.isBlindTasting">Whiskey #10</h1>
-      <rate-single-whiskey
-        v-on:submitrating="incrementAndLoadHigher()"
-        v-bind:rswEvent="event"
-        v-bind:whiskey="event.tastingWhiskeys[9]"
-      ></rate-single-whiskey>
+    <div class="rate-whiskey" id="scroll-to-this">
+      <div v-if="readyFor1()">
+        <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[0].brand}}</h1>
+        <h1 v-if="event.isBlindTasting">Whiskey #1</h1>
+        <rate-single-whiskey
+          v-on:submitrating="incrementAndLoadHigher()"
+          v-bind:rswEvent="event"
+          v-bind:whiskey="event.tastingWhiskeys[0]"
+        ></rate-single-whiskey>
+      </div>
+      <div v-if="readyFor2()">
+        <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[1].brand}}</h1>
+        <h1 v-if="event.isBlindTasting">Whiskey #2</h1>
+        <rate-single-whiskey
+          v-on:submitrating="incrementAndLoadHigher()"
+          v-bind:rswEvent="event"
+          v-bind:whiskey="event.tastingWhiskeys[1]"
+        ></rate-single-whiskey>
+      </div>
+      <div v-if="readyFor3()">
+        <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[2].brand}}</h1>
+        <h1 v-if="event.isBlindTasting">Whiskey #3</h1>
+        <rate-single-whiskey
+          v-on:submitrating="incrementAndLoadHigher()"
+          v-bind:rswEvent="event"
+          v-bind:whiskey="event.tastingWhiskeys[2]"
+        ></rate-single-whiskey>
+      </div>
+      <div v-if="readyFor4()">
+        <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[3].brand}}</h1>
+        <h1 v-if="event.isBlindTasting">Whiskey #4</h1>
+        <rate-single-whiskey
+          v-on:submitrating="incrementAndLoadHigher()"
+          v-bind:rswEvent="event"
+          v-bind:whiskey="event.tastingWhiskeys[3]"
+        ></rate-single-whiskey>
+      </div>
+      <div v-if="readyFor5()">
+        <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[4].brand}}</h1>
+        <h1 v-if="event.isBlindTasting">Whiskey #5</h1>
+        <rate-single-whiskey
+          v-on:submitrating="incrementAndLoadHigher()"
+          v-bind:rswEvent="event"
+          v-bind:whiskey="event.tastingWhiskeys[4]"
+        ></rate-single-whiskey>
+      </div>
+      <div v-if="readyFor6()">
+        <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[5].brand}}</h1>
+        <h1 v-if="event.isBlindTasting">Whiskey #6</h1>
+        <rate-single-whiskey
+          v-on:submitrating="incrementAndLoadHigher()"
+          v-bind:rswEvent="event"
+          v-bind:whiskey="event.tastingWhiskeys[5]"
+        ></rate-single-whiskey>
+      </div>
+      <div v-if="readyFor7()">
+        <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[6].brand}}</h1>
+        <h1 v-if="event.isBlindTasting">Whiskey #7</h1>
+        <rate-single-whiskey
+          v-on:submitrating="incrementAndLoadHigher()"
+          v-bind:rswEvent="event"
+          v-bind:whiskey="event.tastingWhiskeys[6]"
+        ></rate-single-whiskey>
+      </div>
+      <div v-if="readyFor8()">
+        <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[7].brand}}</h1>
+        <h1 v-if="event.isBlindTasting">Whiskey #8</h1>
+        <rate-single-whiskey
+          v-on:submitrating="incrementAndLoadHigher()"
+          v-bind:rswEvent="event"
+          v-bind:whiskey="event.tastingWhiskeys[7]"
+        ></rate-single-whiskey>
+      </div>
+      <div v-if="readyFor9()">
+        <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[8].brand}}</h1>
+        <h1 v-if="event.isBlindTasting">Whiskey #9</h1>
+        <rate-single-whiskey
+          v-on:submitrating="incrementAndLoadHigher()"
+          v-bind:rswEvent="event"
+          v-bind:whiskey="event.tastingWhiskeys[8]"
+        ></rate-single-whiskey>
+      </div>
+      <div v-if="readyFor10()">
+        <h1 v-if="!event.isBlindTasting">{{event.tastingWhiskeys[9].brand}}</h1>
+        <h1 v-if="event.isBlindTasting">Whiskey #10</h1>
+        <rate-single-whiskey
+          v-on:submitrating="incrementAndLoadHigher()"
+          v-bind:rswEvent="event"
+          v-bind:whiskey="event.tastingWhiskeys[9]"
+        ></rate-single-whiskey>
+      </div>
     </div>
   </div>
 </template>

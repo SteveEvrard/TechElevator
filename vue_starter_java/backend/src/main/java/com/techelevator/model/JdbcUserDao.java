@@ -104,7 +104,8 @@ public class JdbcUserDao implements UserDao {
     @Override
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<User>();
-        String sqlSelectAllUsers = "SELECT id, username, role FROM users";
+        String sqlSelectAllUsers = "SELECT id, u.username, role, full_name, phone, city, fav_brands, fav_types FROM users as u WHERE id = ? " + 
+        		"JOIN userdetails WHERE user_id = id Order By full_name";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectAllUsers);
 
         while (results.next()) {
@@ -130,13 +131,7 @@ public class JdbcUserDao implements UserDao {
     	return checkedIn;
     }
 
-    private User mapResultToUser(SqlRowSet results) {
-        User user = new User();
-        user.setId(results.getLong("id"));
-        user.setUsername(results.getString("username"));
-        user.setRole(results.getString("role"));
-        return user;
-    }
+
 
     @Override
     public User getUserByUsername(String username) {
@@ -151,6 +146,19 @@ public class JdbcUserDao implements UserDao {
     }
     
     @Override
+    public List<User> getAdminIds() {
+        String sqlSelectUserByRole = "SELECT id, username, role FROM users WHERE role = 'admin'";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectUserByRole);
+        
+        List<User> adminUsers = new ArrayList<User>();
+
+        if (results.next()) {
+            adminUsers.add(mapResultToUser(results));
+        } 
+        return adminUsers;
+    }
+    
+    @Override
     public User getUserById(Long id) {
         String sqlSelectUserByUsername = "SELECT id, username, role FROM users WHERE id = ?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sqlSelectUserByUsername, id);
@@ -160,6 +168,28 @@ public class JdbcUserDao implements UserDao {
         } else {
             return null;
         }
+    }
+    private User mapResultToUser(SqlRowSet results) {
+        User user = new User();
+        user.setId(results.getLong("id"));
+        user.setUsername(results.getString("username"));
+        user.setRole(results.getString("role"));
+        user.setUserDetails(mapResultsToUserDetail(results));
+     
+        return user;
+    }
+    
+    private UserDetail mapResultsToUserDetail(SqlRowSet results) {
+    	UserDetail uD = new UserDetail();
+    	
+    	uD.setFullName(results.getString("full_name"));
+    	uD.setPhoneNumber(results.getString("phone"));
+    	uD.setCityOfResidence(results.getString("city"));
+    	uD.setFavBrandsOfWhiskeys(results.getString("fav_brands"));
+    	uD.setFavTypesOfWhiskeys(results.getString("fav_types"));
+    	uD.setUsername(results.getString("username"));
+    	
+    	return uD;
     }
 
 }
