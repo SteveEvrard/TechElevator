@@ -3,9 +3,10 @@
     <div class="nav">
       <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
       <router-link class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'resetPassword' }">Reset Password</router-link>
     </div>
     <div id="create-event">
-      <form-format class="event-background">
+      <form-format v-if="isCreated" class="event-background">
         <h1>Create a New Event</h1>
 
         <h4>Title:</h4>
@@ -61,8 +62,31 @@
           <input type="text" v-model="whiskey5.brand" placeholder="Specific Whiskey name">
         </div>
         <h4>
-          <button id="create-event-button" type="submit" v-on:click.prevent="saveEvent">Create Event</button>
+          Do you want to embed a Google Form on this event's page?
+          <input
+            type="checkbox"
+            v-model="addForm"
+          >
+          {{addForm ? "yes" : "no"}}
         </h4>
+        <h4>
+          <button
+            id="create-event-button"
+            type="submit"
+            v-on:click.prevent="saveEvent()"
+          >Create Event</button>
+        </h4>
+      </form-format>
+      <form-format>
+        <div class="add-survey" v-if="addForm">
+          <h4>Paste the Google Form's embed html into the text area below.</h4>
+          <textarea v-model="survey.question" placeholder="Google Form embed html"></textarea>
+          <button
+            id="add-form-buttom"
+            type="submit"
+            v-on:click.prevent="saveFormEmbedInfo()"
+          >Create Event</button>
+        </div>
       </form-format>
     </div>
   </div>
@@ -81,9 +105,12 @@ export default {
 
   data() {
     return {
+      isCreated: false,
       selectedWhiskeyBrands: [],
       apiURLEvent: "http://localhost:8080/AuthenticationApplication/api/events",
       API_URL: "http://localhost:8080/AuthenticationApplication/api/whiskeys",
+      surveyAPI_URL:
+        "http://localhost:8080/AuthenticationApplication/api/save-survey",
       eventData: {
         title: "",
         // eventImageURL: "",
@@ -120,7 +147,13 @@ export default {
       whiskey5: {
         brand: ""
       },
-      addWhiskey: false
+      addWhiskey: false,
+      addForm: false,
+      googleFormHtml: "",
+      survey: {
+        eventId: 0,
+        question: ""
+      }
     };
   },
   methods: {
@@ -144,8 +177,26 @@ export default {
       })
         .then(response => {
           if (response.ok) {
-            let eventId = this.eventData.eventId;
-            this.$router.push({ name: "eventDetailPage", params: { eventId } });
+            this.isCreated = true;
+          }
+        })
+        .catch(err => console.error(err));
+    },
+    saveFormEmbedInfo() {
+      this.survey.eventId = this.eventData.eventId;
+      let eventId = this.eventData.eventId;
+      this.$router.push({ name: "eventDetailPage", params: { eventId } });
+      fetch(this.surveyAPI_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + auth.getToken()
+        },
+        body: JSON.stringify(this.eventData)
+      })
+        .then(response => {
+          if (response.ok) {
+            this.isCreated = true;
           }
         })
         .catch(err => console.error(err));
@@ -164,7 +215,7 @@ export default {
   align-items: center;
   align-self: center;
 }
-
+.add-survey,
 .event-background {
   margin-top: 20px;
   background: black;

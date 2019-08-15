@@ -9,6 +9,8 @@ import RatingResults from './views/RatingResults.vue'
 import RateWhiskey from './views/RateWhiskey.vue'
 import EventDetailPage from './views/EventDetailPage.vue'
 import HomeLoggedIn from './views/HomeLoggedIn.vue'
+import ResetPassword from './views/ResetPassword.vue'
+import EventSurveyPage from './views/EventSurveyPage.vue'
 
 
 Vue.use(Router)
@@ -89,12 +91,32 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
+<<<<<<< HEAD
     }//,
     //{
       //path: "/logout",
       //name: "logout",
       //component: Logout
     //}
+=======
+    },
+    {
+      path: "/resetPass",
+      name: "resetPassword",
+      component: ResetPassword,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/eventSurvey/:eventId",
+      name: "eventSurveyPage",
+      component: EventSurveyPage,
+      meta: {
+        requiresAuth: true
+      }
+    }
+>>>>>>> 49e4e9e374b8296bb3ea8d8cbf8c14187c4908d6
   ]
 })
 
