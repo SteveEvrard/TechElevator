@@ -45,7 +45,7 @@ body {
   text-decoration: none;
   font-weight: bold;
   padding: 5%;
-  font-size: 28px;
+  font-size: 18px;
 }
 
 .nav-link:hover {

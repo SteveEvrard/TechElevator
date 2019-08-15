@@ -2,7 +2,7 @@
   <div>
     <div class="nav">
       <router-link class="nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
-      <router-link :to="{ name: 'logout' }">Logout</router-link>
+      <router-link class="nav-link" :to="{ name: 'logout' }">Logout</router-link>
       <router-link v-if="!isAdmin" class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
       <router-link v-if="isAdmin" class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
       <router-link
