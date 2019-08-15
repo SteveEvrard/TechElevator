@@ -43,7 +43,7 @@ whiskey_id SERIAL PRIMARY KEY,
 brand varchar(255),
 price INT
 );
-DROP TABLE IF EXISTS whiskeyscores;
+DROP TABLE IF EXISTS whiskeyrating;
 
 CREATE TABLE whiskeyrating
 (
@@ -71,9 +71,9 @@ DROP TABLE IF EXISTS whiskeyToUser;
 
 CREATE TABLE whiskeyToUser(
 whiskey_id serial References whiskey(whiskey_id),
-id serial References users(id),
-whiskey_rating_id serial References whiskeyrating(whiskey_rating_id)
+id serial References users(id)
 );
+
 
 DROP TABLE IF EXISTS whiskeyToEvent;
 
