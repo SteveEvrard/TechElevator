@@ -50,7 +50,7 @@ CREATE TABLE whiskeyrating
 whiskey_rating_id SERIAL PRIMARY KEY,
 whiskey_id SERIAL REFERENCES whiskey(whiskey_id),
 event_id SERIAL REFERENCES event(event_id),
-user_id SERIAL REFERENCES users(id),
+id SERIAL REFERENCES users(id),
 taste_rating INT,
 nose_rating INT,
 color_rating INT,
@@ -71,7 +71,8 @@ DROP TABLE IF EXISTS whiskeyToUser;
 
 CREATE TABLE whiskeyToUser(
 whiskey_id serial References whiskey(whiskey_id),
-id serial References users(id)
+id serial References users(id),
+whiskey_rating_id serial References whiskeyrating(whiskey_rating_id)
 );
 
 DROP TABLE IF EXISTS whiskeyToEvent;
