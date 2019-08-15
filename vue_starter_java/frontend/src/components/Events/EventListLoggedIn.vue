@@ -17,7 +17,8 @@ export default {
   name: "EventList",
   props: {
     isHOME: Boolean,
-    childUserId: String
+    childUserId: String,
+    pastOnly: Boolean
   },
   data() {
     return {

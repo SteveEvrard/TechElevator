@@ -12,7 +12,6 @@ import HomeLoggedIn from './views/HomeLoggedIn.vue'
 import ResetPassword from './views/ResetPassword.vue'
 import EventSurveyPage from './views/EventSurveyPage.vue'
 
-
 Vue.use(Router)
 
 /**
@@ -92,6 +91,13 @@ const router = new Router({
         requiresAuth: true
       }
     },
+    //,
+    //{
+      //path: "/logout",
+      //name: "logout",
+      //component: Logout
+    //}
+
     {
       path: "/resetPass",
       name: "resetPassword",

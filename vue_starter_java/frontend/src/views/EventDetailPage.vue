@@ -29,27 +29,29 @@
               <div id="description">
                 <h4>About the Event</h4>
                 <p>{{event.eventDescription}}</p>
-                <!-- <h4 id="table-label">Your Ratings:</h4>
-                <table class="table" v-if="!isHomePage">
-                  <tr>
-                    <th>Whiskey</th>
-                    <th>Taste</th>
-                    <th>Smell</th>
-                    <th>Color</th>
-                    <th>Finish</th>
-                    <th>Price</th>
-                    <th>Overall</th>
-                  </tr>
-                  <tr v-for="rating in whiskeyRatingList" :key="rating">
-                    <td>{{rating.whiskey.brand}}</td>
-                    <td>{{rating.tasteRating}}</td>
-                    <td>{{rating.smellRating}}</td>
-                    <td>{{rating.colorRating}}</td>
-                    <td>{{rating.finishRating}}</td>
-                    <td>{{rating.priceRating}}</td>
-                    <td>{{rating.overallRating}}</td>
-                  </tr>
-                </table>-->
+                <div v-if="isPast()">
+                  <h4 id="table-label">Your Ratings:</h4>
+                  <table class="table" v-if="!isHomePage">
+                    <tr>
+                      <th>Whiskey</th>
+                      <th>Taste</th>
+                      <th>Smell</th>
+                      <th>Color</th>
+                      <th>Finish</th>
+                      <th>Price</th>
+                      <th>Overall</th>
+                    </tr>
+                    <tr v-for="rating in whiskeyRatingList" :key="rating">
+                      <td>{{rating.whiskey.brand}}</td>
+                      <td>{{rating.tasteRating}}</td>
+                      <td>{{rating.smellRating}}</td>
+                      <td>{{rating.colorRating}}</td>
+                      <td>{{rating.finishRating}}</td>
+                      <td>{{rating.priceRating}}</td>
+                      <td>{{rating.overallRating}}</td>
+                    </tr>
+                  </table>
+                </div>
               </div>
               <div v-if="!hasCheckedIn && adminHasCheckedIn">
                 <div class="check-in-div" v-if="!isAdmin" @click="saveUserAndEvent()">
@@ -107,6 +109,8 @@ export default {
       userDetailURL: "http://localhost:8080/AuthenticationApplication/api/user",
       adminCheckinApiURL:
         "http://localhost:8080/AuthenticationApplication/api/admin/checkin/",
+      userCheckinApiURL:
+        "http://localhost:8080/AuthenticationApplication/api/admin/checkin/",
       event: {
         eventId: null,
         title: "",
@@ -131,7 +135,7 @@ export default {
     this.eventId = this.$route.params.eventId;
     this.getEventDetails();
     this.getUser();
-    this.getCheckin();
+    this.getAdminCheckin();
   },
   methods: {
     getEventDetails() {
@@ -181,7 +185,7 @@ export default {
         })
         .catch(err => console.error(err));
     },
-    getCheckin() {
+    getAdminCheckin() {
       fetch(this.adminCheckinApiURL + this.eventId, {
         method: "GET",
         headers: {
@@ -197,6 +201,15 @@ export default {
           console.log(jsonBoolean);
         })
         .catch(err => console.error(err));
+    },
+    isPast() {
+      const datep = $("#datepicker").val();
+
+      if (this.event.date.parse(datep) - Date.parse(new Date()) < 0) {
+        return true;
+      } else {
+        return false;
+      }
     },
     passEventToRate(eventId) {
       this.$router.push({ name: "rateWhiskey", params: { eventId } });
