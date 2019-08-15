@@ -43,8 +43,7 @@ public void setup() {
 		SurveyQuestions surveyQuestion = new SurveyQuestions();
 		surveyQuestion.setEventId(1);
 		surveyQuestion.setQuestion("is this working");
-		surveyQuestion.setQuestionId(3);
-		surveyQuestion.setQuestionType("false");
+		
 		dao.saveQuestions(surveyQuestion);
 		
 		assertEquals(3, dao.getAllQuestions().size());

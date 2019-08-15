@@ -39,13 +39,17 @@ body {
   text-align: center;
   padding: 30px 0px 30px 0px;
 }
-
+/*links for anyone*/
 .nav-link {
   color: white;
   text-decoration: none;
   font-weight: bold;
   padding: 5%;
-  font-size: 18px;
+  font-size: 2em;
+}
+/*links for admin when logged in due to number of them to make them fit */
+.admin-nav-link {
+  font-size: 1.5em;
 }
 
 .nav-link:hover {

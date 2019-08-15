@@ -1,9 +1,12 @@
 <template>
   <div>
-    <div class="nav">
+    <div v-if="!isAdmin" class="nav">
       <router-link class="nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
       <router-link class="nav-link" :to="{ name: 'logout' }">Logout</router-link>
-      <router-link v-if="!isAdmin" class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
+    </div>
+    <div v-if="isAdmin" class="admin-nav">
+      <router-link class="admin-nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
+      <router-link class="admin-nav-link" :to="{ name: 'logout' }">Logout</router-link>
       <router-link v-if="isAdmin" class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
       <router-link
         v-if="isAdmin"
@@ -11,7 +14,7 @@
         v-bind:to="{ name: 'resetPassword' }"
       >Reset Password</router-link>
     </div>
-    <div class="event">
+    <div class="event-detail">
       <div class="flex-box">
         <tile-format class="single-event-detail" id="detail-page-tile">
           <div>
@@ -29,10 +32,10 @@
               <div id="description">
                 <h4>About the Event</h4>
                 <p>{{event.eventDescription}}</p>
-                <!-- v-if="isPast()" -->
-                <div>
+
+                <div v-if="hasCheckedIn">
                   <h4 id="table-label">Your Ratings:</h4>
-                  <table class="table" v-if="!isHomePage">
+                  <table class="table">
                     <tr>
                       <th>Whiskey</th>
                       <th>Taste</th>
@@ -79,6 +82,11 @@
             v-on:click="passEventToDisplay(event.eventId)"
           >View Ratings</div>
         </tile-format>
+        <router-link
+          v-if="!isAdmin"
+          class="event-survey"
+          v-bind:to="{ name: 'eventSurveyPage' }"
+        >After the event, take the survey!</router-link>
       </div>
     </div>
   </div>
@@ -135,7 +143,6 @@ export default {
   created() {
     this.eventId = this.$route.params.eventId;
     this.getEventDetails();
-    this.getUser();
     this.getAdminCheckin();
   },
   methods: {
@@ -167,25 +174,6 @@ export default {
       }).catch(err => console.error(err));
       this.hasCheckedIn = true;
     },
-    getUser() {
-      fetch(this.userDetailURL, {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + auth.getToken()
-        }
-      })
-        .then(response => {
-          console.log(response);
-          return response.json();
-        })
-        .then(jsonUser => {
-          this.user = jsonUser;
-          if (this.user.role == "admin") {
-            this.isAdmin = true;
-          }
-        })
-        .catch(err => console.error(err));
-    },
     getAdminCheckin() {
       fetch(this.adminCheckinApiURL + this.eventId, {
         method: "GET",
@@ -203,15 +191,6 @@ export default {
         })
         .catch(err => console.error(err));
     },
-    // isPast() {
-    //   const datep = $("#datepicker").val();
-
-    //   if (this.event.date.parse(datep) - Date.parse(new Date()) < 0) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // },
     passEventToRate(eventId) {
       this.$router.push({ name: "rateWhiskey", params: { eventId } });
     },
@@ -257,7 +236,22 @@ th {
 .check-in-div label {
   padding-right: 5px;
 }
-
+.event-detail {
+  background-image: url("../assets/img/whiskey-glasses.jpg");
+  background-repeat: no-repeat;
+  background-size: 120%;
+  background-attachment: fixed;
+}
+.event-survey {
+  background-color: rgba(0, 0, 0, 0.7);
+  font-size: 3em;
+  font-style: italic;
+  text-decoration: none;
+  color: white;
+  margin: 10%;
+  padding: 3%;
+  border-radius: 5px;
+}
 .flex-box {
   display: flex;
   justify-content: flex-start;
@@ -267,11 +261,11 @@ th {
   width: fit-content;
 }
 .single-event-detail h4 {
+  display: inline-block;
   margin: 10px 0px 5px 0px;
   font-size: 2em;
   font-weight: 500px;
   padding-right: 10px;
-  display: inline-block;
   color: black;
 }
 .single-event-detail p {
@@ -317,10 +311,10 @@ th {
   margin-bottom: 10px;
 }
 #detail-page-tile {
-  width: 60%;
+  width: 80%;
   height: fit-content;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 #table-label {
   width: fit-content;
