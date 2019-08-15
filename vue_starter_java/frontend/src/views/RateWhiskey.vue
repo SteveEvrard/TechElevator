@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="nav">
-      <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'homeLoggedIn' }">Home</router-link>
       <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
       <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
     </div>
