@@ -10,8 +10,7 @@ export default {
   name: "CheckIn",
   methods: {
     checkUserIn() {
-      this.checkin = !this.checkin;
-      this.$emit(checked);
+      this.$emit("checked");
     }
   }
 };

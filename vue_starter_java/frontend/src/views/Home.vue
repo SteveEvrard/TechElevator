@@ -1,7 +1,14 @@
 <template>
-  <div class="home">
-    <div class="list-of-events">
-      <event-list :isHOME="isHomePage" :apiURL="API_URL" :isLoggedIn="isLoggedIn"></event-list>
+  <div>
+    <div class="nav">
+      <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
+    </div>
+    <div class="home">
+      <div class="list-of-events">
+        <event-list :isHOME="isHomePage" :apiURL="API_URL" :isLoggedIn="isLoggedIn"></event-list>
+      </div>
     </div>
   </div>
 </template>

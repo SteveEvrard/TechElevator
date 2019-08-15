@@ -1,47 +1,54 @@
 <template>
-  <form-format>
-    <div id="register" class="text-center">
-      <form class="form-register" @submit.prevent="register">
-        <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
-        <div
-          class="alert alert-danger"
-          role="alert"
-          v-if="registrationErrors"
-        >There were problems registering this user.</div>
-        <label for="username" class="sr-only">Email</label>
-        <input
-          type="text"
-          id="username"
-          class="form-control"
-          placeholder="Email"
-          v-model="user.username"
-          required
-          autofocus
-        >
-        <label for="password" class="sr-only">Password</label>
-        <input
-          type="password"
-          id="password"
-          class="form-control"
-          placeholder="Password"
-          v-model="user.password"
-          required
-        >
-        <input
-          type="password"
-          id="confirmPassword"
-          class="form-control"
-          placeholder="Confirm Password"
-          v-model="user.confirmPassword"
-          required
-        >
-        <button id = "thisbtn" class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
-        <router-link :to="{ name: 'login' }">
-          <button id = "thisbtn"> Have an account?</button>
-        </router-link>
-      </form>
+  <div>
+    <div class="nav">
+      <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
     </div>
-  </form-format>
+    <form-format>
+      <div id="register" class="text-center">
+        <form class="form-register" @submit.prevent="register">
+          <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+          <div
+            class="alert alert-danger"
+            role="alert"
+            v-if="registrationErrors"
+          >There were problems registering this user.</div>
+          <label for="username" class="sr-only">Email</label>
+          <input
+            type="text"
+            id="username"
+            class="form-control"
+            placeholder="Email"
+            v-model="user.username"
+            required
+            autofocus
+          >
+          <label for="password" class="sr-only">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            placeholder="Password"
+            v-model="user.password"
+            required
+          >
+          <input
+            type="password"
+            id="confirmPassword"
+            class="form-control"
+            placeholder="Confirm Password"
+            v-model="user.confirmPassword"
+            required
+          >
+          <button id="thisbtn" class="btn btn-lg btn-primary btn-block" type="submit">Create Account</button>
+          <router-link :to="{ name: 'login' }">
+            <button id="thisbtn">Have an account?</button>
+          </router-link>
+        </form>
+      </div>
+    </form-format>
+  </div>
 </template>
 
 <script>
@@ -118,15 +125,14 @@ input[type="password"] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #9B5A1A;
+  background-color: #9b5a1a;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  
+
   box-sizing: border-box;
-  
 }
 
 /* Add a hover effect for buttons */
@@ -157,14 +163,13 @@ span.psw {
   text-align: center;
   justify-content: center;
 }
-#thisbtn{
-  
+#thisbtn {
   width: 95%;
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
   border: 1px solid grey;
   box-sizing: border-box;
-  font-size:20px
+  font-size: 20px;
 }
 </style>

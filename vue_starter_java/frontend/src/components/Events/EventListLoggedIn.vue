@@ -43,8 +43,7 @@ export default {
         method: "GET",
         headers: {
           Authorization: "Bearer " + auth.getToken()
-        },
-        body: JSON.stringify(this.eventData)
+        }
       })
         .then(response => {
           console.log(response);

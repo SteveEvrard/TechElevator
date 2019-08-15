@@ -65,9 +65,10 @@ public class AccountController {
         return "{\"success\":true}";
     }
 
-	@GetMapping(path="/user/{id}")
-	public User getUserDetails(@PathVariable long id) {
-		return userDao.getUserById(id);
+	@GetMapping(path="/api/user")
+	public User getUserDetails() {
+		User currentUser = auth.getCurrentUser();
+		return userDao.getUserById(currentUser.getId());
 	}
 	
 	

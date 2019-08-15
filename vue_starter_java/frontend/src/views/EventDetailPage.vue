@@ -1,25 +1,35 @@
 <template>
-  <div class="event">
-    <div class="flex-box">
-      <keep-alive>
-        <single-event-logged-in id="this-event" v-bind:event="eventForDetail"></single-event-logged-in>
-      </keep-alive>
-      <check-in v-if="adminCheckInCheck()" @checked="saveUserAndEvent"></check-in>
-      <check-in v-if="userCanCheckIn()" @checked="saveUserAndEvent"></check-in>
-      {{user.username}}{{user.role}}
+  <div>
+    <div class="nav">
+      <router-link class="nav-link" v-bind:to="{ name: 'home' }">Home</router-link>
+      <router-link v-if="isAdmin" class="nav-link" v-bind:to="{ name: 'createEvent' }">Create Event</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'login' }">Login</router-link>
+      <router-link class="nav-link" v-bind:to="{ name: 'register' }">Register</router-link>
     </div>
-    <!-- v-if="hasCheckedIn" -->
-    <div
-      id="to-next-page"
-      class="select-box"
-      v-on:click="passEventToRate(eventForDetail.eventId)"
-    >Rate Event</div>
-    <!-- v-if="isAdmin" -->
-    <div
-      class="select-box"
-      id="to-next-page"
-      v-on:click="passEventToDisplay(eventForDetail.eventId)"
-    >View Ratings</div>
+    <div class="event">
+      <div class="flex-box">
+        <keep-alive>
+          <single-event-logged-in id="this-event" v-bind:event="eventForDetail"></single-event-logged-in>
+        </keep-alive>
+        <check-in v-if="!isAdmin" @checked="saveUserAndEvent"></check-in>
+        <check-in v-if="isAdmin" @checked="saveUserAndEvent"></check-in>
+        {{user.username}}{{user.role}}
+      </div>
+      <!-- v-if="hasCheckedIn" -->
+      <div
+        v-if="!isAdmin"
+        id="to-next-page"
+        class="select-box"
+        v-on:click="passEventToRate(eventForDetail.eventId)"
+      >Rate Whiskey</div>
+      <!-- v-if="isAdmin" -->
+      <div
+        v-if="isAdmin"
+        class="select-box"
+        id="to-next-page"
+        v-on:click="passEventToDisplay(eventForDetail.eventId)"
+      >View Ratings</div>
+    </div>
   </div>
 </template>
 
@@ -27,7 +37,7 @@
 import SingleEventLoggedIn from "@/components/Events/SingleEventLoggedIn.vue";
 import CheckIn from "../components/CheckIn.vue";
 import SelectBox from "@/components/Formatting/SelectBox.vue";
-import auth from "../auth";
+import auth from "@/auth";
 
 export default {
   components: {
@@ -46,8 +56,9 @@ export default {
       API_URL: "http://localhost:8080/AuthenticationApplication/api/event/",
       Checkin_API_URL:
         "http://localhost:8080/AuthenticationApplication/api/event/",
+      userDetailURL: "http://localhost:8080/AuthenticationApplication/api/user",
       eventForDetail: {
-        eventId: 0,
+        eventId: null,
         title: "",
         // imgUrl: "",
         date: new Date(),
@@ -70,17 +81,15 @@ export default {
   created() {
     this.eventId = this.$route.params.eventId;
     this.getEventDetails();
-    this.getUser;
+    this.getUser();
   },
   methods: {
     getEventDetails() {
       fetch(this.API_URL + this.eventId, {
         method: "GET",
         headers: {
-          "Access-Control-Allow-Origin": "application/json",
           Authorization: "Bearer " + auth.getToken()
-        },
-        body: JSON.stringify(this.eventData)
+        }
       })
         .then(response => {
           console.log(response);
@@ -116,12 +125,11 @@ export default {
         .catch(err => console.error(err));
     },
     getUser() {
-      fetch(this.userDetailURL + this.userId, {
+      fetch(this.userDetailURL, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + auth.getToken()
-        },
-        body: JSON.stringify(this.eventForDetail)
+        }
       })
         .then(response => {
           console.log(response);
@@ -140,25 +148,6 @@ export default {
     },
     passEventToDisplay(eventId) {
       this.$router.push({ name: "ratingResults", params: { eventId } });
-    },
-    checkRole() {
-      if (this.user.role.equals("admin")) {
-        this.isAdmin = true;
-      }
-    },
-    adminCheckInCheck() {
-      if (this.isAdmin && !this.adminHasCheckedIn) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    userCanCheckIn() {
-      if (!this.isAdmin && this.adminHasCheckedIn) {
-        return true;
-      } else {
-        return false;
-      }
     }
   }
 };
